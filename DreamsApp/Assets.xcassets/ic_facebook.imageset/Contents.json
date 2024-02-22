@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Type=Login, Type 2=Social, Type 3=Facebook, Style=Default, State=Default, Theme=Light, Component=Button.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
