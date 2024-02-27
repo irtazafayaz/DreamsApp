@@ -104,9 +104,6 @@ struct ProfileView: View {
             .navigationDestination(isPresented: $isPaywallPresented, destination: {
                 PaywallView(isPaywallPresented: $isPaywallPresented)
             })
-            .navigationDestination(isPresented: $viewModel.goToLogin, destination: {
-                LoginRegisterSelectionView()
-            })
             .sheet(isPresented: $showTerms, content: {
                 SharedWebView(pageType: .terms)
             })

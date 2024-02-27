@@ -84,6 +84,8 @@
 		D594B14E2B87EDDD00C11067 /* Urbanist-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D594B1052B87EDDD00C11067 /* Urbanist-Medium.ttf */; };
 		D594B14F2B87EDDD00C11067 /* Urbanist-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D594B1062B87EDDD00C11067 /* Urbanist-ExtraLight.ttf */; };
 		D594B1502B87EDDD00C11067 /* Urbanist-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D594B1072B87EDDD00C11067 /* Urbanist-ThinItalic.ttf */; };
+		D594B1532B87F1DA00C11067 /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B1522B87F1DA00C11067 /* CalendarWidget.swift */; };
+		D594B1552B87F3B100C11067 /* HorizonCalendarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B1542B87F3B100C11067 /* HorizonCalendarWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -168,6 +170,8 @@
 		D594B1062B87EDDD00C11067 /* Urbanist-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-ExtraLight.ttf"; sourceTree = "<group>"; };
 		D594B1072B87EDDD00C11067 /* Urbanist-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-ThinItalic.ttf"; sourceTree = "<group>"; };
 		D594B1512B87EED500C11067 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D594B1522B87F1DA00C11067 /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
+		D594B1542B87F3B100C11067 /* HorizonCalendarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonCalendarWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -386,6 +390,7 @@
 				D594B0E02B87EDDD00C11067 /* UnderlinedTextField.swift */,
 				D594B0E12B87EDDD00C11067 /* ColorExtension.swift */,
 				D594B0E22B87EDDD00C11067 /* UserDefaults.swift */,
+				D594B1542B87F3B100C11067 /* HorizonCalendarWrapper.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 				D594B0E92B87EDDD00C11067 /* CustomBackButton.swift */,
 				D594B0EA2B87EDDD00C11067 /* DividerWithLabel.swift */,
 				D594B0EB2B87EDDD00C11067 /* LoadingView.swift */,
+				D594B1522B87F1DA00C11067 /* CalendarWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -594,6 +600,7 @@
 				D594B1362B87EDDD00C11067 /* LoadingView.swift in Sources */,
 				D594B12F2B87EDDD00C11067 /* PickerTextField.swift in Sources */,
 				D594B13C2B87EDDD00C11067 /* ResetPasswordVM.swift in Sources */,
+				D594B1552B87F3B100C11067 /* HorizonCalendarWrapper.swift in Sources */,
 				D594B1242B87EDDD00C11067 /* BaseActions.swift in Sources */,
 				D594B1202B87EDDD00C11067 /* PaywallView.swift in Sources */,
 				D594B13A2B87EDDD00C11067 /* HomeVM.swift in Sources */,
@@ -630,6 +637,7 @@
 				D594B12B2B87EDDD00C11067 /* EnumUtils.swift in Sources */,
 				D594B1222B87EDDD00C11067 /* ResetPasswordView.swift in Sources */,
 				D594B1182B87EDDD00C11067 /* HomeView.swift in Sources */,
+				D594B1532B87F1DA00C11067 /* CalendarWidget.swift in Sources */,
 				D594B1252B87EDDD00C11067 /* APIServiceEndpoint.swift in Sources */,
 				D594B1322B87EDDD00C11067 /* RoundedIconWithEditButton.swift in Sources */,
 				D594B1332B87EDDD00C11067 /* PopupView.swift in Sources */,

@@ -26,7 +26,7 @@ struct StartChatView: View {
                 .foregroundColor(Color(hex: Colors.labelDark.rawValue))
                 .padding(.top, 20)
             
-            Text("School AI")
+            Text("Dreams App")
                 .font(Font.custom(FontFamily.bold.rawValue, size: 40))
                 .foregroundColor(Color(hex: Colors.primary.rawValue))
             
