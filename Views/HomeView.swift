@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var selectedTab: Int = 0
-    @State private var title = "School AI"
+    @State private var title = "Dream Interpretation"
     @State var isPaywallPresented = false
     @ObservedObject private var viewModel: HomeVM
     @FetchRequest(sortDescriptors: []) var chatHistory: FetchedResults<ChatHistory>
@@ -29,24 +29,18 @@ struct HomeView: View {
                             Text("Chat")
                         }
                         .tag(0)
-                    ChatAssistantView()
-                        .tabItem {
-                            Image("ic_tab_assistant")
-                            Text("AI Assistants")
-                        }
-                        .tag(1)
                     ChatHistoryView()
                         .tabItem {
                             Image("ic_tab_history")
                             Text("History")
                         }
-                        .tag(2)
+                        .tag(1)
                     ProfileView()
                         .tabItem {
                             Image("ic_tab_people")
                             Text("Account")
                         }
-                        .tag(3)
+                        .tag(2)
                 }
                 .accentColor(Color(hex: Colors.primary.rawValue))
             }
@@ -65,19 +59,17 @@ struct HomeView: View {
             .onChange(of: selectedTab) { newTab in
                 switch newTab {
                 case 0:
-                    title = "School AI"
+                    title = "Dream Interpretation"
                 case 1:
-                    title = "AI Assistants"
-                case 2:
                     title = "History"
-                case 3:
+                case 2:
                     title  = "Account"
                 default:
                     title = "School AI"
                 }
             }
             .onAppear {
-                isPaywallPresented = true
+//                isPaywallPresented = true
             }
             .navigationDestination(isPresented: $isPaywallPresented, destination: {
                 PaywallView(isPaywallPresented: $isPaywallPresented)

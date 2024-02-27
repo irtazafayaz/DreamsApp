@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (5.8.1)
+  - HorizonCalendar (2.0.0)
   - RevenueCat (4.37.0)
 
 DEPENDENCIES:
   - Alamofire
+  - HorizonCalendar
   - RevenueCat
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - HorizonCalendar
     - RevenueCat
 
 SPEC CHECKSUMS:
   Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
+  HorizonCalendar: 21e600058a8f4d407c79ef7848beda692c53a484
   RevenueCat: b4fb058d7ced6a37327f6bc9636752dbc4a7235b
 
-PODFILE CHECKSUM: b9c3932832d38367f2c45971be6a9c722490e04c
+PODFILE CHECKSUM: 22244059cf8101e5ca0c1af2491f90d835570173
 
 COCOAPODS: 1.11.3

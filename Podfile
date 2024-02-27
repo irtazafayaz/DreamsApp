@@ -8,5 +8,6 @@ target 'DreamsApp' do
   # Pods for DreamsApp
   pod 'Alamofire'
   pod 'RevenueCat'
+  pod 'HorizonCalendar'
 
 end
