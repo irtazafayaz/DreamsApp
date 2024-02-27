@@ -67,39 +67,6 @@ struct Message: Decodable {
     let role: SenderRole
 }
 
-struct MessageWithImages {
-    let id: String
-    let content: MessageContent
-    let createdAt: Date
-    let role: SenderRole
-    let sessionID: Double
-    
-    init(id: String, content: MessageContent, createdAt: Date, role: SenderRole, sessionID: Double) {
-        self.id = id
-        self.content = content
-        self.createdAt = createdAt
-        self.role = role
-        self.sessionID = sessionID
-    }
-    
-}
-
-enum MessageContent: Equatable {
-    case text(String)
-    case image(Data)
-
-    static func == (lhs: MessageContent, rhs: MessageContent) -> Bool {
-        switch (lhs, rhs) {
-        case let (.text(leftText), .text(rightText)):
-            return leftText == rightText
-        case let (.image(leftImageData), .image(rightImageData)):
-            return leftImageData == rightImageData
-        default:
-            return false
-        }
-    }
-}
-
 struct ChatStreamCompletionResponse: Decodable {
     let id: String
     let choices: [ChatStreamChoice]

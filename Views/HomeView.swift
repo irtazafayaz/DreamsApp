@@ -13,7 +13,6 @@ struct HomeView: View {
     @State private var title = "Dream Interpretation"
     @State var isPaywallPresented = false
     @ObservedObject private var viewModel: HomeVM
-    @FetchRequest(sortDescriptors: []) var chatHistory: FetchedResults<ChatHistory>
     
     init(viewModel: HomeVM) {
         self.viewModel = viewModel

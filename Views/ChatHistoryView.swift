@@ -12,7 +12,7 @@ struct ChatHistoryView: View {
 
     @State private var moveToChatScreen: Bool = false
     @State private var fromChatHistory: Bool = true
-    @State private var selectedMessages: [MessageWithImages] = []
+    @State private var selectedMessages: [Message] = []
     
     var body: some View {
         VStack {
