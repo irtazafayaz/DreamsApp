@@ -63,22 +63,9 @@ struct ChatView: View {
                 CustomBackButton()
             })
         }
-        .sheet(isPresented: self.$isImagePickerDisplay) {
-            ImagePicker(selectedImage: self.$selectedImage, sourceType: self.sourceType, viewModel: viewModel)
-        }
         .navigationDestination(isPresented: $isPaywallPresented, destination: {
             PaywallView(isPaywallPresented: $isPaywallPresented)
         })
-        .alert("Select Image Picker", isPresented: $openCameraDialogue) {
-            Button("Open Camera") {
-                self.sourceType = .camera
-                self.isImagePickerDisplay.toggle()
-            }
-            Button("Open Gallery") {
-                self.sourceType = .photoLibrary
-                self.isImagePickerDisplay.toggle()
-            }
-        }
     }
     
     //MARK: - Custom UIs -
@@ -185,34 +172,12 @@ struct ChatView: View {
             .ignoresSafeArea(.keyboard, edges: .bottom)
             
             Button {
-                if UserDefaults.standard.isProMemeber {
-                    openCameraDialogue.toggle()
-                } else {
-                    isPaywallPresented.toggle()
-                }
-            } label: {
-                Circle()
-                    .fill(Color(hex: Colors.primary.rawValue))
-                    .frame(width: 50, height: 50)
-                    .overlay(
-                        Image(systemName: "camera.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .font(.largeTitle)
-                            .foregroundColor(.white)
-                            .padding()
-                    )
-            }
-            
-            Button {
                 Task { @MainActor in
                     isTextFieldFocused = false
                     if proxy != nil {
                         scrollToBottom(proxy: proxy!)
                     }
                     if UserDefaults.standard.isProMemeber {
-                        addToCoreData(message: viewModel.addUserMsg())
-//                    viewModel.sendUsingAlamofireStream()
                         viewModel.sendMessageUsingFirebase { success in
                             guard let resp = success else { return }
                             switch resp.content {
@@ -221,7 +186,6 @@ struct ChatView: View {
                             case .image:
                                 break
                             }
-                            addToCoreData(message: resp)
                         }
                     } else {
                         isPaywallPresented.toggle()
@@ -263,14 +227,6 @@ struct ChatView: View {
                             bl: 20,
                             br: message.role == .user ? 8 : 20
                         ).fill(message.role == .user ? Color(hex: Colors.primary.rawValue) : Color(hex: "#F5F5F5")))
-                    if message.role == .assistant {
-                        Button(action: {
-                            sharePDF(render(content))
-                        }, label: {
-                            Image("ic_copy")
-                        })
-                        .padding()
-                    }
                 case .image(let data):
                     Image(uiImage: UIImage(data: data) ?? UIImage())
                         .resizable()
@@ -291,66 +247,11 @@ struct ChatView: View {
         .padding(.vertical, 10)
     }
     
-    //MARK: - Render text to PDF -
-    
-    func render(_ content: String) -> URL {
-        let renderer = ImageRenderer(content:
-                                        Text(content)
-            .font(.largeTitle)
-            .foregroundStyle(.black)
-            .padding()
-            .multilineTextAlignment(.center)
-        )
-        let url = URL.documentsDirectory.appending(path: "output.pdf")
-        renderer.render { size, context in
-            var box = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            guard let pdf = CGContext(url as CFURL, mediaBox: &box, nil) else {
-                return
-            }
-            pdf.beginPDFPage(nil)
-            context(pdf)
-            pdf.endPDFPage()
-            pdf.closePDF()
-        }
-        return url
-    }
-    
-    func sharePDF(_ pdfURL: URL) {
-        let activityViewController = UIActivityViewController(
-            activityItems: [pdfURL],
-            applicationActivities: nil
-        )
-        UIApplication.shared.windows.first?.rootViewController?.present(
-            activityViewController,
-            animated: true,
-            completion: nil
-        )
-    }
-    
     //MARK: - Actions -
     
     private func scrollToBottom(proxy: ScrollViewProxy) {
         guard let id = viewModel.msgsArr.filter({$0.role != .system}).last?.id else { return }
         proxy.scrollTo(id, anchor: .bottomTrailing)
-    }
-    
-    func addToCoreData(message: MessageWithImages) {
-        let chat = ChatHistory(context: moc)
-        chat.id = UUID()
-        if case .text(let text) = message.content {
-            chat.message = text
-        } else if case .image(let imageData) = message.content {
-            chat.imageData = imageData
-        }
-        chat.role = message.role.rawValue
-        chat.createdAt = Date()
-        chat.sessionID = message.sessionID
-        chat.address = UserDefaults.standard.loggedInEmail
-        try? moc.save()
-    }
-    
-    func generatePDF() {
-        isShowingDocumentPicker = true
     }
     
     
