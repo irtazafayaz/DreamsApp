@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RevenueCat
+import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
@@ -18,6 +19,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         Purchases.logLevel = .debug
         Purchases.configure(withAPIKey: Constants.revenueCat)
         Utilities.updateSubscription()
+        FirebaseApp.configure()
+        
         return true
         
     }

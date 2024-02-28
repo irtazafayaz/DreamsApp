@@ -8,11 +8,12 @@
 import Foundation
 import SwiftUI
 import Combine
-import CoreData
 import Alamofire
+import FirebaseFirestore
 
 class ChatVM: ObservableObject {
     
+    @Published var firebaseMsgs: [FirebaseMessages] = []
     @Published var msgsArr: [Message] = []
     @Published var currentInput: String = ""
     @Published var scrollToTop: Bool = false
@@ -22,10 +23,24 @@ class ChatVM: ObservableObject {
     
     private let openAIService = OpenAIService()
     private let service = BaseService.shared
+    private let db = Firestore.firestore()
+    private let cancellables: Set<AnyCancellable> = []
     
     init(with text: String, messages: [Message] = []) {
         currentInput = text
         self.msgsArr = messages
+    }
+    
+    // MARK: - HELPER FUNCTIONS -
+    
+    func mapToMessages(_ messagesWithImages: [Message]) -> [MessageData] {
+        return messagesWithImages.map { messageWithImages in
+            return MessageData(
+                id: messageWithImages.id,
+                role: messageWithImages.role,
+                content: messageWithImages.content
+            )
+        }
     }
     
     func scrollToBottom(proxy: ScrollViewProxy) {
@@ -36,18 +51,6 @@ class ChatVM: ObservableObject {
     func parseStreamData(_ data: String) -> String {
         let responseString = data.split(separator: "data:").map { String($0) }
         return responseString.isEmpty ? "" : responseString[0]
-    }
-
-    // MARK: HELPER FUNCTIONS
-    
-    func mapToMessages(_ messagesWithImages: [Message]) -> [MessageData] {
-        return messagesWithImages.map { messageWithImages in
-            return MessageData(
-                id: messageWithImages.id,
-                role: messageWithImages.role,
-                content: messageWithImages.content
-            )
-        }
     }
     
     // MARK: - Sending Messages APIs -
@@ -121,5 +124,39 @@ class ChatVM: ObservableObject {
             print("Error encoding JSON: \(error.localizedDescription)")
         }
     }
+    
+    //MARK: - Firebase Functions -
+    
+    func fetchImages() {
+        db.collection("messages")
+            .addSnapshotListener { (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print(document.data())
+                    }
+                    self.firebaseMsgs = querySnapshot?.documents.compactMap { document in
+                        try? document.data(as: FirebaseMessages.self)
+                    } ?? []
+                }
+            }
+    }
+    
+    func uploadMessages() {
+        let documentObj: [String: Any] = [
+            "content": "",
+            "role": "",
+            "createdAt": ""
+        ]
+        db.collection("messages").document().setData(documentObj) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
     
 }

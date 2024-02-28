@@ -9,5 +9,7 @@ target 'DreamsApp' do
   pod 'Alamofire'
   pod 'RevenueCat'
   pod 'HorizonCalendar'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
 
 end
