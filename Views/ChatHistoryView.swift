@@ -6,17 +6,18 @@
 //
 
 import SwiftUI
+import HorizonCalendar
 
 struct ChatHistoryView: View {
     
-
     @State private var moveToChatScreen: Bool = false
     @State private var fromChatHistory: Bool = true
     @State private var selectedMessages: [Message] = []
-    
+    @State var selectedDate: DayComponents?
+
     var body: some View {
         VStack {
-           CalendarWidget()
+            CalendarWidget(moveToChatScreen: $moveToChatScreen, selectedDate: $selectedDate)
         }
         .padding(.horizontal, 10)
         .navigationBarBackButtonHidden(true)

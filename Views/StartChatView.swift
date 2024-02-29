@@ -11,7 +11,9 @@ struct StartChatView: View {
     
     @State var isChatScreenPresented = false
     @Environment(\.managedObjectContext) var moc
-
+    @State private var selectedDate = Date.now
+    @State private var openDatePicker = false
+    
     var body: some View {
         VStack {
             
@@ -40,7 +42,7 @@ struct StartChatView: View {
             Spacer()
             
             Button {
-                isChatScreenPresented.toggle()
+                openDatePicker.toggle()
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 100)
@@ -55,9 +57,24 @@ struct StartChatView: View {
                 }
             }
             .padding(.bottom, 50)
+            .sheet(isPresented: $openDatePicker) {
+                DatePicker(
+                    "Select Date",
+                    selection: $selectedDate,
+                    in: ...Date.now, displayedComponents: .date
+                )
+                .datePickerStyle(.graphical)
+                .presentationDetents([.medium])
+                
+                Button("Select Date") {
+                    openDatePicker.toggle()
+                    isChatScreenPresented.toggle()
+                }
+                .padding()
+            }
         }
         .navigationDestination(isPresented: $isChatScreenPresented, destination: {
-            ChatView()
+            ChatView(selectedDate: selectedDate)
         })
     }
 }

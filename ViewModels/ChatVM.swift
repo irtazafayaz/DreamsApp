@@ -20,15 +20,17 @@ class ChatVM: ObservableObject {
     @Published var isEditing: Bool = false
     @Published var isPaywallPresented = false
     @Published var isAdShown = false
+    @Published var selectedDate: Date = .now
     
     private let openAIService = OpenAIService()
     private let service = BaseService.shared
     private let db = Firestore.firestore()
     private let cancellables: Set<AnyCancellable> = []
     
-    init(with text: String, messages: [Message] = []) {
+    init(with text: String, messages: [Message] = [], selectedDate: Date = .now) {
         currentInput = text
         self.msgsArr = messages
+        self.selectedDate = selectedDate
     }
     
     // MARK: - HELPER FUNCTIONS -

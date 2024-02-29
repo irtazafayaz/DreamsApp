@@ -18,8 +18,8 @@ struct ChatView: View {
     
     //MARK: - Initialization Methods -
     
-    init(messagesArr: [Message] = []) {
-        _viewModel = StateObject(wrappedValue: ChatVM(with: "", messages: messagesArr))
+    init(messagesArr: [Message] = [], selectedDate: Date = .now) {
+        _viewModel = StateObject(wrappedValue: ChatVM(with: "", messages: messagesArr, selectedDate: selectedDate))
     }
     
     var body: some View {
