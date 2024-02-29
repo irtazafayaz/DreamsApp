@@ -31,7 +31,6 @@ struct DreamsAppApp: App {
     
     @State private var showSplashScreen = true
     @StateObject var userViewModel = UserViewModel()
-    @StateObject private var dataController = DataController()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     init() {
@@ -51,7 +50,6 @@ struct DreamsAppApp: App {
             } else {
                 ContentView()
                     .environmentObject(userViewModel)
-                    .environment(\.managedObjectContext, dataController.container.viewContext)
             }
         }
     }

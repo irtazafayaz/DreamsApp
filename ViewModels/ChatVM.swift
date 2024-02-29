@@ -53,7 +53,21 @@ class ChatVM: ObservableObject {
         return responseString.isEmpty ? "" : responseString[0]
     }
     
+    func addUserMsg() {
+        let newMessage = Message(id: UUID().uuidString, content: currentInput, createdAt: Date(), role: .user)
+        currentInput = ""
+        msgsArr.append(newMessage)
+        let typingMsg = Message(id: UUID().uuidString, content: "typing...", createdAt: Date(), role: .assistant)
+        msgsArr.append(typingMsg)
+        uploadMessages(message: newMessage)
+    }
+    
     // MARK: - Sending Messages APIs -
+    
+    func sendMessageToFirebase() {
+        addUserMsg()
+        
+    }
     
     func sendMessageUsingFirebase(completion: @escaping (Message?) -> Void) {
         let filteredMsgs = mapToMessages(msgsArr)
@@ -127,7 +141,7 @@ class ChatVM: ObservableObject {
     
     //MARK: - Firebase Functions -
     
-    func fetchImages() {
+    func fetchFireBaseMessages() {
         db.collection("messages")
             .addSnapshotListener { (querySnapshot, error) in
                 if let error = error {
@@ -143,11 +157,11 @@ class ChatVM: ObservableObject {
             }
     }
     
-    func uploadMessages() {
+    func uploadMessages(message: Message) {
         let documentObj: [String: Any] = [
-            "content": "",
-            "role": "",
-            "createdAt": ""
+            "content": message.content,
+            "role": message.role.rawValue,
+            "createdAt": message.createdAt
         ]
         db.collection("messages").document().setData(documentObj) { err in
             if let err = err {

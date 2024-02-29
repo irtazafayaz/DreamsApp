@@ -16,9 +16,7 @@ struct BottomView: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
-            TextField("Ask me anything...", text: $viewModel.currentInput, onEditingChanged: { editing in
-                viewModel.isEditing = editing
-            })
+            TextField("Ask me anything...", text: $viewModel.currentInput)
             .foregroundColor(.black)
             .padding()
             .frame(minHeight: CGFloat(30))
@@ -26,10 +24,10 @@ struct BottomView: View {
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(viewModel.isEditing ? Color(hex: Colors.primary.rawValue) : Color.clear, lineWidth: 2)
+                    .stroke(Color(hex: Colors.primary.rawValue), lineWidth: 2)
             )
             .onChange(of: viewModel.currentInput) { newValue in
-                if newValue.isEmpty && !viewModel.isEditing {
+                if newValue.isEmpty {
                     viewModel.currentInput = ""
                 }
             }
@@ -42,10 +40,8 @@ struct BottomView: View {
                     if proxy != nil {
                         viewModel.scrollToBottom(proxy: proxy!)
                     }
-                    if UserDefaults.standard.isProMemeber {
-                        viewModel.sendMessageUsingFirebase { success in
-                            guard let resp = success else { return }
-                        }
+                    if !UserDefaults.standard.isProMemeber {
+                        viewModel.addUserMsg()
                     } else {
                         viewModel.isPaywallPresented.toggle()
                     }
