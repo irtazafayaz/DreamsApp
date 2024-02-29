@@ -8,16 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		CE5F95E2F4DBFAA86C972FBF /* Pods_DreamsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368D50D528EE1CDB345C296E /* Pods_DreamsApp.framework */; };
+		D51AC8842B8DEC1600F6D3FB /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8832B8DEC1600F6D3FB /* ChatListView.swift */; };
+		D51AC8862B8DECA500F6D3FB /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8852B8DECA500F6D3FB /* MessageView.swift */; };
+		D51AC8882B8DECFB00F6D3FB /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8872B8DECFB00F6D3FB /* BottomView.swift */; };
+		D51AC88A2B8DED2700F6D3FB /* ChatNotStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */; };
+		D51AC88C2B8F222000F6D3FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */; };
 		D594B0A02B87E62E00C11067 /* DreamsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B09F2B87E62E00C11067 /* DreamsAppApp.swift */; };
 		D594B0A22B87E62E00C11067 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0A12B87E62E00C11067 /* ContentView.swift */; };
 		D594B0A42B87E62E00C11067 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D594B0A32B87E62E00C11067 /* Assets.xcassets */; };
 		D594B0A72B87E62E00C11067 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D594B0A62B87E62E00C11067 /* Preview Assets.xcassets */; };
 		D594B1082B87EDDD00C11067 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0AE2B87EDDD00C11067 /* ResponseModel.swift */; };
-		D594B1092B87EDDD00C11067 /* ScanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0AF2B87EDDD00C11067 /* ScanData.swift */; };
 		D594B10A2B87EDDD00C11067 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0B02B87EDDD00C11067 /* ChatModel.swift */; };
-		D594B10B2B87EDDD00C11067 /* ChatHistoryCD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D594B0B12B87EDDD00C11067 /* ChatHistoryCD.xcdatamodeld */; };
-		D594B10C2B87EDDD00C11067 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0B32B87EDDD00C11067 /* UserModel.swift */; };
-		D594B10D2B87EDDD00C11067 /* ChatHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0B42B87EDDD00C11067 /* ChatHistory.swift */; };
 		D594B10F2B87EDDD00C11067 /* ContentMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0B82B87EDDD00C11067 /* ContentMessageView.swift */; };
 		D594B1122B87EDDD00C11067 /* StartChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0BB2B87EDDD00C11067 /* StartChatView.swift */; };
 		D594B1132B87EDDD00C11067 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0BC2B87EDDD00C11067 /* ChatView.swift */; };
@@ -45,9 +46,7 @@
 		D594B1352B87EDDD00C11067 /* DividerWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0EA2B87EDDD00C11067 /* DividerWithLabel.swift */; };
 		D594B1362B87EDDD00C11067 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0EB2B87EDDD00C11067 /* LoadingView.swift */; };
 		D594B1372B87EDDD00C11067 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0ED2B87EDDD00C11067 /* UserViewModel.swift */; };
-		D594B1382B87EDDD00C11067 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0EE2B87EDDD00C11067 /* DataController.swift */; };
 		D594B1392B87EDDD00C11067 /* ChatVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0EF2B87EDDD00C11067 /* ChatVM.swift */; };
-		D594B13A2B87EDDD00C11067 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0F02B87EDDD00C11067 /* HomeVM.swift */; };
 		D594B13E2B87EDDD00C11067 /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0F42B87EDDD00C11067 /* ProfileVM.swift */; };
 		D594B13F2B87EDDD00C11067 /* Urbanist-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D594B0F62B87EDDD00C11067 /* Urbanist-Bold.ttf */; };
 		D594B1402B87EDDD00C11067 /* Urbanist-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D594B0F72B87EDDD00C11067 /* Urbanist-Regular.ttf */; };
@@ -75,17 +74,18 @@
 		0EE135FF85E432D3495B955B /* Pods-DreamsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DreamsApp.release.xcconfig"; path = "Target Support Files/Pods-DreamsApp/Pods-DreamsApp.release.xcconfig"; sourceTree = "<group>"; };
 		368D50D528EE1CDB345C296E /* Pods_DreamsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DreamsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		833B9185A7EBFD7C3A28DF5F /* Pods-DreamsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DreamsApp.debug.xcconfig"; path = "Target Support Files/Pods-DreamsApp/Pods-DreamsApp.debug.xcconfig"; sourceTree = "<group>"; };
+		D51AC8832B8DEC1600F6D3FB /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		D51AC8852B8DECA500F6D3FB /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		D51AC8872B8DECFB00F6D3FB /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNotStartedView.swift; sourceTree = "<group>"; };
+		D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D594B09C2B87E62E00C11067 /* DreamsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D594B09F2B87E62E00C11067 /* DreamsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsAppApp.swift; sourceTree = "<group>"; };
 		D594B0A12B87E62E00C11067 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D594B0A32B87E62E00C11067 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D594B0A62B87E62E00C11067 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D594B0AE2B87EDDD00C11067 /* ResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
-		D594B0AF2B87EDDD00C11067 /* ScanData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanData.swift; sourceTree = "<group>"; };
 		D594B0B02B87EDDD00C11067 /* ChatModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
-		D594B0B22B87EDDD00C11067 /* ChatHistoryCD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatHistoryCD.xcdatamodel; sourceTree = "<group>"; };
-		D594B0B32B87EDDD00C11067 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		D594B0B42B87EDDD00C11067 /* ChatHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHistory.swift; sourceTree = "<group>"; };
 		D594B0B82B87EDDD00C11067 /* ContentMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentMessageView.swift; sourceTree = "<group>"; };
 		D594B0BB2B87EDDD00C11067 /* StartChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartChatView.swift; sourceTree = "<group>"; };
 		D594B0BC2B87EDDD00C11067 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -113,9 +113,7 @@
 		D594B0EA2B87EDDD00C11067 /* DividerWithLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DividerWithLabel.swift; sourceTree = "<group>"; };
 		D594B0EB2B87EDDD00C11067 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		D594B0ED2B87EDDD00C11067 /* UserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
-		D594B0EE2B87EDDD00C11067 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		D594B0EF2B87EDDD00C11067 /* ChatVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVM.swift; sourceTree = "<group>"; };
-		D594B0F02B87EDDD00C11067 /* HomeVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		D594B0F42B87EDDD00C11067 /* ProfileVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
 		D594B0F62B87EDDD00C11067 /* Urbanist-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-Bold.ttf"; sourceTree = "<group>"; };
 		D594B0F72B87EDDD00C11067 /* Urbanist-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-Regular.ttf"; sourceTree = "<group>"; };
@@ -169,6 +167,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D51AC8822B8DEBA200F6D3FB /* ChatUI */ = {
+			isa = PBXGroup;
+			children = (
+				D51AC8832B8DEC1600F6D3FB /* ChatListView.swift */,
+				D51AC8852B8DECA500F6D3FB /* MessageView.swift */,
+				D51AC8872B8DECFB00F6D3FB /* BottomView.swift */,
+				D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */,
+			);
+			path = ChatUI;
+			sourceTree = "<group>";
+		};
 		D594B0932B87E62D00C11067 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +199,7 @@
 		D594B09E2B87E62E00C11067 /* DreamsApp */ = {
 			isa = PBXGroup;
 			children = (
+				D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */,
 				D594B1512B87EED500C11067 /* Info.plist */,
 				D594B0F52B87EDDD00C11067 /* Fonts */,
 				D594B0AD2B87EDDD00C11067 /* Models */,
@@ -218,11 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				D594B0AE2B87EDDD00C11067 /* ResponseModel.swift */,
-				D594B0AF2B87EDDD00C11067 /* ScanData.swift */,
 				D594B0B02B87EDDD00C11067 /* ChatModel.swift */,
-				D594B0B12B87EDDD00C11067 /* ChatHistoryCD.xcdatamodeld */,
-				D594B0B32B87EDDD00C11067 /* UserModel.swift */,
-				D594B0B42B87EDDD00C11067 /* ChatHistory.swift */,
 			);
 			path = Models;
 			sourceTree = SOURCE_ROOT;
@@ -230,12 +236,13 @@
 		D594B0B52B87EDDD00C11067 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D594B0BB2B87EDDD00C11067 /* StartChatView.swift */,
+				D51AC8822B8DEBA200F6D3FB /* ChatUI */,
 				D594B0CE2B87EDDD00C11067 /* PaywallView.swift */,
-				D594B0CC2B87EDDD00C11067 /* ChatHistoryView.swift */,
 				D594B0C82B87EDDD00C11067 /* SharedWebView.swift */,
-				D594B0BC2B87EDDD00C11067 /* ChatView.swift */,
 				D594B0C72B87EDDD00C11067 /* ProfileView.swift */,
+				D594B0CC2B87EDDD00C11067 /* ChatHistoryView.swift */,
+				D594B0BC2B87EDDD00C11067 /* ChatView.swift */,
+				D594B0BB2B87EDDD00C11067 /* StartChatView.swift */,
 				D594B0C22B87EDDD00C11067 /* HomeView.swift */,
 				D594B0BF2B87EDDD00C11067 /* SplashView.swift */,
 			);
@@ -303,9 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				D594B0ED2B87EDDD00C11067 /* UserViewModel.swift */,
-				D594B0EE2B87EDDD00C11067 /* DataController.swift */,
 				D594B0EF2B87EDDD00C11067 /* ChatVM.swift */,
-				D594B0F02B87EDDD00C11067 /* HomeVM.swift */,
 				D594B0F42B87EDDD00C11067 /* ProfileVM.swift */,
 			);
 			path = ViewModels;
@@ -416,6 +421,7 @@
 				D594B14F2B87EDDD00C11067 /* Urbanist-ExtraLight.ttf in Resources */,
 				D594B14C2B87EDDD00C11067 /* Urbanist-BoldItalic.ttf in Resources */,
 				D594B14D2B87EDDD00C11067 /* Urbanist-ExtraBold.ttf in Resources */,
+				D51AC88C2B8F222000F6D3FB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,34 +476,31 @@
 			files = (
 				D594B1152B87EDDD00C11067 /* SplashView.swift in Sources */,
 				D594B10A2B87EDDD00C11067 /* ChatModel.swift in Sources */,
-				D594B10C2B87EDDD00C11067 /* UserModel.swift in Sources */,
 				D594B1122B87EDDD00C11067 /* StartChatView.swift in Sources */,
-				D594B1382B87EDDD00C11067 /* DataController.swift in Sources */,
 				D594B12C2B87EDDD00C11067 /* UnderlinedTextField.swift in Sources */,
 				D594B1392B87EDDD00C11067 /* ChatVM.swift in Sources */,
 				D594B11C2B87EDDD00C11067 /* SharedWebView.swift in Sources */,
 				D594B11D2B87EDDD00C11067 /* WebView.swift in Sources */,
 				D594B1362B87EDDD00C11067 /* LoadingView.swift in Sources */,
+				D51AC8842B8DEC1600F6D3FB /* ChatListView.swift in Sources */,
 				D594B1552B87F3B100C11067 /* HorizonCalendarWrapper.swift in Sources */,
 				D594B1242B87EDDD00C11067 /* BaseActions.swift in Sources */,
+				D51AC8862B8DECA500F6D3FB /* MessageView.swift in Sources */,
 				D594B1202B87EDDD00C11067 /* PaywallView.swift in Sources */,
-				D594B13A2B87EDDD00C11067 /* HomeVM.swift in Sources */,
+				D51AC8882B8DECFB00F6D3FB /* BottomView.swift in Sources */,
 				D594B1272B87EDDD00C11067 /* BaseService.swift in Sources */,
 				D594B1132B87EDDD00C11067 /* ChatView.swift in Sources */,
 				D594B12E2B87EDDD00C11067 /* UserDefaults.swift in Sources */,
-				D594B1092B87EDDD00C11067 /* ScanData.swift in Sources */,
 				D594B1352B87EDDD00C11067 /* DividerWithLabel.swift in Sources */,
 				D594B12A2B87EDDD00C11067 /* Utilities.swift in Sources */,
 				D594B1372B87EDDD00C11067 /* UserViewModel.swift in Sources */,
 				D594B12D2B87EDDD00C11067 /* ColorExtension.swift in Sources */,
 				D594B0A22B87E62E00C11067 /* ContentView.swift in Sources */,
-				D594B10B2B87EDDD00C11067 /* ChatHistoryCD.xcdatamodeld in Sources */,
 				D594B11E2B87EDDD00C11067 /* ChatHistoryCard.swift in Sources */,
 				D594B1232B87EDDD00C11067 /* OpenAIService.swift in Sources */,
 				D594B1082B87EDDD00C11067 /* ResponseModel.swift in Sources */,
 				D594B13E2B87EDDD00C11067 /* ProfileVM.swift in Sources */,
 				D594B1342B87EDDD00C11067 /* CustomBackButton.swift in Sources */,
-				D594B10D2B87EDDD00C11067 /* ChatHistory.swift in Sources */,
 				D594B10F2B87EDDD00C11067 /* ContentMessageView.swift in Sources */,
 				D594B1262B87EDDD00C11067 /* SSEClient.swift in Sources */,
 				D594B1282B87EDDD00C11067 /* Websocket.swift in Sources */,
@@ -507,6 +510,7 @@
 				D594B12B2B87EDDD00C11067 /* Enums.swift in Sources */,
 				D594B1182B87EDDD00C11067 /* HomeView.swift in Sources */,
 				D594B1532B87F1DA00C11067 /* CalendarWidget.swift in Sources */,
+				D51AC88A2B8DED2700F6D3FB /* ChatNotStartedView.swift in Sources */,
 				D594B1252B87EDDD00C11067 /* APIServiceEndpoint.swift in Sources */,
 				D594B1332B87EDDD00C11067 /* PopupView.swift in Sources */,
 			);
@@ -640,28 +644,34 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DreamsApp/Preview Content\"";
-				DEVELOPMENT_TEAM = N3UZ6NV4QG;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 86GDT8VMYM;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DreamsApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Dream Interpretation";
+				INFOPLIST_KEY_CFBundleDisplayName = "AI Dream Interpreter";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = thefreelancers.DreamsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.schoolai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SchoolAIDevelopment;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -674,28 +684,34 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DreamsApp/Preview Content\"";
-				DEVELOPMENT_TEAM = N3UZ6NV4QG;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 86GDT8VMYM;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DreamsApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Dream Interpretation";
+				INFOPLIST_KEY_CFBundleDisplayName = "AI Dream Interpreter";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = thefreelancers.DreamsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.schoolai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SchoolAIDevelopment;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -724,19 +740,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		D594B0B12B87EDDD00C11067 /* ChatHistoryCD.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D594B0B22B87EDDD00C11067 /* ChatHistoryCD.xcdatamodel */,
-			);
-			currentVersion = D594B0B22B87EDDD00C11067 /* ChatHistoryCD.xcdatamodel */;
-			path = ChatHistoryCD.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = D594B0942B87E62D00C11067 /* Project object */;
 }

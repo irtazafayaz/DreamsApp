@@ -39,7 +39,7 @@ enum AppImages: String {
 }
 
 enum Constants: String {
-    case appName = "Dream Interpretation"
+    case appName = "AI Dream Interpreter"
     case apiKey = "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"
     static let privacyURL = "https://www.termsfeed.com/live/4d1413e3-f4df-4b88-8350-052b4c5e308c"
     static let termsURL = "https://www.termsfeed.com/live/5dacdbaa-f525-4afc-b475-e598246063a2"

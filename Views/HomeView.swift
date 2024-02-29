@@ -10,14 +10,8 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var selectedTab: Int = 0
-    @State private var title = "Dream Interpretation"
+    @State private var title = "AI Dream Interpreter"
     @State var isPaywallPresented = false
-    @ObservedObject private var viewModel: HomeVM
-    @FetchRequest(sortDescriptors: []) var chatHistory: FetchedResults<ChatHistory>
-    
-    init(viewModel: HomeVM) {
-        self.viewModel = viewModel
-    }
     
     var body: some View {
         NavigationStack {
@@ -59,7 +53,7 @@ struct HomeView: View {
             .onChange(of: selectedTab) { newTab in
                 switch newTab {
                 case 0:
-                    title = "Dream Interpretation"
+                    title = "AI Dream Interpreter"
                 case 1:
                     title = "History"
                 case 2:
@@ -81,6 +75,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeVM())
+        HomeView()
     }
 }
