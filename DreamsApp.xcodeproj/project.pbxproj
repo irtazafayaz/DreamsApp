@@ -33,9 +33,7 @@
 		D594B1232B87EDDD00C11067 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0D32B87EDDD00C11067 /* OpenAIService.swift */; };
 		D594B1242B87EDDD00C11067 /* BaseActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0D52B87EDDD00C11067 /* BaseActions.swift */; };
 		D594B1252B87EDDD00C11067 /* APIServiceEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0D62B87EDDD00C11067 /* APIServiceEndpoint.swift */; };
-		D594B1262B87EDDD00C11067 /* SSEClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0D72B87EDDD00C11067 /* SSEClient.swift */; };
 		D594B1272B87EDDD00C11067 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0D82B87EDDD00C11067 /* BaseService.swift */; };
-		D594B1282B87EDDD00C11067 /* Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0D92B87EDDD00C11067 /* Websocket.swift */; };
 		D594B12A2B87EDDD00C11067 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0DC2B87EDDD00C11067 /* Utilities.swift */; };
 		D594B12B2B87EDDD00C11067 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0DE2B87EDDD00C11067 /* Enums.swift */; };
 		D594B12C2B87EDDD00C11067 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0E02B87EDDD00C11067 /* UnderlinedTextField.swift */; };
@@ -100,9 +98,7 @@
 		D594B0D32B87EDDD00C11067 /* OpenAIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
 		D594B0D52B87EDDD00C11067 /* BaseActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseActions.swift; sourceTree = "<group>"; };
 		D594B0D62B87EDDD00C11067 /* APIServiceEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServiceEndpoint.swift; sourceTree = "<group>"; };
-		D594B0D72B87EDDD00C11067 /* SSEClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSEClient.swift; sourceTree = "<group>"; };
 		D594B0D82B87EDDD00C11067 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
-		D594B0D92B87EDDD00C11067 /* Websocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Websocket.swift; sourceTree = "<group>"; };
 		D594B0DC2B87EDDD00C11067 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		D594B0DE2B87EDDD00C11067 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		D594B0E02B87EDDD00C11067 /* UnderlinedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
@@ -262,9 +258,7 @@
 			children = (
 				D594B0D52B87EDDD00C11067 /* BaseActions.swift */,
 				D594B0D62B87EDDD00C11067 /* APIServiceEndpoint.swift */,
-				D594B0D72B87EDDD00C11067 /* SSEClient.swift */,
 				D594B0D82B87EDDD00C11067 /* BaseService.swift */,
-				D594B0D92B87EDDD00C11067 /* Websocket.swift */,
 			);
 			path = Networking;
 			sourceTree = SOURCE_ROOT;
@@ -502,8 +496,6 @@
 				D594B13E2B87EDDD00C11067 /* ProfileVM.swift in Sources */,
 				D594B1342B87EDDD00C11067 /* CustomBackButton.swift in Sources */,
 				D594B10F2B87EDDD00C11067 /* ContentMessageView.swift in Sources */,
-				D594B1262B87EDDD00C11067 /* SSEClient.swift in Sources */,
-				D594B1282B87EDDD00C11067 /* Websocket.swift in Sources */,
 				D594B11F2B87EDDD00C11067 /* ChatHistoryView.swift in Sources */,
 				D594B0A02B87E62E00C11067 /* DreamsAppApp.swift in Sources */,
 				D594B11B2B87EDDD00C11067 /* ProfileView.swift in Sources */,

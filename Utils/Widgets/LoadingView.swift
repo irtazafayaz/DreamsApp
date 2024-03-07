@@ -12,6 +12,7 @@ struct LoadingView: View {
     
     var body: some View {
         Image("ic_loading")
+            .foregroundColor(Color(hex: Colors.primary.rawValue))
             .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
             .onAppear {
                 withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {

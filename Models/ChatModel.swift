@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
+
 struct OpenAIChatBody: Encodable {
     let model: String
     let messages: [OpenAIChatMessage]
@@ -18,11 +19,19 @@ struct OpenAIChatBody: Encodable {
         case model, messages, stream
         case maxTokens = "max_tokens"
     }
+    
 }
 
 struct OpenAIChatMessage: Codable {
     let role: SenderRole
     let content: String
+}
+
+enum SenderRole: String, Codable {
+    case system
+    case user
+    case assistant
+    case paywall
 }
 
 struct OpenAIChatResponse: Decodable {
@@ -33,27 +42,6 @@ struct OpenAIChatChoice: Decodable {
     let message: OpenAIChatMessage
 }
 
-enum SenderRole: String, Codable {
-    case system
-    case user
-    case assistant
-    case paywall
-}
-
-struct MessageData: Codable {
-    let id: String
-    let role: SenderRole
-    let content: String
-    
-    var description: [String: Any] {
-        let dictionary: [String: Any] = [
-            "role": role.rawValue,
-            "content": content
-        ]
-        return dictionary
-    }
-}
-
 struct Message: Decodable {
     let id: String
     let content: String
@@ -61,15 +49,17 @@ struct Message: Decodable {
     let role: SenderRole
 }
 
-struct DataSource {
-    static let messages = [
-        Message(id: UUID().uuidString, content: "Hi, I really love your templates and I would like to buy the chat template", createdAt: Date(), role: .user),
-        Message(id: UUID().uuidString, content: "Hi, I really love your templates and I would like to buy the chat template", createdAt: Date(), role: .assistant),
-        Message(id: UUID().uuidString, content: "Hi, I really love your templates and I would like to buy the chat template", createdAt: Date(), role: .user),
-        Message(id: UUID().uuidString, content: "Hi, I really love your templates and I would like to buy the chat template", createdAt: Date(), role: .assistant),
-        Message(id: UUID().uuidString, content: "Hi, I really love your templates and I would like to buy the chat template", createdAt: Date(), role: .user),
-        Message(id: UUID().uuidString, content: "Hi, I really love your templates and I would like to buy the chat template", createdAt: Date(), role: .assistant),
-    ]
+struct ChatStreamCompletionResponse: Decodable {
+    let id: String
+    let choices: [ChatStreamChoice]
+}
+
+struct ChatStreamChoice: Decodable {
+    let delta: ChatStreamContent
+}
+
+struct ChatStreamContent: Decodable {
+    let content: String?
 }
 
 struct FirebaseMessages: Identifiable, Codable {

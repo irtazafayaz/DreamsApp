@@ -28,9 +28,9 @@ struct CalendarWidget: View {
     
     private func getBackgroundColor(_ day: DayComponents) -> Color {
         if day == selectedDate {
-            return .blue
+            return Color(hex: Colors.primary.rawValue)
         }
-        return .gray.opacity(0.2)
+        return .white
     }
     
     private func getForegroundColor(_ day: DayComponents) -> Color {
@@ -45,14 +45,14 @@ struct CalendarWidget: View {
             
             CalendarViewRepresentable(
                 visibleDateRange: beginningDate...endDate,
-                monthsLayout: .vertical,
+                monthsLayout: .horizontal,
                 dataDependency: (selectedDate, endDate),
                 proxy: calendarViewProxy
             )
 
             .verticalDayMargin(10)
             .horizontalDayMargin(10)
-            .interMonthSpacing(30)
+//            .interMonthSpacing(30)
             
             .dayItemProvider { day in
                 ZStack(alignment: .center) {

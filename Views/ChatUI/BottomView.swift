@@ -41,7 +41,7 @@ struct BottomView: View {
                         viewModel.scrollToBottom(proxy: proxy!)
                     }
                     if !UserDefaults.standard.isProMemeber {
-                        viewModel.addUserMsg()
+                        viewModel.sendMessage()
                     } else {
                         viewModel.isPaywallPresented.toggle()
                     }

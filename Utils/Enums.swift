@@ -8,7 +8,7 @@
 import Foundation
 
 enum Colors: String {
-    case primary    = "#17CE92"
+    case primary    = "#c266a7"
     case secondary  = "#E8FAF4"
     case divider    = "#EEEEEE"
     case labelDark  = "#212121"
