@@ -10,10 +10,11 @@ import HorizonCalendar
 
 struct CalendarWidget: View {
     
-    @State private var selectedStartDate: DayComponents?
-    @State private var selectedEndDate: DayComponents?
     @State private var calendar = Calendar(identifier: .gregorian)
+    
     @StateObject private var calendarViewProxy = CalendarViewProxy()
+    @Binding var moveToChatScreen: Bool
+    @Binding var selectedDate: DayComponents?
 
     private var beginningDate: Date {
         let calendar = Calendar.current
@@ -26,14 +27,14 @@ struct CalendarWidget: View {
     }
     
     private func getBackgroundColor(_ day: DayComponents) -> Color {
-        if day == selectedStartDate || day == selectedEndDate {
-            return .blue
+        if day == selectedDate {
+            return Color(hex: Colors.primary.rawValue)
         }
-        return .gray.opacity(0.2)
+        return .white
     }
     
     private func getForegroundColor(_ day: DayComponents) -> Color {
-        if day == selectedStartDate || day == selectedEndDate {
+        if day == selectedDate {
             return .white
         }
         return .black
@@ -44,14 +45,14 @@ struct CalendarWidget: View {
             
             CalendarViewRepresentable(
                 visibleDateRange: beginningDate...endDate,
-                monthsLayout: .vertical,
-                dataDependency: (selectedStartDate, endDate),
+                monthsLayout: .horizontal,
+                dataDependency: (selectedDate, endDate),
                 proxy: calendarViewProxy
             )
 
             .verticalDayMargin(10)
             .horizontalDayMargin(10)
-            .interMonthSpacing(30)
+//            .interMonthSpacing(30)
             
             .dayItemProvider { day in
                 ZStack(alignment: .center) {
@@ -64,7 +65,8 @@ struct CalendarWidget: View {
             }
             
             .onDaySelection { day in
-                selectedStartDate = day
+                selectedDate = day
+                moveToChatScreen.toggle()
             }
             
             .onAppear {
@@ -75,7 +77,7 @@ struct CalendarWidget: View {
         .padding(.horizontal,20)
     }
 }
-
-#Preview {
-    CalendarWidget()
-}
+//
+//#Preview {
+//    CalendarWidget(moveToChatScreen: .constant(false), selectedDate: .constant(DayComponents(month: MonthComponents(era: <#Int#>, year: <#Int#>, month: <#Int#>, isInGregorianCalendar: <#Bool#>), day: 1)))
+//}

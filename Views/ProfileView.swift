@@ -52,7 +52,7 @@ struct ProfileView: View {
                             tr: 10,
                             bl: 10,
                             br: 10
-                        ).fill(Color(hex: "#17CE92")))
+                        ).fill(Color(hex: Colors.primary.rawValue)))
                         .padding(.top, 20)
                     }
                 }

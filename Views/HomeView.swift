@@ -43,11 +43,11 @@ struct HomeView: View {
             .navigationTitle(title)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading, content: {
-                    Image("ic_app_logo_small")
+                    Image("ic_app_logo_gray")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 40, height: 40)
-                    
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(Color(hex: Colors.primary.rawValue))
                 })
             }
             .onChange(of: selectedTab) { newTab in

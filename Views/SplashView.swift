@@ -13,7 +13,8 @@ struct SplashView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 160, height: 160)
-            
+                .foregroundColor(Color(hex: Colors.primary.rawValue))
+
             Text("SchoolAI")
                 .font(Font.custom(FontFamily.bold.rawValue, size: 40))
                 .foregroundColor(Color(hex: Colors.labelDark.rawValue))

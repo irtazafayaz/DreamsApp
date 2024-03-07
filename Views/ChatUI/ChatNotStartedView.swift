@@ -15,6 +15,7 @@ struct ChatNotStartedView: View {
         VStack {
             Image("ic_app_logo_gray")
                 .padding(.top, 50)
+                .foregroundColor(Color(hex: Colors.primary.rawValue))
             Text("Capabilities")
                 .font(Font.custom(FontFamily.bold.rawValue, size: 24))
                 .foregroundColor(Color(hex: "BDBDBD"))
