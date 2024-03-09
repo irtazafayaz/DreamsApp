@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyAfaWMRGXiCETJhV8TQh_EwD3iNCieK00Q</string>
+	<string>AIzaSyDSyq-1gDGXeY0Y4OiJWl9qt5MkmLFQkMU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>246535524591</string>
+	<string>510602123049</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.thefreelancers.schoolai</string>
+	<string>com.thefreelancers.dreamgpt</string>
 	<key>PROJECT_ID</key>
-	<string>dreamsinterpretation-2cc3d</string>
+	<string>live-dream-interpreter</string>
 	<key>STORAGE_BUCKET</key>
-	<string>dreamsinterpretation-2cc3d.appspot.com</string>
+	<string>live-dream-interpreter.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:246535524591:ios:97c7a781c2012142758b1a</string>
+	<string>1:510602123049:ios:54c482da5a26bd0f738938</string>
 </dict>
 </plist>

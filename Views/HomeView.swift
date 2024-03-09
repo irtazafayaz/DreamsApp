@@ -14,7 +14,6 @@ struct HomeView: View {
     @State var isPaywallPresented = false
     
     var body: some View {
-        NavigationStack {
             VStack(alignment: .center) {
                 TabView(selection: $selectedTab) {
                     StartChatView()
@@ -68,7 +67,7 @@ struct HomeView: View {
             .navigationDestination(isPresented: $isPaywallPresented, destination: {
                 PaywallView(isPaywallPresented: $isPaywallPresented)
             })
-        }
+        
     }
     
 }

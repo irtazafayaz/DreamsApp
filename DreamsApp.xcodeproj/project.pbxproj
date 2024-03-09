@@ -13,6 +13,8 @@
 		D51AC8882B8DECFB00F6D3FB /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8872B8DECFB00F6D3FB /* BottomView.swift */; };
 		D51AC88A2B8DED2700F6D3FB /* ChatNotStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */; };
 		D51AC88C2B8F222000F6D3FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */; };
+		D53ED0782B9CAB6100334348 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53ED0772B9CAB6100334348 /* LoginView.swift */; };
+		D53ED07A2B9CAD3C00334348 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53ED0792B9CAD3C00334348 /* LoginVM.swift */; };
 		D594B0A02B87E62E00C11067 /* DreamsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B09F2B87E62E00C11067 /* DreamsAppApp.swift */; };
 		D594B0A22B87E62E00C11067 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0A12B87E62E00C11067 /* ContentView.swift */; };
 		D594B0A42B87E62E00C11067 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D594B0A32B87E62E00C11067 /* Assets.xcassets */; };
@@ -77,6 +79,9 @@
 		D51AC8872B8DECFB00F6D3FB /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNotStartedView.swift; sourceTree = "<group>"; };
 		D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D53ED0762B9CAA9900334348 /* DreamsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DreamsApp.entitlements; sourceTree = "<group>"; };
+		D53ED0772B9CAB6100334348 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D53ED0792B9CAD3C00334348 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		D594B09C2B87E62E00C11067 /* DreamsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D594B09F2B87E62E00C11067 /* DreamsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsAppApp.swift; sourceTree = "<group>"; };
 		D594B0A12B87E62E00C11067 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -195,6 +200,7 @@
 		D594B09E2B87E62E00C11067 /* DreamsApp */ = {
 			isa = PBXGroup;
 			children = (
+				D53ED0762B9CAA9900334348 /* DreamsApp.entitlements */,
 				D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */,
 				D594B1512B87EED500C11067 /* Info.plist */,
 				D594B0F52B87EDDD00C11067 /* Fonts */,
@@ -241,6 +247,7 @@
 				D594B0BB2B87EDDD00C11067 /* StartChatView.swift */,
 				D594B0C22B87EDDD00C11067 /* HomeView.swift */,
 				D594B0BF2B87EDDD00C11067 /* SplashView.swift */,
+				D53ED0772B9CAB6100334348 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = SOURCE_ROOT;
@@ -306,6 +313,7 @@
 				D594B0ED2B87EDDD00C11067 /* UserViewModel.swift */,
 				D594B0EF2B87EDDD00C11067 /* ChatVM.swift */,
 				D594B0F42B87EDDD00C11067 /* ProfileVM.swift */,
+				D53ED0792B9CAD3C00334348 /* LoginVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = SOURCE_ROOT;
@@ -482,8 +490,10 @@
 				D51AC8862B8DECA500F6D3FB /* MessageView.swift in Sources */,
 				D594B1202B87EDDD00C11067 /* PaywallView.swift in Sources */,
 				D51AC8882B8DECFB00F6D3FB /* BottomView.swift in Sources */,
+				D53ED07A2B9CAD3C00334348 /* LoginVM.swift in Sources */,
 				D594B1272B87EDDD00C11067 /* BaseService.swift in Sources */,
 				D594B1132B87EDDD00C11067 /* ChatView.swift in Sources */,
+				D53ED0782B9CAB6100334348 /* LoginView.swift in Sources */,
 				D594B12E2B87EDDD00C11067 /* UserDefaults.swift in Sources */,
 				D594B1352B87EDDD00C11067 /* DividerWithLabel.swift in Sources */,
 				D594B12A2B87EDDD00C11067 /* Utilities.swift in Sources */,
@@ -636,13 +646,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DreamsApp/DreamsApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DreamsApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 86GDT8VMYM;
+				DEVELOPMENT_TEAM = H7J77Z36VS;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -660,10 +669,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.schoolai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.dreamgpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SchoolAIDevelopment;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -676,13 +684,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = DreamsApp/DreamsApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Distribution: Damla Yildiztekin (H7J77Z36VS)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DreamsApp/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 86GDT8VMYM;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = H7J77Z36VS;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -700,10 +708,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.schoolai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.dreamgpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SchoolAIDevelopment;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DreamDisProfile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
