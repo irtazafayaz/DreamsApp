@@ -15,6 +15,18 @@ struct LoginView: View {
     var body: some View {
         
         VStack {
+
+            Image("ic_app_logo_gray")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+                .foregroundColor(Color(hex: Colors.primary.rawValue))
+                .padding(.top, 30)
+            
+            Text("Login")
+                .font(Font.custom(FontFamily.bold.rawValue, size: 20))
+                .foregroundColor(Color(hex: Colors.primary.rawValue))
+            
             SignInWithAppleButton { request in
                 viewModel.handleSignWithAppleRequest(request)
             } onCompletion: { result in
@@ -24,6 +36,7 @@ struct LoginView: View {
             .frame(height: 50)
             .padding()
             .cornerRadius(10)
+            .padding(.top, 40)
         }
         .navigationDestination(isPresented: $viewModel.isLoginSuccessful, destination: {
             HomeView()

@@ -126,7 +126,7 @@ extension UserDefaults {
     
     var userEmail: String {
         get {
-            UserDefaults.standard.string(forKey: "user-email") ?? "NaN"
+            UserDefaults.standard.string(forKey: "user-email") ?? ""
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: "user-email")

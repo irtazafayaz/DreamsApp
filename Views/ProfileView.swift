@@ -14,7 +14,8 @@ struct ProfileView: View {
     @State private var showPrivacy = false
     @ObservedObject private var viewModel: ProfileVM
     @Environment(\.presentationMode) var presentationMode
-    
+    @EnvironmentObject var sessionManager: SessionManager
+
     init () {
         self.viewModel = ProfileVM()
     }
@@ -94,6 +95,24 @@ struct ProfileView: View {
                         Spacer()
                         Image("ic_arrow_right")
                             .foregroundColor(.black)
+                    }
+                    .padding(.top, 20)
+                }
+                
+                Button {
+                    sessionManager.logout()
+                    UserDefaults.standard.userEmail = ""
+                } label: {
+                    HStack(alignment: .center) {
+                        Image(systemName: "person.slash.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 17, height: 20)
+                        Text("Logout")
+                            .font(Font.custom(FontFamily.bold.rawValue, size: 18))
+                            .foregroundColor(.red)
+                            .padding(.leading, 5)
+                        Spacer()
                     }
                     .padding(.top, 20)
                 }

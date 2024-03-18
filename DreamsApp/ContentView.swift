@@ -8,9 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var sessionManager = SessionManager()
+    
+//    init() {
+//        sessionManager.getCurrentAuthUser()
+//    }
+    
     var body: some View {
-        NavigationStack {
+        
+        switch sessionManager.authState {
+        case .login:
             LoginView()
+                .environmentObject(sessionManager)
+        case .home(_):
+            HomeView()
+                .environmentObject(sessionManager)
         }
     }
 }
