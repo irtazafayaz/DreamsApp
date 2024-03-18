@@ -45,10 +45,11 @@ class LoginVM: ObservableObject {
                     do {
                         let result = try await Auth.auth().signIn(with: credential)
                         if let email = result.user.email {
-                            UserDefaults.standard.set(result.user.email, forKey: "user-email")
-                            isLoginSuccessful.toggle()
+                            UserDefaults.standard.set(email, forKey: "user-email")
+                            DispatchQueue.main.async {
+                                self.isLoginSuccessful.toggle()
+                            }
                         }
-                        print("SUCESSSSSSSS \(result)")
                     } catch {
                         print("signin failed")
                     }

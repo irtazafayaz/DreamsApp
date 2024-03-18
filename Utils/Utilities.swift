@@ -13,7 +13,7 @@ class Utilities {
     
     static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM yyyy - hh:mm a"
+        dateFormatter.dateFormat = "dd MMM yyyy"
         return dateFormatter
     }()
     
@@ -24,7 +24,11 @@ class Utilities {
         return jsonDecoder
     }()
     
-    static func formatDate(_ date: Date) -> String {
+    static func formatDateAndTime(_ date: Date) -> String {
+        return dateFormatter.string(from: date)
+    }
+    
+    static func convertDateToString(_ date: Date) -> String {
         return dateFormatter.string(from: date)
     }
     

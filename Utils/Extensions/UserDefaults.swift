@@ -61,6 +61,15 @@ extension UserDefaults {
         }
     }
     
+    var sessionDate: String {
+        get {
+            UserDefaults.standard.string(forKey: "session-date") ?? ""
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "session-date")
+        }
+    }
+    
     var refreshToken: String? {
         get {
             UserDefaults.standard.string(forKey: "refresh_token")
@@ -114,5 +123,16 @@ extension UserDefaults {
             UserDefaults.standard.setValue(newValue, forKey: "max_tries")
         }
     }
+    
+    var userEmail: String {
+        get {
+            UserDefaults.standard.string(forKey: "user-email") ?? "NaN"
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "user-email")
+        }
+    }
+    
+    
     
 }

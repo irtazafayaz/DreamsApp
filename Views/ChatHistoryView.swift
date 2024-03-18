@@ -14,7 +14,8 @@ struct ChatHistoryView: View {
     @State private var fromChatHistory: Bool = true
     @State private var selectedMessages: [Message] = []
     @State var selectedDate: DayComponents?
-
+    @ObservedObject private var viewModel = ChatHistoryVM()
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Select Date")
@@ -30,9 +31,19 @@ struct ChatHistoryView: View {
                 .padding(.leading, 20)
                 .padding(.bottom, 40)
 
-            CalendarWidget(moveToChatScreen: $moveToChatScreen, selectedDate: $selectedDate)
-            
+            CalendarWidget(moveToChatScreen: $moveToChatScreen, selectedDate: $selectedDate, createdAtDates: self.viewModel.createdAtDates)
             Spacer()
+        }
+        .onAppear {
+            viewModel.fetchMessagesGroupedByCreatedAt { groupedMessages in
+                for (createdAt, messages) in groupedMessages {
+                    print("Messages created at \(createdAt):")
+                    for message in messages {
+                        print("- \(message.content)")
+                    }
+                }
+                
+            }
         }
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $moveToChatScreen, destination: {

@@ -20,8 +20,10 @@ class ChatVM: ObservableObject {
     @Published var isEditing: Bool = false
     @Published var isPaywallPresented = false
     @Published var isAdShown = false
-    @Published var selectedDate: Date = .now
     
+    @Published var selectedDate: Date = .now
+    @Published var updateSessionID = true
+
     private let openAIService = OpenAIService()
     private let service = BaseService.shared
     private let db = Firestore.firestore()
@@ -33,17 +35,11 @@ class ChatVM: ObservableObject {
         self.selectedDate = selectedDate
     }
     
-    // MARK: - HELPER FUNCTIONS -
-    
-    func scrollToBottom(proxy: ScrollViewProxy) {
-        guard let id = msgsArr.filter({$0.role != .system}).last?.id else { return }
-        proxy.scrollTo(id, anchor: .bottomTrailing)
-    }
-    
     // MARK: - Sending Messages APIs -
     
     func sendMessage() {
-        let newMessage = Message(id: UUID().uuidString, content: currentInput, createdAt: Date(), role: .user)
+        let newMessage = Message(id: UUID().uuidString, content: currentInput, createdAt: getSessionDate(), role: .user)
+        uploadMessages(message: newMessage)
         msgsArr.append(newMessage)
         currentInput = ""
         
@@ -55,39 +51,37 @@ class ChatVM: ObservableObject {
                 switch response {
                 case .success(let string):
                     let streamResponse = self.parseStreamData(string)
-                    print(streamResponse)
-                    print(self.msgsArr)
                     streamResponse.forEach { newMessageResponse in
                         guard let messageContent = newMessageResponse.choices.first?.delta.content else {
                             return
                         }
                         guard let existingMessageIndex = self.msgsArr.lastIndex(where: {$0.id == newMessageResponse.id}) else {
-                            let newMessage = Message(id: newMessageResponse.id, content: messageContent, createdAt: Date(), role: .assistant)
+                            let newMessage = Message(
+                                id: newMessageResponse.id,
+                                content: messageContent,
+                                createdAt: self.getSessionDate(),
+                                role: .assistant
+                            )
                             self.msgsArr.append(newMessage)
                             return
                         }
-                        let newMessage = Message(id: newMessageResponse.id, content: self.msgsArr[existingMessageIndex].content + messageContent, createdAt: Date(), role: .assistant)
+                        let newMessage = Message(
+                            id: newMessageResponse.id,
+                            content: self.msgsArr[existingMessageIndex].content + messageContent,
+                            createdAt: self.getSessionDate(),
+                            role: .assistant
+                        )
                         self.msgsArr[existingMessageIndex] = newMessage
-                        
                     }
                 case .failure(_):
                     print("/ChatVM/sendMessage/sendStreamMessage/Failure")
                 }
             case .complete(_):
                 print("COMPLETE")
+                if let serverMsg = msgsArr.last {
+                    uploadMessages(message: serverMsg)
+                }
             }
-        }
-    }
-    
-    func parseStreamData(_ data: String) -> [ChatStreamCompletionResponse] {
-        let responseString = data.split(separator: "data:").map({$0.trimmingCharacters(in: .whitespacesAndNewlines)}).filter({!$0.isEmpty})
-        let jsonDecoder = JSONDecoder()
-        
-        return responseString.compactMap { jsonString in
-            guard let jsonData = jsonString.data(using: .utf8), let streamResponse = try? jsonDecoder.decode(ChatStreamCompletionResponse.self, from: jsonData) else {
-                return nil
-            }
-            return streamResponse
         }
     }
     
@@ -113,7 +107,8 @@ class ChatVM: ObservableObject {
         let documentObj: [String: Any] = [
             "content": message.content,
             "role": message.role.rawValue,
-            "createdAt": message.createdAt
+            "createdAt": message.createdAt,
+            "userEmail": UserDefaults.standard.userEmail
         ]
         db.collection("messages").document().setData(documentObj) { err in
             if let err = err {
@@ -121,6 +116,34 @@ class ChatVM: ObservableObject {
             } else {
                 print("Document successfully written!")
             }
+        }
+    }
+    
+    // MARK: - HELPER FUNCTIONS -
+    
+    func scrollToBottom(proxy: ScrollViewProxy) {
+        guard let id = msgsArr.filter({$0.role != .system}).last?.id else { return }
+        proxy.scrollTo(id, anchor: .bottomTrailing)
+    }
+    
+    func parseStreamData(_ data: String) -> [ChatStreamCompletionResponse] {
+        let responseString = data.split(separator: "data:").map({$0.trimmingCharacters(in: .whitespacesAndNewlines)}).filter({!$0.isEmpty})
+        let jsonDecoder = JSONDecoder()
+        
+        return responseString.compactMap { jsonString in
+            guard let jsonData = jsonString.data(using: .utf8), let streamResponse = try? jsonDecoder.decode(ChatStreamCompletionResponse.self, from: jsonData) else {
+                return nil
+            }
+            return streamResponse
+        }
+    }
+    
+    func getSessionDate() -> String {
+        if msgsArr.isEmpty {
+            UserDefaults.standard.sessionDate = Utilities.convertDateToString(selectedDate)
+            return UserDefaults.standard.sessionDate
+        } else {
+            return msgsArr[0].createdAt
         }
     }
     

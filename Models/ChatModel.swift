@@ -45,7 +45,7 @@ struct OpenAIChatChoice: Decodable {
 struct Message: Decodable {
     let id: String
     let content: String
-    let createdAt: Date
+    let createdAt: String
     let role: SenderRole
 }
 
@@ -65,6 +65,7 @@ struct ChatStreamContent: Decodable {
 struct FirebaseMessages: Identifiable, Codable {
     @DocumentID var id: String?
     let content: String
-    let createdAt: Date
+    let createdAt: String
     let role: String
+    let userEmail: String
 }
