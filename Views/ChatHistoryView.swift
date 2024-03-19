@@ -36,11 +36,16 @@ struct ChatHistoryView: View {
                     .padding(.bottom, 40)
                 
                 CalendarWidget(
-                    refreshCalendar: $viewModel.refreshCalendar, 
-                    moveToChatScreen: $viewModel.moveToChatScreen,
-                    selectedDate: $viewModel.selectedDate,
-                    createdAtDates: viewModel.createdAtDates
-                )
+                    createdAtDates: viewModel.createdAtDates, 
+                    moveToChatScreen: $viewModel.moveToChatScreen, 
+                    selectedDate: $viewModel.selectedDate) { selectedDate in
+                        
+                        guard let date = selectedDate else { return }
+                        viewModel.setSelectedMsgs(date)
+                        viewModel.moveToChatScreen.toggle()
+                        
+                }
+                
                 Spacer()
                 
             }
@@ -53,7 +58,6 @@ struct ChatHistoryView: View {
                     print("Messages created at \(createdAt):")
                     for message in messages {
                         print("- \(message.content)")
-                        viewModel.refreshCalendar.toggle()
                     }
                 }
                 

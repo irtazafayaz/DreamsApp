@@ -10,12 +10,20 @@ import HorizonCalendar
 
 struct CalendarWidget: View {
     
+    // MARK: Data Members
+    
     @State private var calendar = Calendar(identifier: .gregorian)
     @StateObject private var calendarViewProxy = CalendarViewProxy()
-    @Binding var refreshCalendar: Bool  // Bind to the new refresh trigger
+    var createdAtDates: [Date]
+
+    // MARK: Binding Members
+    
     @Binding var moveToChatScreen: Bool
     @Binding var selectedDate: DayComponents?
-    var createdAtDates: [Date]
+    
+    var openChatWithMessages: ((Date?) -> Void)?
+    
+    // MARK: Date Ranges
     
     private var beginningDate: Date {
         let calendar = Calendar.current
@@ -25,39 +33,6 @@ struct CalendarWidget: View {
     
     private var endDate: Date {
         return Date()
-    }
-    
-    private func compareTwoDates(day: DayComponents) -> Bool {
-        let calendar = Calendar.current
-        var dateComponents = DateComponents()
-        dateComponents.year = day.month.year
-        dateComponents.month = day.month.month
-        dateComponents.day = day.day
-        guard let date = calendar.date(from: dateComponents) else {
-            return false
-        }
-        for createdAtDate in createdAtDates {
-            if calendar.isDate(createdAtDate, equalTo: date, toGranularity: .day) {
-                return true
-            }
-            print("Created Date \(createdAtDate) - Calendar Date \(date)")
-        }
-        return false
-    }
-    
-    private func getBackgroundColor(_ day: DayComponents) -> Color {
-        if compareTwoDates(day: day) {
-            return Color(hex: Colors.primary.rawValue)
-        }
-        return .clear
-    }
-
-    
-    private func getForegroundColor(_ day: DayComponents) -> Color {
-        if compareTwoDates(day: day) {
-            return .white
-        }
-        return .black
     }
     
     var body: some View {
@@ -86,18 +61,43 @@ struct CalendarWidget: View {
             
             .onDaySelection { day in
                 selectedDate = day
-                moveToChatScreen.toggle()
+                openChatWithMessages?(Utilities.convertDayToDate(day))
             }
             
             .onAppear {
                 calendarViewProxy.scrollToDay(containing: .now, scrollPosition: .firstFullyVisiblePosition(padding: 0), animated: false)
             }
-            
         }
         .padding(.horizontal,20)
-        .onChange(of: refreshCalendar) { _ in
-            // This block doesn't need to do anything. It's just here to trigger a refresh.
-        }
     }
+    
+    // MARK: Helper Functions
+    
+    private func checkIfDayHasChatHistory(day: DayComponents) -> Bool {
+        
+        guard let date = Utilities.convertDayToDate(day) else { return false }
+        for createdAtDate in createdAtDates {
+            if calendar.isDate(createdAtDate, equalTo: date, toGranularity: .day) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func getBackgroundColor(_ day: DayComponents) -> Color {
+        if checkIfDayHasChatHistory(day: day) {
+            return Color(hex: Colors.primary.rawValue)
+        }
+        return .clear
+    }
+
+    
+    private func getForegroundColor(_ day: DayComponents) -> Color {
+        if checkIfDayHasChatHistory(day: day) {
+            return .white
+        }
+        return .black
+    }
+    
 }
 

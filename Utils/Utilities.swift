@@ -8,6 +8,7 @@
 import Foundation
 import RevenueCat
 import SwiftUI
+import HorizonCalendar
 
 class Utilities {
     
@@ -30,6 +31,16 @@ class Utilities {
     
     static func convertDateToString(_ date: Date) -> String {
         return dateFormatter.string(from: date)
+    }
+    
+    static func convertDayToDate(_ day: DayComponents) -> Date? {
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.year = day.month.year
+        dateComponents.month = day.month.month
+        dateComponents.day = day.day
+        guard let date = calendar.date(from: dateComponents) else { return nil }
+        return date
     }
     
     static func updateSubscription() {
