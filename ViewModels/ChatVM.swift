@@ -21,7 +21,7 @@ class ChatVM: ObservableObject {
     @Published var isPaywallPresented = false
     @Published var isAdShown = false
     
-    @Published var selectedDate: Date = .now
+    @Published var selectedDate: Date = Calendar.current.startOfDay(for: Date())
     @Published var updateSessionID = true
 
     private let openAIService = OpenAIService()
@@ -138,9 +138,9 @@ class ChatVM: ObservableObject {
         }
     }
     
-    func getSessionDate() -> String {
+    func getSessionDate() -> Date {
         if msgsArr.isEmpty {
-            UserDefaults.standard.sessionDate = Utilities.convertDateToString(selectedDate)
+            UserDefaults.standard.sessionDate = selectedDate
             return UserDefaults.standard.sessionDate
         } else {
             return msgsArr[0].createdAt

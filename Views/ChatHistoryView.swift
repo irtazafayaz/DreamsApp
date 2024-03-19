@@ -10,44 +10,58 @@ import HorizonCalendar
 
 struct ChatHistoryView: View {
     
-    @State private var moveToChatScreen: Bool = false
-    @State private var fromChatHistory: Bool = true
-    @State private var selectedMessages: [Message] = []
-    @State var selectedDate: DayComponents?
-    @ObservedObject private var viewModel = ChatHistoryVM()
+    @StateObject private var viewModel = ChatHistoryVM()
+    @State private var isLoading: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Select Date")
-                .font(Font.custom(FontFamily.bold.rawValue, size: 30))
-                .foregroundColor(Color(hex: Colors.labelDark.rawValue))
-                .padding(.leading, 20)
-                .padding(.top, 20)
-                .padding(.bottom, 5)
-            
-            Text("Choose the date you want to see your interpretations from :")
-                .font(Font.custom(FontFamily.regular.rawValue, size: 18))
-                .foregroundColor(Color(hex: Colors.labelDark.rawValue))
-                .padding(.leading, 20)
-                .padding(.bottom, 40)
-
-            CalendarWidget(moveToChatScreen: $moveToChatScreen, selectedDate: $selectedDate, createdAtDates: self.viewModel.createdAtDates)
-            Spacer()
+            if isLoading {
+                Spacer()
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                    .scaleEffect(1.5)
+                Spacer()
+            } else {
+                Text("Select Date")
+                    .font(Font.custom(FontFamily.bold.rawValue, size: 30))
+                    .foregroundColor(Color(hex: Colors.labelDark.rawValue))
+                    .padding(.leading, 20)
+                    .padding(.top, 20)
+                    .padding(.bottom, 5)
+                
+                Text("Choose the date you want to see your interpretations from :")
+                    .font(Font.custom(FontFamily.regular.rawValue, size: 18))
+                    .foregroundColor(Color(hex: Colors.labelDark.rawValue))
+                    .padding(.leading, 20)
+                    .padding(.bottom, 40)
+                
+                CalendarWidget(
+                    refreshCalendar: $viewModel.refreshCalendar, 
+                    moveToChatScreen: $viewModel.moveToChatScreen,
+                    selectedDate: $viewModel.selectedDate,
+                    createdAtDates: viewModel.createdAtDates
+                )
+                Spacer()
+                
+            }
         }
         .onAppear {
+            isLoading = true
             viewModel.fetchMessagesGroupedByCreatedAt { groupedMessages in
+                isLoading = false
                 for (createdAt, messages) in groupedMessages {
                     print("Messages created at \(createdAt):")
                     for message in messages {
                         print("- \(message.content)")
+                        viewModel.refreshCalendar.toggle()
                     }
                 }
                 
             }
         }
         .navigationBarBackButtonHidden(true)
-        .navigationDestination(isPresented: $moveToChatScreen, destination: {
-            ChatView(messagesArr: selectedMessages)
+        .navigationDestination(isPresented: $viewModel.moveToChatScreen, destination: {
+            ChatView(messagesArr: viewModel.selectedMessages)
         })
     }
     

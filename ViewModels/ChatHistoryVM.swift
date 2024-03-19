@@ -7,26 +7,30 @@
 
 import Foundation
 import FirebaseFirestore
+import HorizonCalendar
 
 class ChatHistoryVM: ObservableObject {
     
-    @Published var createdAtDates: [String] = []
-    
-    func fetchMessagesGroupedByCreatedAt(completion: @escaping ([String: [FirebaseMessages]]) -> Void) {
-        createdAtDates.removeAll()
+    @Published var createdAtDates: [Date] = []
+    @Published var moveToChatScreen: Bool = false
+    @Published var fromChatHistory: Bool = true
+    @Published var selectedMessages: [Message] = []
+    @Published var selectedDate: DayComponents?
+    @Published var refreshCalendar: Bool = false
+
+
+    func fetchMessagesGroupedByCreatedAt(completion: @escaping ([Date: [FirebaseMessages]]) -> Void) {
+        self.refreshCalendar.toggle()
         let db = Firestore.firestore()
         let messagesRef = db.collection("messages")
-
-        var groupedMessages = [String: [FirebaseMessages]]()
-
+        var groupedMessages = [Date: [FirebaseMessages]]()
         let dispatchGroup = DispatchGroup()
-
         messagesRef.getDocuments { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("Error fetching documents: \(String(describing: error))")
                 return
             }
-
+            self.createdAtDates.removeAll()
             for document in documents {
                 if let message = try? document.data(as: FirebaseMessages.self) {
                     dispatchGroup.enter()
@@ -42,6 +46,7 @@ class ChatHistoryVM: ObservableObject {
                 }
             }
             dispatchGroup.notify(queue: .main) {
+                self.refreshCalendar.toggle()  
                 completion(groupedMessages)
             }
         }

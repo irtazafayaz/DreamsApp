@@ -12,8 +12,9 @@ struct HomeView: View {
     @State private var selectedTab: Int = 0
     @State private var title = "AI Dream Interpreter"
     @State var isPaywallPresented = false
-    
+
     var body: some View {
+        NavigationStack {
             VStack(alignment: .center) {
                 TabView(selection: $selectedTab) {
                     StartChatView()
@@ -62,11 +63,12 @@ struct HomeView: View {
                 }
             }
             .onAppear {
-//                isPaywallPresented = true
+                //                isPaywallPresented = true
             }
             .navigationDestination(isPresented: $isPaywallPresented, destination: {
                 PaywallView(isPaywallPresented: $isPaywallPresented)
             })
+        }
         
     }
     

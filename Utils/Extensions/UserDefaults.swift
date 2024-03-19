@@ -61,9 +61,9 @@ extension UserDefaults {
         }
     }
     
-    var sessionDate: String {
+    var sessionDate: Date {
         get {
-            UserDefaults.standard.string(forKey: "session-date") ?? ""
+            UserDefaults.standard.object(forKey: "session-date") as! Date
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: "session-date")

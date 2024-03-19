@@ -37,5 +37,5 @@ struct MessageView: View {
 }
 
 #Preview {
-    MessageView(message: Message(id: "", content: "", createdAt: Utilities.convertDateToString(.now), role: .assistant))
+    MessageView(message: Message(id: "", content: "", createdAt: .now, role: .assistant))
 }
