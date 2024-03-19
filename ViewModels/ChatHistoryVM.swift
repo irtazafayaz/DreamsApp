@@ -13,82 +13,61 @@ class ChatHistoryVM: ObservableObject {
     
     @Published var moveToChatScreen: Bool = false
     @Published var fromChatHistory: Bool = true
+        
+    var createdAtDates: [Date] {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        let uniqueDateStrings = Set(groupedMessages.map { $0.date }).sorted()
+        let dates = uniqueDateStrings.compactMap { dateFormatter.date(from: $0) }.sorted()
+        return dates
+    }
     
-    @Published var createdAtDates: [Date] = []
     @Published var selectedDate: DayComponents?
-
-    @Published var selectedMessages: [Message] = []
-    @Published var groupedMessages = [Date: [FirebaseMessages]]()
     
+    @Published var selectedMessages: [Message] = []
+    @Published var groupedMessages = [FirebaseMessages]()
+    @Published var isLoading: Bool = false
+
     private let db = Firestore.firestore()
     
-    func fetchMessagesGroupedByCreatedAt(completion: @escaping ([Date: [FirebaseMessages]]) -> Void) {
-        createdAtDates.removeAll()
+    func fetchMessagesGroupedByCreatedAt() {
+        isLoading.toggle()
         groupedMessages.removeAll()
-        let dispatchGroup = DispatchGroup()
         
         db.collection("messages").getDocuments { [weak self] (querySnapshot, error) in
             guard let self = self else { return }
             guard let documents = querySnapshot?.documents else { return }
-            for document in documents {
-                dispatchGroup.enter()
-
-                if let message = try? document.data(as: FirebaseMessages.self) {
-                    let createdAt = message.createdAt
-                    self.createdAtDates.append(createdAt)
-                    if var messagesArray = self.groupedMessages[createdAt] {
-                        messagesArray.append(message)
-                        self.groupedMessages[createdAt] = messagesArray
-                    } else {
-                        self.groupedMessages[createdAt] = [message]
-                    }
-                }
-
-                dispatchGroup.leave()
-            }
             
-            dispatchGroup.notify(queue: .main) {
-                // Sort the messages within each group by createdAt date
-                for (date, messages) in self.groupedMessages {
-                    let sortedMessages = messages.sorted { $0.createdAt > $1.createdAt }
-                    self.groupedMessages[date] = sortedMessages
-                }
-                
-                self.createdAtDates = Array(self.groupedMessages.keys).sorted(by: >)
-                completion(self.groupedMessages)
+            
+            let allMessages = documents.compactMap { document -> FirebaseMessages? in
+                try? document.data(as: FirebaseMessages.self)
             }
+            groupedMessages = allMessages
+            isLoading.toggle()
+            print("Grouped Messages\n \(groupedMessages)")
         }
     }
-
     
-    func setSelectedMsgs(_ selectedDate: Date?) {
+    
+    func setSelectedMsgs(_ selectedDate: Date) {
         selectedMessages.removeAll()
-        guard let selectedDate = selectedDate else { return }
-        
-        let calendar = Calendar.current
-        let selectedDateComponents = calendar.dateComponents([.year, .month, .day], from: selectedDate)
-        
-        for (dateKey, msgs) in groupedMessages {
-            let dateKeyComponents = calendar.dateComponents([.year, .month, .day], from: dateKey)
-            if dateKeyComponents == selectedDateComponents {
-                convertDataToMessagesArray(msgs: msgs)
-                break
-            }
-        }
+        let date = Utilities.formatDateAndTime(selectedDate)
+        guard let message = groupedMessages.first(where: { $0.date == date }) else { return }
+        convertDataToMessagesArray(message: message)
     }
-
     
-    func convertDataToMessagesArray(msgs: [FirebaseMessages]) {
-        if !msgs.isEmpty {
-            selectedMessages = msgs.map {
-                Message(
-                    id: UUID().uuidString,
-                    content: $0.content,
-                    createdAt: $0.createdAt ,
-                    role: SenderRole(rawValue: $0.role) ?? .paywall
-                )
-            }
+    
+    func convertDataToMessagesArray(message: FirebaseMessages) {
+        guard let date = Utilities.convertToDate(message.date) else { return }
+        selectedMessages = message.messages.map {
+            Message(
+                id: UUID().uuidString,
+                content: $0.content,
+                createdAt: date,
+                role: $0.role
+            )
         }
+        print("Selected Messages \(selectedMessages)")
     }
     
 }

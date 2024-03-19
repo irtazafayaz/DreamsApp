@@ -104,20 +104,43 @@ class ChatVM: ObservableObject {
     }
     
     func uploadMessages(message: Message) {
-        let documentObj: [String: Any] = [
-            "content": message.content,
-            "role": message.role.rawValue,
-            "createdAt": message.createdAt,
-            "userEmail": UserDefaults.standard.userEmail
-        ]
-        db.collection("messages").document().setData(documentObj) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
+        
+        
+        let dateString = Utilities.formatDateAndTime(message.createdAt)
+        
+        let userEmail = UserDefaults.standard.string(forKey: "user-email") ?? "NaN"
+        let messageObj: [String: Any] = ["content": message.content, "role": message.role.rawValue]
+
+        let query = db.collection("messages")
+            .whereField("date", isEqualTo: dateString)
+            .whereField("user", isEqualTo: userEmail)
+        
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let document = querySnapshot?.documents.first {
+                let documentRef = document.reference
+                documentRef.updateData([
+                    "messages": FieldValue.arrayUnion([messageObj])
+                ])
             } else {
-                print("Document successfully written!")
+                let newDocumentData: [String: Any] = [
+                    "user": userEmail,
+                    "date": dateString,
+                    "messages": [messageObj]
+                ]
+                self.db.collection("messages").addDocument(data: newDocumentData) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document added with ID: \(newDocumentData)")
+                    }
+                }
             }
         }
     }
+    
+    
+    
     
     // MARK: - HELPER FUNCTIONS -
     

@@ -29,10 +29,6 @@ class Utilities {
         return dateFormatter.string(from: date)
     }
     
-    static func convertDateToString(_ date: Date) -> String {
-        return dateFormatter.string(from: date)
-    }
-    
     static func convertDayToDate(_ day: DayComponents) -> Date? {
         let calendar = Calendar.current
         var dateComponents = DateComponents()
@@ -40,6 +36,15 @@ class Utilities {
         dateComponents.month = day.month.month
         dateComponents.day = day.day
         guard let date = calendar.date(from: dateComponents) else { return nil }
+        return date
+    }
+    
+    static func convertToDate(_ dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        guard let date = dateFormatter.date(from: dateString) else {
+            return nil
+        }
         return date
     }
     

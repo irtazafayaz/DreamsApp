@@ -62,10 +62,14 @@ struct ChatStreamContent: Decodable {
     let content: String?
 }
 
+struct MessageContent: Codable {
+    let content: String
+    let role: SenderRole
+}
+
 struct FirebaseMessages: Identifiable, Codable {
     @DocumentID var id: String?
-    let content: String
-    let createdAt: Date
-    let role: String
-    let userEmail: String
+    let date: String
+    let messages: [MessageContent]
+    let user: String
 }
