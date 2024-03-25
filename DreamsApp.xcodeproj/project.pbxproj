@@ -69,6 +69,8 @@
 		D594B1502B87EDDD00C11067 /* Urbanist-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D594B1072B87EDDD00C11067 /* Urbanist-ThinItalic.ttf */; };
 		D594B1532B87F1DA00C11067 /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B1522B87F1DA00C11067 /* CalendarWidget.swift */; };
 		D594B1552B87F3B100C11067 /* HorizonCalendarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B1542B87F3B100C11067 /* HorizonCalendarWrapper.swift */; };
+		D5AD63222BB1BF09002ECFD0 /* DreamInterpreterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD63212BB1BF08002ECFD0 /* DreamInterpreterView.swift */; };
+		D5AD633B2BB23933002ECFD0 /* OpenAIKit in Frameworks */ = {isa = PBXBuildFile; productRef = D5AD633A2BB23933002ECFD0 /* OpenAIKit */; };
 		D5ED9E332B9FB0C40085AC9A /* ChatHistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ED9E322B9FB0C40085AC9A /* ChatHistoryVM.swift */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +142,7 @@
 		D594B1512B87EED500C11067 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D594B1522B87F1DA00C11067 /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		D594B1542B87F3B100C11067 /* HorizonCalendarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonCalendarWrapper.swift; sourceTree = "<group>"; };
+		D5AD63212BB1BF08002ECFD0 /* DreamInterpreterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamInterpreterView.swift; sourceTree = "<group>"; };
 		D5ED9E322B9FB0C40085AC9A /* ChatHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE5F95E2F4DBFAA86C972FBF /* Pods_DreamsApp.framework in Frameworks */,
+				D5AD633B2BB23933002ECFD0 /* OpenAIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +184,7 @@
 				D51AC8852B8DECA500F6D3FB /* MessageView.swift */,
 				D51AC8872B8DECFB00F6D3FB /* BottomView.swift */,
 				D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */,
+				D5AD63212BB1BF08002ECFD0 /* DreamInterpreterView.swift */,
 			);
 			path = ChatUI;
 			sourceTree = "<group>";
@@ -367,6 +372,9 @@
 			dependencies = (
 			);
 			name = DreamsApp;
+			packageProductDependencies = (
+				D5AD633A2BB23933002ECFD0 /* OpenAIKit */,
+			);
 			productName = DreamsApp;
 			productReference = D594B09C2B87E62E00C11067 /* DreamsApp.app */;
 			productType = "com.apple.product-type.application";
@@ -395,6 +403,9 @@
 				Base,
 			);
 			mainGroup = D594B0932B87E62D00C11067;
+			packageReferences = (
+				D5AD63392BB23933002ECFD0 /* XCRemoteSwiftPackageReference "OpenAIKit" */,
+			);
 			productRefGroup = D594B09D2B87E62E00C11067 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -511,6 +522,7 @@
 				D594B1082B87EDDD00C11067 /* ResponseModel.swift in Sources */,
 				D5ED9E332B9FB0C40085AC9A /* ChatHistoryVM.swift in Sources */,
 				D594B13E2B87EDDD00C11067 /* ProfileVM.swift in Sources */,
+				D5AD63222BB1BF09002ECFD0 /* DreamInterpreterView.swift in Sources */,
 				D594B1342B87EDDD00C11067 /* CustomBackButton.swift in Sources */,
 				D594B10F2B87EDDD00C11067 /* ContentMessageView.swift in Sources */,
 				D56CCE962BA85FBA00889AEA /* SessionManager.swift in Sources */,
@@ -748,6 +760,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D5AD63392BB23933002ECFD0 /* XCRemoteSwiftPackageReference "OpenAIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OpenDive/OpenAIKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D5AD633A2BB23933002ECFD0 /* OpenAIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5AD63392BB23933002ECFD0 /* XCRemoteSwiftPackageReference "OpenAIKit" */;
+			productName = OpenAIKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D594B0942B87E62D00C11067 /* Project object */;
 }
