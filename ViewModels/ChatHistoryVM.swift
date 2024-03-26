@@ -24,7 +24,7 @@ class ChatHistoryVM: ObservableObject {
     
     @Published var selectedDate: DayComponents?
     
-    @Published var selectedMessages: [Message] = []
+    @Published var selectedMessage: FirebaseMessages?
     @Published var groupedMessages = [FirebaseMessages]()
     @Published var isLoading: Bool = false
 
@@ -33,41 +33,37 @@ class ChatHistoryVM: ObservableObject {
     func fetchMessagesGroupedByCreatedAt() {
         isLoading.toggle()
         groupedMessages.removeAll()
+        let userEmail = UserDefaults.standard.string(forKey: "user-email") ?? "NaN"
         
-        db.collection("messages").getDocuments { [weak self] (querySnapshot, error) in
-            guard let self = self else { return }
-            guard let documents = querySnapshot?.documents else { return }
-            
-            
-            let allMessages = documents.compactMap { document -> FirebaseMessages? in
-                try? document.data(as: FirebaseMessages.self)
+        db.collection("messages")
+            .whereField("user", isEqualTo: userEmail)
+            .getDocuments { [weak self] (querySnapshot, error) in
+                guard let self = self else { return }
+                if let error = error {
+                    isLoading.toggle()
+                    return
+                } else {
+                    for document in querySnapshot!.documents {
+                        do {
+                            let messageData = try document.data(as: FirebaseMessages.self)
+                            self.groupedMessages.append(messageData)
+                            
+                        } catch {
+                            print("Error decoding to FirebaseMessages")
+                        }
+                    }
+                    isLoading.toggle()
+                    print("Grouped Messages: \(groupedMessages)")
+                }
             }
-            groupedMessages = allMessages
-            isLoading.toggle()
-            print("Grouped Messages\n \(groupedMessages)")
-        }
+        
     }
     
     
     func setSelectedMsgs(_ selectedDate: Date) {
-        selectedMessages.removeAll()
         let date = Utilities.formatDateAndTime(selectedDate)
         guard let message = groupedMessages.first(where: { $0.date == date }) else { return }
-        convertDataToMessagesArray(message: message)
-    }
-    
-    
-    func convertDataToMessagesArray(message: FirebaseMessages) {
-        guard let date = Utilities.convertToDate(message.date) else { return }
-        selectedMessages = message.messages.map {
-            Message(
-                id: UUID().uuidString,
-                content: $0.content,
-                createdAt: date,
-                role: $0.role
-            )
-        }
-        print("Selected Messages \(selectedMessages)")
+        selectedMessage = message
     }
     
 }

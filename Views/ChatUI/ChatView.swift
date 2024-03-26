@@ -12,8 +12,7 @@ import UIKit
 struct ChatView: View {
     
     //MARK: - Data Members -
-    @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var userViewModel: UserViewModel
+    
     @StateObject private var viewModel: ChatVM = ChatVM(with: "")
     
     //MARK: - Initialization Methods -
@@ -23,12 +22,37 @@ struct ChatView: View {
     }
     
     var body: some View {
-        VStack {
-            if !viewModel.msgsArr.isEmpty {
-                ChatListView(viewModel: viewModel)
-            } else {
-                ChatNotStartedView(viewModel: viewModel)
+        VStack(spacing: 0) {
+            
+            if let lastAssistantMessage = viewModel.msgsArr.last(where: { $0.role == .assistant }) {
+                
+                ScrollView {
+                    Text(lastAssistantMessage.content)
+                        .padding()
+                        .background(Color(hex: Colors.primary.rawValue).opacity(0.5))
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color(hex: Colors.primary.rawValue), lineWidth: 2)
+                )
+
             }
+            
+            if let image = viewModel.dreamInterpretedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 200)
+                    .padding()
+            }
+            
+            Spacer()
+            Divider()
+            BottomView(viewModel: viewModel)
+            
+        }
+        .onAppear{
+            viewModel.setup()
         }
         .padding(.horizontal, 10)
         .navigationBarBackButtonHidden(true)

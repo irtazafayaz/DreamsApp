@@ -54,7 +54,7 @@ struct ChatHistoryView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $viewModel.moveToChatScreen, destination: {
-            ChatView(messagesArr: viewModel.selectedMessages)
+            ChatHistoryPreview(dream: viewModel.selectedMessage)
         })
     }
     

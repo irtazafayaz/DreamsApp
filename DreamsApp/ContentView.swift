@@ -10,11 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var sessionManager = SessionManager()
-    
-//    init() {
-//        sessionManager.getCurrentAuthUser()
-//    }
-    
+
     var body: some View {
         
         switch sessionManager.authState {

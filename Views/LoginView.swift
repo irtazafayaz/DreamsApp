@@ -24,8 +24,9 @@ struct LoginView: View {
                 .padding(.top, 30)
             
             Text("Login")
-                .font(Font.custom(FontFamily.bold.rawValue, size: 20))
+                .font(Font.custom(FontFamily.bold.rawValue, size: 40))
                 .foregroundColor(Color(hex: Colors.primary.rawValue))
+                .padding(.top, 20)
             
             SignInWithAppleButton { request in
                 viewModel.handleSignWithAppleRequest(request)

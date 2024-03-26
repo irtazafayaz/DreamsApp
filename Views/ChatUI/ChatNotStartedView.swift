@@ -65,7 +65,7 @@ struct ChatNotStartedView: View {
                 .foregroundColor(Color(hex: "9E9E9E"))
             Spacer()
             Divider()
-            BottomView(image: "profile", proxy: nil, viewModel: viewModel)
+            BottomView(viewModel: viewModel)
         }
     }
 }

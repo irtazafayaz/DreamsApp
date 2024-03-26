@@ -26,7 +26,7 @@ struct ChatListView: View {
                     }
                 }
                 Divider()
-                BottomView(image: "profile", proxy: proxy, viewModel: viewModel)
+                BottomView(viewModel: viewModel)
                 Spacer()
             }
             .onChange(of: viewModel.msgsArr.filter({$0.role != .system}).last?.content) { _ in

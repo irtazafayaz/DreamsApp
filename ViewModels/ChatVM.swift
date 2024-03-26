@@ -10,36 +10,60 @@ import SwiftUI
 import Combine
 import Alamofire
 import FirebaseFirestore
+import OpenAIKit
+import FirebaseStorage
 
 class ChatVM: ObservableObject {
     
-    @Published var firebaseMsgs: [FirebaseMessages] = []
+    //MARK: View Binding
     @Published var msgsArr: [Message] = []
     @Published var currentInput: String = ""
+    @Published var selectedDate: Date = Calendar.current.startOfDay(for: Date())
+    @Published var dreamInterpretedText: String = ""
+    @Published var dreamInterpretedImage: UIImage?
+    @Published var errorMessage: String = ""
+    
+    // MARK: Toggles
     @Published var scrollToTop: Bool = false
     @Published var isEditing: Bool = false
     @Published var isPaywallPresented = false
     @Published var isAdShown = false
     
-    @Published var selectedDate: Date = Calendar.current.startOfDay(for: Date())
-    @Published var updateSessionID = true
-
-    private let openAIService = OpenAIService()
-    private let service = BaseService.shared
+    // MARK: Service
     private let db = Firestore.firestore()
-    private let cancellables: Set<AnyCancellable> = []
+    private let openAIService = OpenAIService()
+    private var openAI: OpenAI?
     
+    // MARK: Initialization
     init(with text: String, messages: [Message] = [], selectedDate: Date = .now) {
         currentInput = text
         self.msgsArr = messages
         self.selectedDate = selectedDate
     }
     
+    func setup() {
+        openAI = OpenAI(Configuration(organizationId: "Personal", apiKey: Constants.apiKey.rawValue))
+    }
+    
+    func generateImage(prompt: String) async -> UIImage? {
+        guard let openai = openAI else { return nil }
+        do {
+            let params = ImageParameters(prompt: prompt, resolution: .medium, responseFormat: .base64Json)
+            let result = try await openai.createImage(parameters: params)
+            let data = result.data[0].image
+            let image = try openai.decodeBase64Image(data)
+            storeMessageInFirebase(image)
+            return image
+        } catch {
+            print(String(describing: error))
+            return nil
+        }
+    }
+    
     // MARK: - Sending Messages APIs -
     
     func sendMessage() {
         let newMessage = Message(id: UUID().uuidString, content: currentInput, createdAt: getSessionDate(), role: .user)
-        uploadMessages(message: newMessage)
         msgsArr.append(newMessage)
         currentInput = ""
         
@@ -78,43 +102,68 @@ class ChatVM: ObservableObject {
                 }
             case .complete(_):
                 print("COMPLETE")
-                if let serverMsg = msgsArr.last {
-                    uploadMessages(message: serverMsg)
-                }
             }
         }
     }
     
     //MARK: - Firebase Functions -
     
-    func fetchFireBaseMessages() {
-        db.collection("messages")
-            .addSnapshotListener { (querySnapshot, error) in
-                if let error = error {
-                    print("Error getting documents: \(error)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print(document.data())
-                    }
-                    self.firebaseMsgs = querySnapshot?.documents.compactMap { document in
-                        try? document.data(as: FirebaseMessages.self)
-                    } ?? []
+    func storeMessageInFirebase(_ image: UIImage) {
+        guard let message = msgsArr.last else { return }
+        
+        let storageRef = Storage.storage().reference()
+        let imageData = image.jpegData(compressionQuality: 0.5)
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        guard let imageData = imageData else { return }
+        
+        let path = "Images/\(UUID().uuidString)"
+        let fileRef = storageRef.child(path)
+        let uploadTask = fileRef.putData(imageData, metadata: metadata)
+        
+        uploadTask.observe(.progress) { snapshot in
+            print("In progress")
+        }
+        
+        uploadTask.observe(.success) { snapshot in
+            fileRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Handle error appropriately
+                    return
+                }
+                self.uploadMessages(message: message, image: String(describing: downloadURL))
+            }
+        }
+        
+        uploadTask.observe(.failure) { snapshot in
+            if let error = snapshot.error as? NSError {
+                switch StorageErrorCode(rawValue: error.code) {
+                case .objectNotFound:
+                    self.errorMessage = "File doesn't exist"
+                case .unauthorized:
+                    self.errorMessage = "User doesn't have permission to access the file"
+                case .cancelled:
+                    self.errorMessage = "User canceled the upload"
+                case .unknown:
+                    self.errorMessage = "Unknown error occurred"
+                default:
+                    self.errorMessage = "A separate error occurred. This is a good place to retry the upload."
                 }
             }
+        }
+        
     }
     
-    func uploadMessages(message: Message) {
-        
+    func uploadMessages(message: Message, image: String) {
         
         let dateString = Utilities.formatDateAndTime(message.createdAt)
-        
         let userEmail = UserDefaults.standard.string(forKey: "user-email") ?? "NaN"
-        let messageObj: [String: Any] = ["content": message.content, "role": message.role.rawValue]
-
+        let messageObj: [String: Any] = ["image": image, "prompt": currentInput, "interpretedText": message.content]
+        
         let query = db.collection("messages")
             .whereField("date", isEqualTo: dateString)
             .whereField("user", isEqualTo: userEmail)
-        
         
         query.getDocuments { (querySnapshot, error) in
             if let document = querySnapshot?.documents.first {
@@ -126,7 +175,7 @@ class ChatVM: ObservableObject {
                 let newDocumentData: [String: Any] = [
                     "user": userEmail,
                     "date": dateString,
-                    "messages": [messageObj]
+                    "message": messageObj
                 ]
                 self.db.collection("messages").addDocument(data: newDocumentData) { err in
                     if let err = err {
@@ -137,9 +186,8 @@ class ChatVM: ObservableObject {
                 }
             }
         }
+        
     }
-    
-    
     
     
     // MARK: - HELPER FUNCTIONS -
