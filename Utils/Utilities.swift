@@ -53,6 +53,7 @@ class Utilities {
            _ = updateCustumerInCache(cust: cust)
         }
     }
+    
     static func updateCustumerInCache(cust: CustomerInfo?) -> Bool {
         UserDefaults.standard.isProMemeber = cust?.entitlements["Pro"]?.isActive == true
         UserDefaults.standard.subscriptionDate = cust?.entitlements["Pro"]?.latestPurchaseDate

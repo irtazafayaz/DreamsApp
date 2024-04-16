@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct StartChatView: View {
-    
-    @State var isChatScreenPresented = false
+
     @Environment(\.managedObjectContext) var moc
+
+    @State var isChatScreenPresented = false
     @State private var selectedDate = Date.now
     @State private var openDatePicker = false
-    
+    @State private var openErrorDialog = false
+
+    var groupedMessages: [FirebaseMessages]
+
     var body: some View {
         VStack {
             
@@ -33,7 +37,7 @@ struct StartChatView: View {
                 .font(Font.custom(FontFamily.bold.rawValue, size: 40))
                 .foregroundColor(Color(hex: Colors.primary.rawValue))
             
-            Text("Start chatting with School AI now.\nYou can ask me anything.")
+            Text("Start chatting now.\nYou can ask me anything.")
                 .font(Font.custom(FontFamily.regular.rawValue, size: 18))
                 .foregroundColor(Color(hex: Colors.labelGray.rawValue))
                 .multilineTextAlignment(.center)
@@ -69,19 +73,21 @@ struct StartChatView: View {
                 
                 Button("Select Date") {
                     openDatePicker.toggle()
-                    isChatScreenPresented.toggle()
+                    if !groupedMessages.contains(where: { $0.date == Utilities.formatDateAndTime(selectedDate) }) {
+                        isChatScreenPresented.toggle()
+                    } else {
+                        openErrorDialog.toggle()
+                    }
                 }
                 .padding()
             }
         }
+        .alert("Already interpredted dream on this day", isPresented: $openErrorDialog, actions: {
+            Button("OK", role: .cancel){}
+        })
         .navigationDestination(isPresented: $isChatScreenPresented, destination: {
             ChatView(selectedDate: selectedDate)
         })
     }
 }
 
-struct StartChatView_Previews: PreviewProvider {
-    static var previews: some View {
-        StartChatView()
-    }
-}

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @StateObject private var viewModel = ChatHistoryVM()
+    @EnvironmentObject var sessionManager: SessionManager
+    
     @State private var selectedTab: Int = 0
     @State private var title = "AI Dream Interpreter"
     @State var isPaywallPresented = false
@@ -17,13 +20,13 @@ struct HomeView: View {
         NavigationStack {
             VStack(alignment: .center) {
                 TabView(selection: $selectedTab) {
-                    StartChatView()
+                    StartChatView(groupedMessages: viewModel.groupedMessages)
                         .tabItem {
                             Image("ic_tab_chat")
                             Text("Chat")
                         }
                         .tag(0)
-                    ChatHistoryView()
+                    ChatHistoryView(viewModel: viewModel)
                         .tabItem {
                             Image("ic_tab_history")
                             Text("History")
@@ -38,6 +41,7 @@ struct HomeView: View {
                 }
                 .accentColor(Color(hex: Colors.primary.rawValue))
             }
+            .onAppear { viewModel.fetchMessagesGroupedByCreatedAt(email: sessionManager.user?.email ?? "NaN") }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(title)
@@ -59,7 +63,7 @@ struct HomeView: View {
                 case 2:
                     title  = "Account"
                 default:
-                    title = "School AI"
+                    title = "Dream In"
                 }
             }
             .onAppear {

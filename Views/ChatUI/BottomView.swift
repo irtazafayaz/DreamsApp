@@ -10,14 +10,17 @@ import SwiftUI
 struct BottomView: View {
     
     @ObservedObject var viewModel: ChatVM
-
+    @State var generatingImageTapped: Bool = false
+    
     var body: some View {
         VStack {
             Button {
                 if let lastAssistantMessage = viewModel.msgsArr.last(where: { $0.role == .assistant })?.content {
                     if !lastAssistantMessage.trimmingCharacters(in: .whitespaces).isEmpty {
                         Task {
+                            generatingImageTapped.toggle()
                             let result = await viewModel.generateImage(prompt: lastAssistantMessage)
+                            generatingImageTapped.toggle()
                             if result == nil {
                                 print("Failed to get image")
                             } else {
@@ -27,16 +30,22 @@ struct BottomView: View {
                     }
                 }
             } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 100)
-                        .foregroundColor(Color(hex: Colors.primary.rawValue))
-                        .shadow(color: Color.green.opacity(0.25), radius: 24, x: 4, y: 8)
-                        .frame(height: 65)
-                        .padding()
-                    
-                    Text("Generate Image")
-                        .foregroundColor(.white)
-                        .font(.system(size: 18, weight: .bold))
+                if generatingImageTapped {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: Colors.primary.rawValue)))
+                        .scaleEffect(1.5)
+                } else {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 100)
+                            .foregroundColor(Color(hex: Colors.primary.rawValue))
+                            .shadow(color: Color.green.opacity(0.25), radius: 24, x: 4, y: 8)
+                            .frame(height: 65)
+                            .padding()
+                        
+                        Text("Generate Image")
+                            .foregroundColor(.white)
+                            .font(.system(size: 18, weight: .bold))
+                    }
                 }
             }
             

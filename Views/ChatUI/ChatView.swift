@@ -23,34 +23,33 @@ struct ChatView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
-            if let lastAssistantMessage = viewModel.msgsArr.last(where: { $0.role == .assistant }) {
+            ScrollView {
                 
-                ScrollView {
+                if let lastAssistantMessage = viewModel.msgsArr.last(where: { $0.role == .assistant }) {
                     Text(lastAssistantMessage.content)
                         .padding()
                         .background(Color(hex: Colors.primary.rawValue).opacity(0.5))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color(hex: Colors.primary.rawValue), lineWidth: 2)
+                        )
                 }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color(hex: Colors.primary.rawValue), lineWidth: 2)
-                )
 
+                if let image = viewModel.dreamInterpretedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 200)
+                        .padding()
+                }
+                
             }
             
-            if let image = viewModel.dreamInterpretedImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 200)
-                    .padding()
-            }
-            
-            Spacer()
             Divider()
             BottomView(viewModel: viewModel)
             
         }
+        .disabled(viewModel.isLoading)
         .onAppear{
             viewModel.setup()
         }

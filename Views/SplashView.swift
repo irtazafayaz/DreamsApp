@@ -15,7 +15,7 @@ struct SplashView: View {
                 .frame(width: 160, height: 160)
                 .foregroundColor(Color(hex: Colors.primary.rawValue))
 
-            Text("SchoolAI")
+            Text("Dream In")
                 .font(Font.custom(FontFamily.bold.rawValue, size: 40))
                 .foregroundColor(Color(hex: Colors.labelDark.rawValue))
                 .multilineTextAlignment(.center)

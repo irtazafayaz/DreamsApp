@@ -10,14 +10,20 @@ import HorizonCalendar
 
 struct ChatHistoryView: View {
     
-    @StateObject private var viewModel = ChatHistoryVM()
+    @ObservedObject var viewModel: ChatHistoryVM
+    @State private var moveToChatScreen: Bool = false
+    
+    
+    init(viewModel: ChatHistoryVM = ChatHistoryVM()) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
             if viewModel.isLoading {
                 Spacer()
                 ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: Colors.primary.rawValue)))
                     .scaleEffect(1.5)
                 Spacer()
             } else {
@@ -48,9 +54,6 @@ struct ChatHistoryView: View {
                 Spacer()
                 
             }
-        }
-        .onAppear {
-            viewModel.fetchMessagesGroupedByCreatedAt()
         }
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $viewModel.moveToChatScreen, destination: {

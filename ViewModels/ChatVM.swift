@@ -24,10 +24,8 @@ class ChatVM: ObservableObject {
     @Published var errorMessage: String = ""
     
     // MARK: Toggles
-    @Published var scrollToTop: Bool = false
-    @Published var isEditing: Bool = false
+    @Published var isLoading: Bool = false
     @Published var isPaywallPresented = false
-    @Published var isAdShown = false
     
     // MARK: Service
     private let db = Firestore.firestore()
@@ -48,14 +46,17 @@ class ChatVM: ObservableObject {
     func generateImage(prompt: String) async -> UIImage? {
         guard let openai = openAI else { return nil }
         do {
+            isLoading.toggle()
             let params = ImageParameters(prompt: prompt, resolution: .medium, responseFormat: .base64Json)
             let result = try await openai.createImage(parameters: params)
             let data = result.data[0].image
             let image = try openai.decodeBase64Image(data)
             storeMessageInFirebase(image)
+            isLoading.toggle()
             return image
         } catch {
             print(String(describing: error))
+            isLoading.toggle()
             return nil
         }
     }
@@ -63,10 +64,9 @@ class ChatVM: ObservableObject {
     // MARK: - Sending Messages APIs -
     
     func sendMessage() {
+        isLoading.toggle()
         let newMessage = Message(id: UUID().uuidString, content: currentInput, createdAt: getSessionDate(), role: .user)
         msgsArr.append(newMessage)
-        currentInput = ""
-        
         openAIService.sendStreamMessages(messages: msgsArr).responseStreamString { [weak self] stream in
             
             guard let self = self else { return }
@@ -98,9 +98,11 @@ class ChatVM: ObservableObject {
                         self.msgsArr[existingMessageIndex] = newMessage
                     }
                 case .failure(_):
+                    isLoading.toggle()
                     print("/ChatVM/sendMessage/sendStreamMessage/Failure")
                 }
             case .complete(_):
+                isLoading.toggle()
                 print("COMPLETE")
             }
         }
@@ -159,7 +161,7 @@ class ChatVM: ObservableObject {
         
         let dateString = Utilities.formatDateAndTime(message.createdAt)
         let userEmail = UserDefaults.standard.string(forKey: "user-email") ?? "NaN"
-        let messageObj: [String: Any] = ["image": image, "prompt": currentInput, "interpretedText": message.content]
+        let messageObj: [String: Any] = ["image": image, "interpretedText": message.content]
         
         let query = db.collection("messages")
             .whereField("date", isEqualTo: dateString)
@@ -177,7 +179,7 @@ class ChatVM: ObservableObject {
                     "date": dateString,
                     "message": messageObj
                 ]
-                self.db.collection("messages").addDocument(data: newDocumentData) { err in
+                self.db.collection("messages").document(dateString).setData(newDocumentData) { err in
                     if let err = err {
                         print("Error adding document: \(err)")
                     } else {

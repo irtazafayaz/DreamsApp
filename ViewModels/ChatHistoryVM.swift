@@ -30,16 +30,15 @@ class ChatHistoryVM: ObservableObject {
 
     private let db = Firestore.firestore()
     
-    func fetchMessagesGroupedByCreatedAt() {
+    func fetchMessagesGroupedByCreatedAt(email: String) {
         isLoading.toggle()
         groupedMessages.removeAll()
-        let userEmail = UserDefaults.standard.string(forKey: "user-email") ?? "NaN"
         
         db.collection("messages")
-            .whereField("user", isEqualTo: userEmail)
+            .whereField("user", isEqualTo: email)
             .getDocuments { [weak self] (querySnapshot, error) in
                 guard let self = self else { return }
-                if let error = error {
+                if error != nil {
                     isLoading.toggle()
                     return
                 } else {

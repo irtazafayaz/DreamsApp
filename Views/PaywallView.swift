@@ -28,13 +28,13 @@ struct PaywallView: View {
         }
         switch subPeriod.unit {
         case .day:
-            return "Daily Premium (School AI)"
+            return "Daily Premium"
         case .month:
-            return "Monthly Premium (School AI)"
+            return "Monthly Premium"
         case .week:
-            return "Weekly Premium (School AI)"
+            return "Weekly Premium"
         case .year:
-            return "Yearly Premium (School AI)"
+            return "Yearly Premium"
         }
     }
     
@@ -44,13 +44,13 @@ struct PaywallView: View {
         }
         switch subPeriod.unit {
         case .day:
-            return "Daily Premium (School AI)"
+            return ""
         case .month:
-            return "350 tries mathpix"
+            return ""
         case .week:
-            return "70 tries mathpix"
+            return ""
         case .year:
-            return "1000 tries mathpix"
+            return ""
         }
     }
     
@@ -132,10 +132,6 @@ struct PaywallView: View {
                                     .cornerRadius(10)
                                     .padding(.horizontal, 20)
                                 }
-                                Text(getPeriodSubTitle(pkg.storeProduct.subscriptionPeriod))
-                                    .font(Font.custom(FontFamily.regular.rawValue, size: 12))
-                                    .foregroundColor(.black)
-                                    .padding(.horizontal, 20)
 
                             }
 
