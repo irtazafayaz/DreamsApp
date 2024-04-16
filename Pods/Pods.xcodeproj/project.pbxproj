@@ -638,7 +638,7 @@
 		9ADD5A7EA3F25C473921EA7D757766A0 /* OfferingsManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OfferingsManager.swift; path = Sources/Purchasing/OfferingsManager.swift; sourceTree = "<group>"; };
 		9BD27D79ECCC0C899A4247F80294EEE7 /* CustomerInfo+OfflineEntitlements.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CustomerInfo+OfflineEntitlements.swift"; path = "Sources/OfflineEntitlements/CustomerInfo+OfflineEntitlements.swift"; sourceTree = "<group>"; };
 		9C451FCBFC886B2E6862AAAE1BFF204C /* URLRequest+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Alamofire.swift"; path = "Source/URLRequest+Alamofire.swift"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DAFDC0F5C6BF424EC06274779B053CD /* PostSubscriberAttributesOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostSubscriberAttributesOperation.swift; path = Sources/Networking/Operations/PostSubscriberAttributesOperation.swift; sourceTree = "<group>"; };
 		9E2D7CCA97CE1821C2CA5491281F63C8 /* MacDevice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MacDevice.swift; path = Sources/Misc/MacDevice.swift; sourceTree = "<group>"; };
 		9E85A3C47E89EBCAFA0E2FA2D202F6FC /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
@@ -692,7 +692,7 @@
 		BC190CD06BA2F01AAAC71BEC4301D70F /* Pods-DreamsApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DreamsApp-acknowledgements.plist"; sourceTree = "<group>"; };
 		BC2C1FEB4D3136331004FEA931CDB6A2 /* NonSubscriptionTransaction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NonSubscriptionTransaction.swift; path = Sources/Purchasing/NonSubscriptionTransaction.swift; sourceTree = "<group>"; };
 		BCC811F92BA7BCE0617A3193778FFBA3 /* DebugView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DebugView.swift; path = Sources/Support/DebugUI/DebugView.swift; sourceTree = "<group>"; };
-		BE34149A2D3D0C95B78471DE895ADB95 /* Pods-DreamsApp */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-DreamsApp"; path = Pods_DreamsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE34149A2D3D0C95B78471DE895ADB95 /* Pods_DreamsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DreamsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7D816A1EC0439D391F94795343B4C0 /* SK2StoreProduct.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SK2StoreProduct.swift; path = Sources/Purchasing/StoreKitAbstractions/SK2StoreProduct.swift; sourceTree = "<group>"; };
 		BE9F48AD786E655B906C0EBE3B52B41B /* Pods-DreamsApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DreamsApp-umbrella.h"; sourceTree = "<group>"; };
 		BFA4B79F0DD43E8D1CA52B1312B638F1 /* OfflineEntitlementsAPI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OfflineEntitlementsAPI.swift; path = Sources/Networking/OfflineEntitlementsAPI.swift; sourceTree = "<group>"; };
@@ -897,7 +897,6 @@
 				85271601FC85949A3BF689076054231C /* VisibleItemsProvider.swift */,
 				932CF5DBAEBD4A929A2BAE4969BDB659 /* Support Files */,
 			);
-			name = HorizonCalendar;
 			path = HorizonCalendar;
 			sourceTree = "<group>";
 		};
@@ -951,7 +950,6 @@
 				AEDFA045E7AE5A4701069CF2117EBDFE /* Validation.swift */,
 				D23635CDD85A2385B5111D69E7659E7A /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -1253,7 +1251,6 @@
 				FFD9600D43809A6FF727AA27AEB686B7 /* VerificationResult.swift */,
 				36CC68ABC319924FC6FF85A6AC507606 /* Support Files */,
 			);
-			name = RevenueCat;
 			path = RevenueCat;
 			sourceTree = "<group>";
 		};
@@ -1320,7 +1317,7 @@
 			children = (
 				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */,
 				F45579511528B62D4DDD4ED7123E55D2 /* HorizonCalendar */,
-				BE34149A2D3D0C95B78471DE895ADB95 /* Pods-DreamsApp */,
+				BE34149A2D3D0C95B78471DE895ADB95 /* Pods_DreamsApp.framework */,
 				74A3C88613D4EB0E63038367698A81E9 /* RevenueCat */,
 			);
 			name = Products;
@@ -1418,7 +1415,7 @@
 			);
 			name = "Pods-DreamsApp";
 			productName = Pods_DreamsApp;
-			productReference = BE34149A2D3D0C95B78471DE895ADB95 /* Pods-DreamsApp */;
+			productReference = BE34149A2D3D0C95B78471DE895ADB95 /* Pods_DreamsApp.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */ = {

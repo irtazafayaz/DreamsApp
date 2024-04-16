@@ -40,7 +40,7 @@ class ChatVM: ObservableObject {
     }
     
     func setup() {
-        openAI = OpenAI(Configuration(organizationId: "Personal", apiKey: Constants.apiKey.rawValue))
+        openAI = OpenAI(Configuration(organizationId: "Personal", apiKey: EnvironmentInfo.apiKey))
     }
     
     func generateImage(prompt: String) async -> UIImage? {
