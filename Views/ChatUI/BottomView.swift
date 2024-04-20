@@ -64,7 +64,7 @@ struct BottomView: View {
                 
                 Button {
                     Task { @MainActor in
-                        if !UserDefaults.standard.isProMemeber {
+                        if UserDefaults.standard.isProMemeber {
                             viewModel.sendMessage()
                         } else {
                             viewModel.isPaywallPresented.toggle()
