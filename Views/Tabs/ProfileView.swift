@@ -100,8 +100,10 @@ struct ProfileView: View {
                 }
                 
                 Button {
-//                    sessionManager.logout()
-                    UserDefaults.standard.userEmail = ""
+                    Task {
+                            await SessionManager.shared.logout()
+                            UserDefaults.standard.userEmail = ""
+                        }
                 } label: {
                     HStack(alignment: .center) {
                         Image(systemName: "person.slash.fill")
@@ -134,6 +136,7 @@ struct ProfileView: View {
         
         
     }
+    
 }
 
 struct ProfileView_Previews: PreviewProvider {
