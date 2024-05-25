@@ -9,17 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var sessionManager = SessionManager()
-
+    //    @ObservedObject var sessionManager = SessionManager()
+    
     var body: some View {
         
-        switch sessionManager.authState {
-        case .login:
-            LoginView()
-                .environmentObject(sessionManager)
-        case .home(_):
+        if SessionManager.shared.isSignedIn {
             HomeView()
-                .environmentObject(sessionManager)
+        } else {
+            LoginView()
         }
     }
 }

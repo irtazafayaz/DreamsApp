@@ -35,14 +35,6 @@ extension UserDefaults {
         }
     }
     
-    var expiryDate: Date? {
-        get {
-            UserDefaults.standard.object(forKey: "expiryDate") as? Date
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: "expiryDate")
-        }
-    }
     var subscriptionType: String? {
         get {
             UserDefaults.standard.string(forKey: "subscriptionType")

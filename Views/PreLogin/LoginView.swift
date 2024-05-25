@@ -11,6 +11,8 @@ import AuthenticationServices
 struct LoginView: View {
     
     @ObservedObject private var viewModel = LoginVM()
+    @State private var email: String = ""
+    @State private var password: String = ""
     
     var body: some View {
         
@@ -19,25 +21,36 @@ struct LoginView: View {
             Image("ic_app_logo_gray")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 200, height: 200)
+                .frame(width: 100, height: 100)
                 .foregroundColor(Color(hex: Colors.primary.rawValue))
-                .padding(.top, 30)
+                .padding(.top, 50)
             
             Text("Login")
                 .font(Font.custom(FontFamily.bold.rawValue, size: 40))
                 .foregroundColor(Color(hex: Colors.primary.rawValue))
                 .padding(.top, 20)
             
-            SignInWithAppleButton { request in
-                viewModel.handleSignWithAppleRequest(request)
-            } onCompletion: { result in
-                viewModel.handleSignWithAppleCompletion(result)
+
+            
+            CustomTextField(label: $email, textfieldType: .email, placeholder: "Email")
+                .padding(.top, 40)
+            CustomTextField(label: $email, textfieldType: .password, placeholder: "Password")
+
+            
+            Button {
+                
+            } label: {
+                Text("Login")
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(Color(hex: Colors.primary.rawValue))
+                    .cornerRadius(10)
+                    .foregroundColor(.white)
             }
-            .frame(maxWidth: .infinity)
-            .frame(height: 50)
-            .padding()
-            .cornerRadius(10)
-            .padding(.top, 40)
+            .padding(.top, 20)
+            
+            Spacer()
+
         }
         .navigationDestination(isPresented: $viewModel.isLoginSuccessful, destination: {
             HomeView()

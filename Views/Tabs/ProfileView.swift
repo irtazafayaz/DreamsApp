@@ -100,7 +100,7 @@ struct ProfileView: View {
                 }
                 
                 Button {
-                    sessionManager.logout()
+//                    sessionManager.logout()
                     UserDefaults.standard.userEmail = ""
                 } label: {
                     HStack(alignment: .center) {

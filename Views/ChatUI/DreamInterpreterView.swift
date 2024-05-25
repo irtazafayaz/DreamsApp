@@ -69,15 +69,6 @@ struct DreamInterpreterView: View {
                         }
                     }
                 }
-                
-                
-                
-                
-                
-                
-                
-                
-                
             }
             .onAppear{
                 viewModel.setup()

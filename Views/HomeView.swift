@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject private var viewModel = ChatHistoryVM()
-    @EnvironmentObject var sessionManager: SessionManager
+//    @EnvironmentObject var sessionManager: SessionManager
     
     @State private var selectedTab: Int = 0
     @State private var title = "AI Dream Interpreter"
@@ -41,7 +41,7 @@ struct HomeView: View {
                 }
                 .accentColor(Color(hex: Colors.primary.rawValue))
             }
-            .onAppear { viewModel.fetchMessagesGroupedByCreatedAt(email: sessionManager.user?.email ?? "NaN") }
+            .onAppear { viewModel.fetchMessagesGroupedByCreatedAt(email: SessionManager.shared.currentUser?.email ?? "NaN") }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(title)

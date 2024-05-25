@@ -11,11 +11,12 @@
 		D51AC8842B8DEC1600F6D3FB /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8832B8DEC1600F6D3FB /* ChatListView.swift */; };
 		D51AC8862B8DECA500F6D3FB /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8852B8DECA500F6D3FB /* MessageView.swift */; };
 		D51AC8882B8DECFB00F6D3FB /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8872B8DECFB00F6D3FB /* BottomView.swift */; };
-		D51AC88A2B8DED2700F6D3FB /* ChatNotStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */; };
 		D51AC88C2B8F222000F6D3FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */; };
 		D53ED0782B9CAB6100334348 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53ED0772B9CAB6100334348 /* LoginView.swift */; };
 		D53ED07A2B9CAD3C00334348 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53ED0792B9CAD3C00334348 /* LoginVM.swift */; };
-		D56CCE962BA85FBA00889AEA /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56CCE952BA85FBA00889AEA /* SessionManager.swift */; };
+		D56EA80B2C0276A500A196BE /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56EA80A2C0276A500A196BE /* SessionManager.swift */; };
+		D56EA80E2C0283E800A196BE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56EA80D2C0283E800A196BE /* CustomTextField.swift */; };
+		D56EA8102C0287F400A196BE /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56EA80F2C0287F400A196BE /* RegisterView.swift */; };
 		D594B0A02B87E62E00C11067 /* DreamsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B09F2B87E62E00C11067 /* DreamsAppApp.swift */; };
 		D594B0A22B87E62E00C11067 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0A12B87E62E00C11067 /* ContentView.swift */; };
 		D594B0A42B87E62E00C11067 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D594B0A32B87E62E00C11067 /* Assets.xcassets */; };
@@ -92,12 +93,13 @@
 		D51AC8832B8DEC1600F6D3FB /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		D51AC8852B8DECA500F6D3FB /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		D51AC8872B8DECFB00F6D3FB /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
-		D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNotStartedView.swift; sourceTree = "<group>"; };
 		D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D53ED0762B9CAA9900334348 /* DreamsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DreamsApp.entitlements; sourceTree = "<group>"; };
 		D53ED0772B9CAB6100334348 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D53ED0792B9CAD3C00334348 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
-		D56CCE952BA85FBA00889AEA /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		D56EA80A2C0276A500A196BE /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		D56EA80D2C0283E800A196BE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		D56EA80F2C0287F400A196BE /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		D594B09C2B87E62E00C11067 /* DreamsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D594B09F2B87E62E00C11067 /* DreamsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsAppApp.swift; sourceTree = "<group>"; };
 		D594B0A12B87E62E00C11067 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -150,7 +152,7 @@
 		D594B1052B87EDDD00C11067 /* Urbanist-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-Medium.ttf"; sourceTree = "<group>"; };
 		D594B1062B87EDDD00C11067 /* Urbanist-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-ExtraLight.ttf"; sourceTree = "<group>"; };
 		D594B1072B87EDDD00C11067 /* Urbanist-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-ThinItalic.ttf"; sourceTree = "<group>"; };
-		D594B1512B87EED500C11067 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D594B1512B87EED500C11067 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D594B1522B87F1DA00C11067 /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		D594B1542B87F3B100C11067 /* HorizonCalendarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonCalendarWrapper.swift; sourceTree = "<group>"; };
 		D5AD63212BB1BF08002ECFD0 /* DreamInterpreterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamInterpreterView.swift; sourceTree = "<group>"; };
@@ -205,10 +207,39 @@
 				D51AC8832B8DEC1600F6D3FB /* ChatListView.swift */,
 				D51AC8852B8DECA500F6D3FB /* MessageView.swift */,
 				D51AC8872B8DECFB00F6D3FB /* BottomView.swift */,
-				D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */,
 				D5AD63212BB1BF08002ECFD0 /* DreamInterpreterView.swift */,
+				D5FE42DF2BB36BDA00B594DC /* ChatHistoryPreview.swift */,
 			);
 			path = ChatUI;
+			sourceTree = "<group>";
+		};
+		D56EA8072C0273A700A196BE /* PreLogin */ = {
+			isa = PBXGroup;
+			children = (
+				D53ED0772B9CAB6100334348 /* LoginView.swift */,
+				D594B0BF2B87EDDD00C11067 /* SplashView.swift */,
+				D56EA80F2C0287F400A196BE /* RegisterView.swift */,
+			);
+			path = PreLogin;
+			sourceTree = "<group>";
+		};
+		D56EA8082C0273FF00A196BE /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				D594B0CC2B87EDDD00C11067 /* ChatHistoryView.swift */,
+				D594B0BB2B87EDDD00C11067 /* StartChatView.swift */,
+				D594B0C72B87EDDD00C11067 /* ProfileView.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		D56EA8092C02741300A196BE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D594B0CE2B87EDDD00C11067 /* PaywallView.swift */,
+				D594B0C82B87EDDD00C11067 /* SharedWebView.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		D594B0932B87E62D00C11067 = {
@@ -233,18 +264,17 @@
 			isa = PBXGroup;
 			children = (
 				D53ED0762B9CAA9900334348 /* DreamsApp.entitlements */,
-				D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */,
 				D594B1512B87EED500C11067 /* Info.plist */,
+				D594B0A32B87E62E00C11067 /* Assets.xcassets */,
+				D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */,
 				D594B0F52B87EDDD00C11067 /* Fonts */,
 				D594B0AD2B87EDDD00C11067 /* Models */,
 				D594B0D42B87EDDD00C11067 /* Networking */,
-				D594B0D22B87EDDD00C11067 /* Service */,
-				D594B0DA2B87EDDD00C11067 /* Utils */,
+				D594B0DA2B87EDDD00C11067 /* Common */,
 				D594B0EC2B87EDDD00C11067 /* ViewModels */,
 				D594B0B52B87EDDD00C11067 /* Views */,
 				D594B09F2B87E62E00C11067 /* DreamsAppApp.swift */,
 				D594B0A12B87E62E00C11067 /* ContentView.swift */,
-				D594B0A32B87E62E00C11067 /* Assets.xcassets */,
 				D594B0A52B87E62E00C11067 /* Preview Content */,
 			);
 			path = DreamsApp;
@@ -270,16 +300,11 @@
 		D594B0B52B87EDDD00C11067 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D56EA8092C02741300A196BE /* Common */,
+				D56EA8082C0273FF00A196BE /* Tabs */,
+				D56EA8072C0273A700A196BE /* PreLogin */,
 				D51AC8822B8DEBA200F6D3FB /* ChatUI */,
-				D594B0CE2B87EDDD00C11067 /* PaywallView.swift */,
-				D594B0C82B87EDDD00C11067 /* SharedWebView.swift */,
-				D594B0C72B87EDDD00C11067 /* ProfileView.swift */,
-				D594B0CC2B87EDDD00C11067 /* ChatHistoryView.swift */,
-				D594B0BB2B87EDDD00C11067 /* StartChatView.swift */,
 				D594B0C22B87EDDD00C11067 /* HomeView.swift */,
-				D594B0BF2B87EDDD00C11067 /* SplashView.swift */,
-				D53ED0772B9CAB6100334348 /* LoginView.swift */,
-				D5FE42DF2BB36BDA00B594DC /* ChatHistoryPreview.swift */,
 			);
 			path = Views;
 			sourceTree = SOURCE_ROOT;
@@ -289,12 +314,14 @@
 			children = (
 				D594B0D32B87EDDD00C11067 /* OpenAIService.swift */,
 			);
-			path = Service;
+			name = Service;
+			path = Networking/Service;
 			sourceTree = SOURCE_ROOT;
 		};
 		D594B0D42B87EDDD00C11067 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				D594B0D22B87EDDD00C11067 /* Service */,
 				D594B0D52B87EDDD00C11067 /* BaseActions.swift */,
 				D594B0D62B87EDDD00C11067 /* APIServiceEndpoint.swift */,
 				D594B0D82B87EDDD00C11067 /* BaseService.swift */,
@@ -302,16 +329,15 @@
 			path = Networking;
 			sourceTree = SOURCE_ROOT;
 		};
-		D594B0DA2B87EDDD00C11067 /* Utils */ = {
+		D594B0DA2B87EDDD00C11067 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				D594B0DC2B87EDDD00C11067 /* Utilities.swift */,
 				D594B0DE2B87EDDD00C11067 /* Enums.swift */,
 				D594B0DF2B87EDDD00C11067 /* Extensions */,
 				D594B0E32B87EDDD00C11067 /* Widgets */,
-				D56CCE952BA85FBA00889AEA /* SessionManager.swift */,
 			);
-			path = Utils;
+			path = Common;
 			sourceTree = SOURCE_ROOT;
 		};
 		D594B0DF2B87EDDD00C11067 /* Extensions */ = {
@@ -336,6 +362,7 @@
 				D594B1522B87F1DA00C11067 /* CalendarWidget.swift */,
 				D594B0B82B87EDDD00C11067 /* ContentMessageView.swift */,
 				D594B0CB2B87EDDD00C11067 /* ChatHistoryCard.swift */,
+				D56EA80D2C0283E800A196BE /* CustomTextField.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -348,6 +375,7 @@
 				D594B0F42B87EDDD00C11067 /* ProfileVM.swift */,
 				D53ED0792B9CAD3C00334348 /* LoginVM.swift */,
 				D5ED9E322B9FB0C40085AC9A /* ChatHistoryVM.swift */,
+				D56EA80A2C0276A500A196BE /* SessionManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = SOURCE_ROOT;
@@ -374,7 +402,8 @@
 				D594B1062B87EDDD00C11067 /* Urbanist-ExtraLight.ttf */,
 				D594B1072B87EDDD00C11067 /* Urbanist-ThinItalic.ttf */,
 			);
-			path = Fonts;
+			name = Fonts;
+			path = DreamsApp/Fonts;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -543,6 +572,7 @@
 				D51AC8882B8DECFB00F6D3FB /* BottomView.swift in Sources */,
 				D53ED07A2B9CAD3C00334348 /* LoginVM.swift in Sources */,
 				D5FE42E02BB36BDA00B594DC /* ChatHistoryPreview.swift in Sources */,
+				D56EA80E2C0283E800A196BE /* CustomTextField.swift in Sources */,
 				D594B1272B87EDDD00C11067 /* BaseService.swift in Sources */,
 				D594B1132B87EDDD00C11067 /* ChatView.swift in Sources */,
 				D53ED0782B9CAB6100334348 /* LoginView.swift in Sources */,
@@ -555,19 +585,19 @@
 				D594B11E2B87EDDD00C11067 /* ChatHistoryCard.swift in Sources */,
 				D594B1232B87EDDD00C11067 /* OpenAIService.swift in Sources */,
 				D594B1082B87EDDD00C11067 /* ResponseModel.swift in Sources */,
+				D56EA80B2C0276A500A196BE /* SessionManager.swift in Sources */,
 				D5ED9E332B9FB0C40085AC9A /* ChatHistoryVM.swift in Sources */,
 				D594B13E2B87EDDD00C11067 /* ProfileVM.swift in Sources */,
 				D5AD63222BB1BF09002ECFD0 /* DreamInterpreterView.swift in Sources */,
+				D56EA8102C0287F400A196BE /* RegisterView.swift in Sources */,
 				D594B1342B87EDDD00C11067 /* CustomBackButton.swift in Sources */,
 				D594B10F2B87EDDD00C11067 /* ContentMessageView.swift in Sources */,
-				D56CCE962BA85FBA00889AEA /* SessionManager.swift in Sources */,
 				D594B11F2B87EDDD00C11067 /* ChatHistoryView.swift in Sources */,
 				D594B0A02B87E62E00C11067 /* DreamsAppApp.swift in Sources */,
 				D594B11B2B87EDDD00C11067 /* ProfileView.swift in Sources */,
 				D594B12B2B87EDDD00C11067 /* Enums.swift in Sources */,
 				D594B1182B87EDDD00C11067 /* HomeView.swift in Sources */,
 				D594B1532B87F1DA00C11067 /* CalendarWidget.swift in Sources */,
-				D51AC88A2B8DED2700F6D3FB /* ChatNotStartedView.swift in Sources */,
 				D594B1252B87EDDD00C11067 /* APIServiceEndpoint.swift in Sources */,
 				D594B1332B87EDDD00C11067 /* PopupView.swift in Sources */,
 			);
@@ -628,7 +658,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -685,7 +715,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
