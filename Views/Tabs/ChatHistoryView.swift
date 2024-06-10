@@ -34,10 +34,10 @@ struct ChatHistoryView: View {
                     .padding(.top, 20)
                     .padding(.bottom, 5)
                 
-                Text("Choose the date you want to see your interpretations from :")
+                Text("Click the date you want to see your dream and interpretation")
                     .font(Font.custom(FontFamily.regular.rawValue, size: 18))
                     .foregroundColor(Color(hex: Colors.labelDark.rawValue))
-                    .padding(.leading, 20)
+                    .padding(.horizontal, 20)
                     .padding(.bottom, 20)
                 
                 searchBar

@@ -33,11 +33,11 @@ struct StartChatView: View {
                 .foregroundColor(Color(hex: Colors.labelDark.rawValue))
                 .padding(.top, 20)
             
-            Text("Dream GPT")
+            Text("AI Dream Interpreter")
                 .font(Font.custom(FontFamily.bold.rawValue, size: 40))
                 .foregroundColor(Color(hex: Colors.primary.rawValue))
             
-            Text("Start chatting now.\nYou can ask me anything.")
+            Text("Start describing your dream. Don’t be afraid to ask me questions about your dreams!")
                 .font(Font.custom(FontFamily.regular.rawValue, size: 18))
                 .foregroundColor(Color(hex: Colors.labelGray.rawValue))
                 .multilineTextAlignment(.center)
@@ -56,7 +56,7 @@ struct StartChatView: View {
                         .frame(height: 65)
                         .padding()
                     
-                    Text("Start Chat")
+                    Text("Enter your dream")
                         .foregroundColor(.white)
                         .font(.system(size: 18, weight: .bold))
                 }

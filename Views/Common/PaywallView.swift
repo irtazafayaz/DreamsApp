@@ -59,7 +59,7 @@ struct PaywallView: View {
         NavigationStack {
             
             VStack (alignment: .leading, spacing: 10) {
-                Text("Unlock Unlimited Access")
+                Text("Unlock Unlimited Dreams")
                     .font(Font.custom(FontFamily.bold.rawValue, size: 30))
                     .foregroundColor(.black)
                     .padding(.top, 10)
@@ -67,36 +67,37 @@ struct PaywallView: View {
                 
                 VStack(alignment: .leading, spacing: 20) {
                     HStack(alignment: .center) {
-                        Image(systemName: "brain.head.profile")
+                        Image(systemName: "cloud.moon.fill")
                             .foregroundColor(.black)
                         VStack(alignment: .leading) {
-                            Text("Answers from GPT3.5")
-                                .font(Font.custom(FontFamily.semiBold.rawValue, size: 20))
+                            Text("Personalized Dream Interpretations")
+                                .font(Font.custom(FontFamily.semiBold.rawValue, size: 18))
                                 .foregroundColor(.black)
                         }
                     }
                     
                     HStack(alignment: .center) {
-                        Image(systemName: "checkmark.icloud")
+                        Image(systemName: "text.quote")
                             .foregroundColor(.black)
                         VStack(alignment: .leading) {
-                            Text("Higher word limit")
-                                .font(Font.custom(FontFamily.semiBold.rawValue, size: 20))
+                            Text("Detailed Analysis and Insights")
+                                .font(Font.custom(FontFamily.semiBold.rawValue, size: 18))
                                 .foregroundColor(.black)
                         }
                     }
 
                     HStack(alignment: .center) {
-                        Image(systemName: "brain.head.profile")
+                        Image(systemName: "cloud.fill")
                             .foregroundColor(.black)
                         VStack(alignment: .leading) {
-                            Text("No Ads")
-                                .font(Font.custom(FontFamily.semiBold.rawValue, size: 20))
+                            Text("Detailed Analysis and Insights")
+                                .font(Font.custom(FontFamily.semiBold.rawValue, size: 18))
                                 .foregroundColor(.black)
                         }
                     }
                 }
                 .padding()
+
                 
                 if isHideLoader {
                     if currentOffering != nil {

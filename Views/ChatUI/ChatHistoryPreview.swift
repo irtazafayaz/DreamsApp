@@ -39,10 +39,6 @@ struct ChatHistoryPreview: View {
                         .padding()
                         .background(Color(hex: Colors.primary.rawValue).opacity(0.5))
                         .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color(hex: Colors.primary.rawValue), lineWidth: 2)
-                        )
                         .padding(.vertical)
                     
                     if let url = URL(string: interpretedDream.image) {

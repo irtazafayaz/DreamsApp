@@ -23,13 +23,13 @@ struct HomeView: View {
                     StartChatView(groupedMessages: viewModel.groupedMessages)
                         .tabItem {
                             Image("ic_tab_chat")
-                            Text("Chat")
+                            Text("Your Dream")
                         }
                         .tag(0)
                     ChatHistoryView(viewModel: viewModel)
                         .tabItem {
                             Image("ic_tab_history")
-                            Text("History")
+                            Text("Your Dream History")
                         }
                         .tag(1)
                     ProfileView()

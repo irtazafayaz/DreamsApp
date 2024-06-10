@@ -16,7 +16,6 @@ struct ChatView: View {
     @StateObject private var viewModel: ChatVM = ChatVM(with: "")
     @State var generatingImageTapped: Bool = false
     @State private var tagInput: String = ""
-    @State private var isExpanded: Bool = false
     
     //MARK: - Initialization Methods -
     
@@ -33,11 +32,7 @@ struct ChatView: View {
                         .padding()
                         .background(Color(hex: Colors.primary.rawValue).opacity(0.5))
                         .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color(hex: Colors.primary.rawValue), lineWidth: 2)
-                        )
-                        .padding()
+                        .padding(.vertical)
                 }
                 
                 if let image = viewModel.dreamInterpretedImage {
@@ -45,13 +40,42 @@ struct ChatView: View {
                         .resizable()
                         .frame(maxWidth: .infinity)
                         .frame(height: 400)
+                    
+                    if viewModel.tags.count > 0 {
+                        HStack {
+                            Text("Tags:")
+                                .font(.title3)
+                                .bold()
+                                .frame(alignment: .leading)
+                            Text("\(viewModel.tags.joined(separator: ", "))")
+                                .font(.title3)
+                            
+                        }
+                        .padding(.top)
+                    }
+                    
+                    Text("Input Text:")
+                        .bold()
+                        .font(.title2)
+                        .padding(.top)
+                    Text(viewModel.currentInput)
+                        .font(.title3)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .padding(.top)
+                    
+                    
                 }
+                
+                
                 
             }
             
             Divider()
-            bottomView
-            
+            if viewModel.dreamInterpretedImage == nil {
+                bottomView
+            }
         }
         .disabled(viewModel.isLoading)
         .onAppear{
@@ -74,104 +98,88 @@ struct ChatView: View {
     var bottomView: some View {
         VStack(spacing: 8) {
             
-            Button(action: {
-                withAnimation {
-                    isExpanded.toggle()
-                }
-            }) {
-                Text(isExpanded ? "-" : "+")
-                    .foregroundColor(.white)
-                    .padding(10)
-                    .background(Color(hex: Colors.primary.rawValue))
-                    .clipShape(Circle())
-            }
-            .padding(.top)
-            
-            if isExpanded {
-                if let lastAssistantMessage = viewModel.msgsArr.last(where: { $0.role == .assistant })?.content, !lastAssistantMessage.trimmingCharacters(in: .whitespaces).isEmpty {
-                    
-                    HStack {
-                        Button {
-                            Task {
-                                generatingImageTapped.toggle()
-                                let result = await viewModel.generateImage(prompt: lastAssistantMessage)
-                                generatingImageTapped.toggle()
-                                if result == nil {
-                                    print("Failed to get image")
-                                } else {
-                                    viewModel.dreamInterpretedImage = result
-                                }
-                            }
-                            
-                        } label: {
-                            if generatingImageTapped {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: Colors.primary.rawValue)))
-                                    .scaleEffect(1.5)
-                            } else {
-                                Text("Generate Image")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 18, weight: .bold))
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 10)
-                                    .background(.black)
-                                    .cornerRadius(10)
-                            }
-                        }
-                        .padding(.top)
-                    }
-                }
+            if let lastAssistantMessage = viewModel.msgsArr.last(where: { $0.role == .assistant })?.content, !lastAssistantMessage.trimmingCharacters(in: .whitespaces).isEmpty {
                 
-                tagInputView
-                    .padding(.top, 10)
-                
-                HStack(alignment: .top, spacing: 8) {
-                    TextField("Ask me anything...", text: $viewModel.currentInput)
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(8)
-                        .onChange(of: viewModel.currentInput) { newValue in
-                            if newValue.isEmpty {
-                                viewModel.currentInput = ""
-                            }
-                        }
-                        .ignoresSafeArea(.keyboard, edges: .bottom)
-                    
+                HStack {
                     Button {
-                        Task { @MainActor in
-                            if UserDefaults.standard.isProMemeber {
-                                viewModel.sendMessage()
+                        Task {
+                            generatingImageTapped.toggle()
+                            let result = await viewModel.generateImage(prompt: lastAssistantMessage)
+                            generatingImageTapped.toggle()
+                            if result == nil {
+                                print("Failed to get image")
                             } else {
-                                SessionManager.shared.getMaxTries() { max in
-                                    if max > 0 {
-                                        viewModel.sendMessage()
-                                    } else {
-                                        viewModel.isPaywallPresented.toggle()
-                                    }
+                                viewModel.dreamInterpretedImage = result
+                            }
+                        }
+                        
+                    } label: {
+                        if generatingImageTapped {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: Colors.primary.rawValue)))
+                                .scaleEffect(1.5)
+                        } else {
+                            Text("Generate the Image of My Dream")
+                                .foregroundColor(.white)
+                                .font(.system(size: 18, weight: .bold))
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 10)
+                                .background(.black)
+                                .cornerRadius(10)
+                        }
+                    }
+                    .padding(.top)
+                }
+            }
+            
+            tagInputView
+                .padding(.top, 10)
+            
+            HStack(alignment: .top, spacing: 8) {
+                TextField("Describe your dream...", text: $viewModel.currentInput)
+                    .foregroundColor(.black)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+                    .onChange(of: viewModel.currentInput) { newValue in
+                        if newValue.isEmpty {
+                            viewModel.currentInput = ""
+                        }
+                    }
+                    .ignoresSafeArea(.keyboard, edges: .bottom)
+                
+                Button {
+                    Task { @MainActor in
+                        if UserDefaults.standard.isProMemeber {
+                            viewModel.sendMessage()
+                        } else {
+                            SessionManager.shared.getMaxTries() { max in
+                                if max > 0 {
+                                    viewModel.sendMessage()
+                                } else {
+                                    viewModel.isPaywallPresented.toggle()
                                 }
                             }
                         }
-                    } label: {
-                        Circle()
-                            .fill(Color(hex: Colors.primary.rawValue))
-                            .frame(width: 50, height: 50)
-                            .overlay(
-                                Image("ic_send_btn_icon")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .font(.largeTitle)
-                                    .foregroundColor(.white)
-                                    .padding()
-                            )
                     }
-                    .disabled(viewModel.currentInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                } label: {
+                    Circle()
+                        .fill(Color(hex: Colors.primary.rawValue))
+                        .frame(width: 50, height: 50)
+                        .overlay(
+                            Image("ic_send_btn_icon")
+                                .resizable()
+                                .scaledToFit()
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                                .padding()
+                        )
                 }
-                .padding(.top, 12)
-                
+                .disabled(viewModel.currentInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
+            .padding(.top, 12)
             
-
+            
         }
     }
     
@@ -234,7 +242,7 @@ struct ChatView: View {
 
 #Preview {
     ChatView(messagesArr: [
-        Message(id: UUID().uuidString, content: "Hello fjdsfjhdsjfh dsjfhjsd fjsdhfjjhsjahfkajhdsjk", createdAt: .now, role: .assistant)
+        Message(id: UUID().uuidString, content: "Hello fjdsfjhdsjfh dsjfhjsd fjsdhfjjhsjahfkajhdsjkjash jashd jashjkd hasjkhd kjas nbcsajcjashjdfhasjkdh  dhjkashdjkashd hsdk jahskjd", createdAt: .now, role: .assistant)
     ])
 }
 
