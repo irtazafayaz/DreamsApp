@@ -22,7 +22,8 @@ class ChatVM: ObservableObject {
     @Published var dreamInterpretedText: String = ""
     @Published var dreamInterpretedImage: UIImage?
     @Published var errorMessage: String = ""
-    
+    @Published var tags: [String] = []
+
     // MARK: Toggles
     @Published var isLoading: Bool = false
     @Published var isPaywallPresented = false
@@ -59,23 +60,6 @@ class ChatVM: ObservableObject {
             print(String(describing: error))
             isLoading.toggle()
             return nil
-        }
-    }
-    
-    private func decrementMaxTriesCount() {
-        if let uid = SessionManager.shared.currentUser?.uid {
-            
-            let documentReference = db.collection("user-info").document(uid)
-            documentReference.getDocument { document, error in
-                
-                if let document = document, document.exists {
-                    if var maxTries = document.data()?["maxTries"] as? Int, maxTries > 0 {
-                        maxTries -= 1
-                        documentReference.updateData(["maxTries": maxTries]) { error in }
-                    }
-                }
-                
-            }
         }
     }
     
@@ -180,11 +164,11 @@ class ChatVM: ObservableObject {
         
         let dateString = Utilities.formatDateAndTime(message.createdAt)
         let userEmail = UserDefaults.standard.string(forKey: "user-email") ?? "NaN"
-        let messageObj: [String: Any] = ["image": image, "interpretedText": message.content]
+        let messageObj: [String: Any] = ["image": image, "interpretedText": message.content, "inputText": currentInput, "tags": tags]
         
         let query = db.collection("messages")
             .whereField("date", isEqualTo: dateString)
-            .whereField("user", isEqualTo: userEmail)
+            .whereField("user", isEqualTo: SessionManager.shared.currentUser?.email ?? "")
         
         query.getDocuments { (querySnapshot, error) in
             if let document = querySnapshot?.documents.first {
@@ -194,7 +178,7 @@ class ChatVM: ObservableObject {
                 ])
             } else {
                 let newDocumentData: [String: Any] = [
-                    "user": userEmail,
+                    "user": SessionManager.shared.currentUser?.email ?? "",
                     "date": dateString,
                     "message": messageObj
                 ]
@@ -208,6 +192,23 @@ class ChatVM: ObservableObject {
             }
         }
         
+    }
+    
+    private func decrementMaxTriesCount() {
+        if let uid = SessionManager.shared.currentUser?.uid {
+            
+            let documentReference = db.collection("user-info").document(uid)
+            documentReference.getDocument { document, error in
+                
+                if let document = document, document.exists {
+                    if var maxTries = document.data()?["maxTries"] as? Int, maxTries > 0 {
+                        maxTries -= 1
+                        documentReference.updateData(["maxTries": maxTries]) { error in }
+                    }
+                }
+                
+            }
+        }
     }
     
     

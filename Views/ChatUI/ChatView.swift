@@ -16,8 +16,7 @@ struct ChatView: View {
     @StateObject private var viewModel: ChatVM = ChatVM(with: "")
     @State var generatingImageTapped: Bool = false
     @State private var tagInput: String = ""
-    @State private var tags: [String] = []
-    @State private var isExpanded: Bool = true
+    @State private var isExpanded: Bool = false
     
     //MARK: - Initialization Methods -
     
@@ -116,7 +115,7 @@ struct ChatView: View {
                                     .padding(.horizontal, 16)
                                     .padding(.vertical, 10)
                                     .background(.black)
-                                    .clipShape(Capsule())
+                                    .cornerRadius(10)
                             }
                         }
                         .padding(.top)
@@ -124,6 +123,7 @@ struct ChatView: View {
                 }
                 
                 tagInputView
+                    .padding(.top, 10)
                 
                 HStack(alignment: .top, spacing: 8) {
                     TextField("Ask me anything...", text: $viewModel.currentInput)
@@ -191,12 +191,11 @@ struct ChatView: View {
                         .bold()
                 }
             }
-            .padding(.horizontal, 40)
             
-            if !tags.isEmpty {
+            if !viewModel.tags.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(tags, id: \.self) { tag in
+                        ForEach(viewModel.tags, id: \.self) { tag in
                             HStack {
                                 Text(tag)
                                     .padding(.horizontal, 12)
@@ -222,14 +221,14 @@ struct ChatView: View {
     
     func addTag() {
         let trimmedTag = tagInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !trimmedTag.isEmpty && !tags.contains(trimmedTag) {
-            tags.append(trimmedTag)
+        if !trimmedTag.isEmpty && !viewModel.tags.contains(trimmedTag) {
+            viewModel.tags.append(trimmedTag)
         }
         tagInput = ""
     }
     
     func removeTag(_ tag: String) {
-        tags.removeAll { $0 == tag }
+        viewModel.tags.removeAll { $0 == tag }
     }
 }
 
