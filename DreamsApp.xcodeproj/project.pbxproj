@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE5F95E2F4DBFAA86C972FBF /* Pods_DreamsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 368D50D528EE1CDB345C296E /* Pods_DreamsApp.framework */; };
-		D51AC8842B8DEC1600F6D3FB /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8832B8DEC1600F6D3FB /* ChatListView.swift */; };
+		101976DE2C13563E0093736C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 101976DD2C13563E0093736C /* Alamofire */; };
+		101976E02C13563E0093736C /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 101976DF2C13563E0093736C /* AlamofireDynamic */; };
+		101976E32C1356BD0093736C /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 101976E22C1356BD0093736C /* HorizonCalendar */; };
+		101976E62C1357910093736C /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 101976E52C1357910093736C /* RevenueCat */; };
 		D51AC8862B8DECA500F6D3FB /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8852B8DECA500F6D3FB /* MessageView.swift */; };
 		D51AC8882B8DECFB00F6D3FB /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8872B8DECFB00F6D3FB /* BottomView.swift */; };
-		D51AC88A2B8DED2700F6D3FB /* ChatNotStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */; };
 		D51AC88C2B8F222000F6D3FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */; };
+		D53ED0782B9CAB6100334348 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53ED0772B9CAB6100334348 /* LoginView.swift */; };
+		D53ED07A2B9CAD3C00334348 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53ED0792B9CAD3C00334348 /* LoginVM.swift */; };
+		D56EA80B2C0276A500A196BE /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56EA80A2C0276A500A196BE /* SessionManager.swift */; };
+		D56EA80E2C0283E800A196BE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56EA80D2C0283E800A196BE /* CustomTextField.swift */; };
+		D56EA8102C0287F400A196BE /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56EA80F2C0287F400A196BE /* RegisterView.swift */; };
 		D594B0A02B87E62E00C11067 /* DreamsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B09F2B87E62E00C11067 /* DreamsAppApp.swift */; };
 		D594B0A22B87E62E00C11067 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B0A12B87E62E00C11067 /* ContentView.swift */; };
 		D594B0A42B87E62E00C11067 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D594B0A32B87E62E00C11067 /* Assets.xcassets */; };
@@ -66,17 +72,33 @@
 		D594B1502B87EDDD00C11067 /* Urbanist-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D594B1072B87EDDD00C11067 /* Urbanist-ThinItalic.ttf */; };
 		D594B1532B87F1DA00C11067 /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B1522B87F1DA00C11067 /* CalendarWidget.swift */; };
 		D594B1552B87F3B100C11067 /* HorizonCalendarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D594B1542B87F3B100C11067 /* HorizonCalendarWrapper.swift */; };
+		D5AD633B2BB23933002ECFD0 /* OpenAIKit in Frameworks */ = {isa = PBXBuildFile; productRef = D5AD633A2BB23933002ECFD0 /* OpenAIKit */; };
+		D5ED9E332B9FB0C40085AC9A /* ChatHistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ED9E322B9FB0C40085AC9A /* ChatHistoryVM.swift */; };
+		D5FE42CC2BB35C5300B594DC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D5FE42CB2BB35C5300B594DC /* FirebaseAnalytics */; };
+		D5FE42CE2BB35C5300B594DC /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = D5FE42CD2BB35C5300B594DC /* FirebaseAnalyticsOnDeviceConversion */; };
+		D5FE42D02BB35C5300B594DC /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D5FE42CF2BB35C5300B594DC /* FirebaseAnalyticsSwift */; };
+		D5FE42D22BB35C5300B594DC /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = D5FE42D12BB35C5300B594DC /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		D5FE42D42BB35C5300B594DC /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = D5FE42D32BB35C5300B594DC /* FirebaseAppCheck */; };
+		D5FE42D62BB35C5300B594DC /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D5FE42D52BB35C5300B594DC /* FirebaseAppDistribution-Beta */; };
+		D5FE42D82BB35C5300B594DC /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D5FE42D72BB35C5300B594DC /* FirebaseAuth */; };
+		D5FE42DA2BB35C5300B594DC /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D5FE42D92BB35C5300B594DC /* FirebaseAuthCombine-Community */; };
+		D5FE42DC2BB35C6800B594DC /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D5FE42DB2BB35C6800B594DC /* FirebaseStorage */; };
+		D5FE42DE2BB35F5700B594DC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D5FE42DD2BB35F5700B594DC /* FirebaseFirestore */; };
+		D5FE42E02BB36BDA00B594DC /* ChatHistoryPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FE42DF2BB36BDA00B594DC /* ChatHistoryPreview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0EE135FF85E432D3495B955B /* Pods-DreamsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DreamsApp.release.xcconfig"; path = "Target Support Files/Pods-DreamsApp/Pods-DreamsApp.release.xcconfig"; sourceTree = "<group>"; };
+		101976ED2C17369D0093736C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		368D50D528EE1CDB345C296E /* Pods_DreamsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DreamsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		833B9185A7EBFD7C3A28DF5F /* Pods-DreamsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DreamsApp.debug.xcconfig"; path = "Target Support Files/Pods-DreamsApp/Pods-DreamsApp.debug.xcconfig"; sourceTree = "<group>"; };
-		D51AC8832B8DEC1600F6D3FB /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		D51AC8852B8DECA500F6D3FB /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		D51AC8872B8DECFB00F6D3FB /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
-		D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNotStartedView.swift; sourceTree = "<group>"; };
 		D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D53ED0762B9CAA9900334348 /* DreamsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DreamsApp.entitlements; sourceTree = "<group>"; };
+		D53ED0772B9CAB6100334348 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D53ED0792B9CAD3C00334348 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
+		D56EA80A2C0276A500A196BE /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		D56EA80D2C0283E800A196BE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		D56EA80F2C0287F400A196BE /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		D594B09C2B87E62E00C11067 /* DreamsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D594B09F2B87E62E00C11067 /* DreamsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsAppApp.swift; sourceTree = "<group>"; };
 		D594B0A12B87E62E00C11067 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,9 +151,11 @@
 		D594B1052B87EDDD00C11067 /* Urbanist-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-Medium.ttf"; sourceTree = "<group>"; };
 		D594B1062B87EDDD00C11067 /* Urbanist-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-ExtraLight.ttf"; sourceTree = "<group>"; };
 		D594B1072B87EDDD00C11067 /* Urbanist-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-ThinItalic.ttf"; sourceTree = "<group>"; };
-		D594B1512B87EED500C11067 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D594B1512B87EED500C11067 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D594B1522B87F1DA00C11067 /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		D594B1542B87F3B100C11067 /* HorizonCalendarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonCalendarWrapper.swift; sourceTree = "<group>"; };
+		D5ED9E322B9FB0C40085AC9A /* ChatHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryVM.swift; sourceTree = "<group>"; };
+		D5FE42DF2BB36BDA00B594DC /* ChatHistoryPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryPreview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +163,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5F95E2F4DBFAA86C972FBF /* Pods_DreamsApp.framework in Frameworks */,
+				D5FE42D22BB35C5300B594DC /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				D5AD633B2BB23933002ECFD0 /* OpenAIKit in Frameworks */,
+				D5FE42CC2BB35C5300B594DC /* FirebaseAnalytics in Frameworks */,
+				D5FE42D82BB35C5300B594DC /* FirebaseAuth in Frameworks */,
+				D5FE42DE2BB35F5700B594DC /* FirebaseFirestore in Frameworks */,
+				D5FE42D42BB35C5300B594DC /* FirebaseAppCheck in Frameworks */,
+				101976E32C1356BD0093736C /* HorizonCalendar in Frameworks */,
+				D5FE42CE2BB35C5300B594DC /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				D5FE42D02BB35C5300B594DC /* FirebaseAnalyticsSwift in Frameworks */,
+				D5FE42DC2BB35C6800B594DC /* FirebaseStorage in Frameworks */,
+				D5FE42D62BB35C5300B594DC /* FirebaseAppDistribution-Beta in Frameworks */,
+				101976E62C1357910093736C /* RevenueCat in Frameworks */,
+				101976E02C13563E0093736C /* AlamofireDynamic in Frameworks */,
+				D5FE42DA2BB35C5300B594DC /* FirebaseAuthCombine-Community in Frameworks */,
+				101976DE2C13563E0093736C /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,24 +192,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B7570BB2BD5895BAF54E42BE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				833B9185A7EBFD7C3A28DF5F /* Pods-DreamsApp.debug.xcconfig */,
-				0EE135FF85E432D3495B955B /* Pods-DreamsApp.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		D51AC8822B8DEBA200F6D3FB /* ChatUI */ = {
 			isa = PBXGroup;
 			children = (
-				D51AC8832B8DEC1600F6D3FB /* ChatListView.swift */,
+				D594B0BC2B87EDDD00C11067 /* ChatView.swift */,
 				D51AC8852B8DECA500F6D3FB /* MessageView.swift */,
 				D51AC8872B8DECFB00F6D3FB /* BottomView.swift */,
-				D51AC8892B8DED2700F6D3FB /* ChatNotStartedView.swift */,
+				D5FE42DF2BB36BDA00B594DC /* ChatHistoryPreview.swift */,
 			);
 			path = ChatUI;
+			sourceTree = "<group>";
+		};
+		D56EA8072C0273A700A196BE /* PreLogin */ = {
+			isa = PBXGroup;
+			children = (
+				D53ED0772B9CAB6100334348 /* LoginView.swift */,
+				D594B0BF2B87EDDD00C11067 /* SplashView.swift */,
+				D56EA80F2C0287F400A196BE /* RegisterView.swift */,
+			);
+			path = PreLogin;
+			sourceTree = "<group>";
+		};
+		D56EA8082C0273FF00A196BE /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				D594B0CC2B87EDDD00C11067 /* ChatHistoryView.swift */,
+				D594B0BB2B87EDDD00C11067 /* StartChatView.swift */,
+				D594B0C72B87EDDD00C11067 /* ProfileView.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		D56EA8092C02741300A196BE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D594B0CE2B87EDDD00C11067 /* PaywallView.swift */,
+				D594B0C82B87EDDD00C11067 /* SharedWebView.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		D594B0932B87E62D00C11067 = {
@@ -179,7 +237,6 @@
 			children = (
 				D594B09E2B87E62E00C11067 /* DreamsApp */,
 				D594B09D2B87E62E00C11067 /* Products */,
-				B7570BB2BD5895BAF54E42BE /* Pods */,
 				0B42419B2C85C1D34940F518 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -195,19 +252,20 @@
 		D594B09E2B87E62E00C11067 /* DreamsApp */ = {
 			isa = PBXGroup;
 			children = (
-				D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */,
+				D53ED0762B9CAA9900334348 /* DreamsApp.entitlements */,
 				D594B1512B87EED500C11067 /* Info.plist */,
+				D594B0A32B87E62E00C11067 /* Assets.xcassets */,
+				D51AC88B2B8F222000F6D3FB /* GoogleService-Info.plist */,
 				D594B0F52B87EDDD00C11067 /* Fonts */,
 				D594B0AD2B87EDDD00C11067 /* Models */,
 				D594B0D42B87EDDD00C11067 /* Networking */,
-				D594B0D22B87EDDD00C11067 /* Service */,
-				D594B0DA2B87EDDD00C11067 /* Utils */,
+				D594B0DA2B87EDDD00C11067 /* Common */,
 				D594B0EC2B87EDDD00C11067 /* ViewModels */,
 				D594B0B52B87EDDD00C11067 /* Views */,
 				D594B09F2B87E62E00C11067 /* DreamsAppApp.swift */,
 				D594B0A12B87E62E00C11067 /* ContentView.swift */,
-				D594B0A32B87E62E00C11067 /* Assets.xcassets */,
 				D594B0A52B87E62E00C11067 /* Preview Content */,
+				101976ED2C17369D0093736C /* Config.xcconfig */,
 			);
 			path = DreamsApp;
 			sourceTree = "<group>";
@@ -232,15 +290,11 @@
 		D594B0B52B87EDDD00C11067 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D56EA8092C02741300A196BE /* Common */,
+				D56EA8082C0273FF00A196BE /* Tabs */,
+				D56EA8072C0273A700A196BE /* PreLogin */,
 				D51AC8822B8DEBA200F6D3FB /* ChatUI */,
-				D594B0CE2B87EDDD00C11067 /* PaywallView.swift */,
-				D594B0C82B87EDDD00C11067 /* SharedWebView.swift */,
-				D594B0C72B87EDDD00C11067 /* ProfileView.swift */,
-				D594B0CC2B87EDDD00C11067 /* ChatHistoryView.swift */,
-				D594B0BC2B87EDDD00C11067 /* ChatView.swift */,
-				D594B0BB2B87EDDD00C11067 /* StartChatView.swift */,
 				D594B0C22B87EDDD00C11067 /* HomeView.swift */,
-				D594B0BF2B87EDDD00C11067 /* SplashView.swift */,
 			);
 			path = Views;
 			sourceTree = SOURCE_ROOT;
@@ -250,12 +304,14 @@
 			children = (
 				D594B0D32B87EDDD00C11067 /* OpenAIService.swift */,
 			);
-			path = Service;
+			name = Service;
+			path = Networking/Service;
 			sourceTree = SOURCE_ROOT;
 		};
 		D594B0D42B87EDDD00C11067 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				D594B0D22B87EDDD00C11067 /* Service */,
 				D594B0D52B87EDDD00C11067 /* BaseActions.swift */,
 				D594B0D62B87EDDD00C11067 /* APIServiceEndpoint.swift */,
 				D594B0D82B87EDDD00C11067 /* BaseService.swift */,
@@ -263,7 +319,7 @@
 			path = Networking;
 			sourceTree = SOURCE_ROOT;
 		};
-		D594B0DA2B87EDDD00C11067 /* Utils */ = {
+		D594B0DA2B87EDDD00C11067 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				D594B0DC2B87EDDD00C11067 /* Utilities.swift */,
@@ -271,7 +327,7 @@
 				D594B0DF2B87EDDD00C11067 /* Extensions */,
 				D594B0E32B87EDDD00C11067 /* Widgets */,
 			);
-			path = Utils;
+			path = Common;
 			sourceTree = SOURCE_ROOT;
 		};
 		D594B0DF2B87EDDD00C11067 /* Extensions */ = {
@@ -296,6 +352,7 @@
 				D594B1522B87F1DA00C11067 /* CalendarWidget.swift */,
 				D594B0B82B87EDDD00C11067 /* ContentMessageView.swift */,
 				D594B0CB2B87EDDD00C11067 /* ChatHistoryCard.swift */,
+				D56EA80D2C0283E800A196BE /* CustomTextField.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -306,6 +363,9 @@
 				D594B0ED2B87EDDD00C11067 /* UserViewModel.swift */,
 				D594B0EF2B87EDDD00C11067 /* ChatVM.swift */,
 				D594B0F42B87EDDD00C11067 /* ProfileVM.swift */,
+				D53ED0792B9CAD3C00334348 /* LoginVM.swift */,
+				D5ED9E322B9FB0C40085AC9A /* ChatHistoryVM.swift */,
+				D56EA80A2C0276A500A196BE /* SessionManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = SOURCE_ROOT;
@@ -332,7 +392,8 @@
 				D594B1062B87EDDD00C11067 /* Urbanist-ExtraLight.ttf */,
 				D594B1072B87EDDD00C11067 /* Urbanist-ThinItalic.ttf */,
 			);
-			path = Fonts;
+			name = Fonts;
+			path = DreamsApp/Fonts;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -342,17 +403,32 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D594B0AA2B87E62E00C11067 /* Build configuration list for PBXNativeTarget "DreamsApp" */;
 			buildPhases = (
-				8DB947987657FF151317BC23 /* [CP] Check Pods Manifest.lock */,
 				D594B0982B87E62E00C11067 /* Sources */,
 				D594B0992B87E62E00C11067 /* Frameworks */,
 				D594B09A2B87E62E00C11067 /* Resources */,
-				53F0999603FA4F2C2FD6486B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = DreamsApp;
+			packageProductDependencies = (
+				D5AD633A2BB23933002ECFD0 /* OpenAIKit */,
+				D5FE42CB2BB35C5300B594DC /* FirebaseAnalytics */,
+				D5FE42CD2BB35C5300B594DC /* FirebaseAnalyticsOnDeviceConversion */,
+				D5FE42CF2BB35C5300B594DC /* FirebaseAnalyticsSwift */,
+				D5FE42D12BB35C5300B594DC /* FirebaseAnalyticsWithoutAdIdSupport */,
+				D5FE42D32BB35C5300B594DC /* FirebaseAppCheck */,
+				D5FE42D52BB35C5300B594DC /* FirebaseAppDistribution-Beta */,
+				D5FE42D72BB35C5300B594DC /* FirebaseAuth */,
+				D5FE42D92BB35C5300B594DC /* FirebaseAuthCombine-Community */,
+				D5FE42DB2BB35C6800B594DC /* FirebaseStorage */,
+				D5FE42DD2BB35F5700B594DC /* FirebaseFirestore */,
+				101976DD2C13563E0093736C /* Alamofire */,
+				101976DF2C13563E0093736C /* AlamofireDynamic */,
+				101976E22C1356BD0093736C /* HorizonCalendar */,
+				101976E52C1357910093736C /* RevenueCat */,
+			);
 			productName = DreamsApp;
 			productReference = D594B09C2B87E62E00C11067 /* DreamsApp.app */;
 			productType = "com.apple.product-type.application";
@@ -381,6 +457,13 @@
 				Base,
 			);
 			mainGroup = D594B0932B87E62D00C11067;
+			packageReferences = (
+				D5AD63392BB23933002ECFD0 /* XCRemoteSwiftPackageReference "OpenAIKit" */,
+				D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				101976DC2C13563E0093736C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				101976E12C1356BD0093736C /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
+				101976E42C1357910093736C /* XCRemoteSwiftPackageReference "purchases-ios" */,
+			);
 			productRefGroup = D594B09D2B87E62E00C11067 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -421,48 +504,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		53F0999603FA4F2C2FD6486B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DreamsApp/Pods-DreamsApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DreamsApp/Pods-DreamsApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DreamsApp/Pods-DreamsApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8DB947987657FF151317BC23 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DreamsApp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		D594B0982B87E62E00C11067 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -476,14 +517,17 @@
 				D594B11C2B87EDDD00C11067 /* SharedWebView.swift in Sources */,
 				D594B11D2B87EDDD00C11067 /* WebView.swift in Sources */,
 				D594B1362B87EDDD00C11067 /* LoadingView.swift in Sources */,
-				D51AC8842B8DEC1600F6D3FB /* ChatListView.swift in Sources */,
 				D594B1552B87F3B100C11067 /* HorizonCalendarWrapper.swift in Sources */,
 				D594B1242B87EDDD00C11067 /* BaseActions.swift in Sources */,
 				D51AC8862B8DECA500F6D3FB /* MessageView.swift in Sources */,
 				D594B1202B87EDDD00C11067 /* PaywallView.swift in Sources */,
 				D51AC8882B8DECFB00F6D3FB /* BottomView.swift in Sources */,
+				D53ED07A2B9CAD3C00334348 /* LoginVM.swift in Sources */,
+				D5FE42E02BB36BDA00B594DC /* ChatHistoryPreview.swift in Sources */,
+				D56EA80E2C0283E800A196BE /* CustomTextField.swift in Sources */,
 				D594B1272B87EDDD00C11067 /* BaseService.swift in Sources */,
 				D594B1132B87EDDD00C11067 /* ChatView.swift in Sources */,
+				D53ED0782B9CAB6100334348 /* LoginView.swift in Sources */,
 				D594B12E2B87EDDD00C11067 /* UserDefaults.swift in Sources */,
 				D594B1352B87EDDD00C11067 /* DividerWithLabel.swift in Sources */,
 				D594B12A2B87EDDD00C11067 /* Utilities.swift in Sources */,
@@ -493,7 +537,10 @@
 				D594B11E2B87EDDD00C11067 /* ChatHistoryCard.swift in Sources */,
 				D594B1232B87EDDD00C11067 /* OpenAIService.swift in Sources */,
 				D594B1082B87EDDD00C11067 /* ResponseModel.swift in Sources */,
+				D56EA80B2C0276A500A196BE /* SessionManager.swift in Sources */,
+				D5ED9E332B9FB0C40085AC9A /* ChatHistoryVM.swift in Sources */,
 				D594B13E2B87EDDD00C11067 /* ProfileVM.swift in Sources */,
+				D56EA8102C0287F400A196BE /* RegisterView.swift in Sources */,
 				D594B1342B87EDDD00C11067 /* CustomBackButton.swift in Sources */,
 				D594B10F2B87EDDD00C11067 /* ContentMessageView.swift in Sources */,
 				D594B11F2B87EDDD00C11067 /* ChatHistoryView.swift in Sources */,
@@ -502,7 +549,6 @@
 				D594B12B2B87EDDD00C11067 /* Enums.swift in Sources */,
 				D594B1182B87EDDD00C11067 /* HomeView.swift in Sources */,
 				D594B1532B87F1DA00C11067 /* CalendarWidget.swift in Sources */,
-				D51AC88A2B8DED2700F6D3FB /* ChatNotStartedView.swift in Sources */,
 				D594B1252B87EDDD00C11067 /* APIServiceEndpoint.swift in Sources */,
 				D594B1332B87EDDD00C11067 /* PopupView.swift in Sources */,
 			);
@@ -513,6 +559,7 @@
 /* Begin XCBuildConfiguration section */
 		D594B0A82B87E62E00C11067 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 101976ED2C17369D0093736C /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -563,7 +610,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -576,6 +623,7 @@
 		};
 		D594B0A92B87E62E00C11067 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 101976ED2C17369D0093736C /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -620,7 +668,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -632,22 +680,21 @@
 		};
 		D594B0AB2B87E62E00C11067 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 833B9185A7EBFD7C3A28DF5F /* Pods-DreamsApp.debug.xcconfig */;
+			baseConfigurationReference = 101976ED2C17369D0093736C /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DreamsApp/DreamsApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DreamsApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 86GDT8VMYM;
+				DEVELOPMENT_TEAM = H7J77Z36VS;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DreamsApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "AI Dream Interpreter";
+				INFOPLIST_KEY_CFBundleDisplayName = "Live Dream Interpreter";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -660,10 +707,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.schoolai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.dreamgpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SchoolAIDevelopment;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -672,22 +718,22 @@
 		};
 		D594B0AC2B87E62E00C11067 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0EE135FF85E432D3495B955B /* Pods-DreamsApp.release.xcconfig */;
+			baseConfigurationReference = 101976ED2C17369D0093736C /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = DreamsApp/DreamsApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Distribution: Damla Yildiztekin (H7J77Z36VS)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DreamsApp/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 86GDT8VMYM;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = H7J77Z36VS;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DreamsApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "AI Dream Interpreter";
+				INFOPLIST_KEY_CFBundleDisplayName = "Live Dream Interpreter";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -700,10 +746,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.schoolai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.dreamgpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SchoolAIDevelopment;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DreamDisProfile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -732,6 +778,127 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		101976DC2C13563E0093736C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		101976E12C1356BD0093736C /* XCRemoteSwiftPackageReference "HorizonCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/HorizonCalendar";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		101976E42C1357910093736C /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.43.0;
+			};
+		};
+		D5AD63392BB23933002ECFD0 /* XCRemoteSwiftPackageReference "OpenAIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OpenDive/OpenAIKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.1;
+			};
+		};
+		D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.23.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		101976DD2C13563E0093736C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 101976DC2C13563E0093736C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		101976DF2C13563E0093736C /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 101976DC2C13563E0093736C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+		101976E22C1356BD0093736C /* HorizonCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 101976E12C1356BD0093736C /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
+			productName = HorizonCalendar;
+		};
+		101976E52C1357910093736C /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 101976E42C1357910093736C /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
+		};
+		D5AD633A2BB23933002ECFD0 /* OpenAIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5AD63392BB23933002ECFD0 /* XCRemoteSwiftPackageReference "OpenAIKit" */;
+			productName = OpenAIKit;
+		};
+		D5FE42CB2BB35C5300B594DC /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		D5FE42CD2BB35C5300B594DC /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		D5FE42CF2BB35C5300B594DC /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		D5FE42D12BB35C5300B594DC /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		D5FE42D32BB35C5300B594DC /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		D5FE42D52BB35C5300B594DC /* FirebaseAppDistribution-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAppDistribution-Beta";
+		};
+		D5FE42D72BB35C5300B594DC /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D5FE42D92BB35C5300B594DC /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		D5FE42DB2BB35C6800B594DC /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		D5FE42DD2BB35F5700B594DC /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5FE42CA2BB35C5300B594DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D594B0942B87E62D00C11067 /* Project object */;
 }

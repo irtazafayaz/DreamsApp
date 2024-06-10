@@ -17,7 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     ) -> Bool {
        
         Purchases.logLevel = .debug
-        Purchases.configure(withAPIKey: Constants.revenueCat)
+        Purchases.configure(withAPIKey: EnvironmentInfo.revenueCat)
         Utilities.updateSubscription()
         FirebaseApp.configure()
         

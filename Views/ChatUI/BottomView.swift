@@ -9,63 +9,91 @@ import SwiftUI
 
 struct BottomView: View {
     
-    var image: String
-    var proxy: ScrollViewProxy?
     @ObservedObject var viewModel: ChatVM
-    @FocusState private var isTextFieldFocused: Bool
+    @State var generatingImageTapped: Bool = false
     
     var body: some View {
-        HStack(alignment: .top, spacing: 8) {
-            TextField("Ask me anything...", text: $viewModel.currentInput)
-            .foregroundColor(.black)
-            .padding()
-            .frame(minHeight: CGFloat(30))
-            .background(Color(hex: "#1417CE92"))
-            .cornerRadius(8)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color(hex: Colors.primary.rawValue), lineWidth: 2)
-            )
-            .onChange(of: viewModel.currentInput) { newValue in
-                if newValue.isEmpty {
-                    viewModel.currentInput = ""
-                }
-            }
-            .focused($isTextFieldFocused)
-            .ignoresSafeArea(.keyboard, edges: .bottom)
-            
+        VStack {
             Button {
-                Task { @MainActor in
-                    isTextFieldFocused = false
-                    if proxy != nil {
-                        viewModel.scrollToBottom(proxy: proxy!)
-                    }
-                    if !UserDefaults.standard.isProMemeber {
-                        viewModel.sendMessage()
-                    } else {
-                        viewModel.isPaywallPresented.toggle()
+                if let lastAssistantMessage = viewModel.msgsArr.last(where: { $0.role == .assistant })?.content {
+                    if !lastAssistantMessage.trimmingCharacters(in: .whitespaces).isEmpty {
+                        Task {
+                            generatingImageTapped.toggle()
+                            let result = await viewModel.generateImage(prompt: lastAssistantMessage)
+                            generatingImageTapped.toggle()
+                            if result == nil {
+                                print("Failed to get image")
+                            } else {
+                                viewModel.dreamInterpretedImage = result
+                            }
+                        }
                     }
                 }
             } label: {
-                Circle()
-                    .fill(Color(hex: Colors.primary.rawValue))
-                    .frame(width: 50, height: 50)
-                    .overlay(
-                        Image("ic_send_btn_icon")
-                            .resizable()
-                            .scaledToFit()
-                            .font(.largeTitle)
-                            .foregroundColor(.white)
+                if generatingImageTapped {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: Colors.primary.rawValue)))
+                        .scaleEffect(1.5)
+                } else {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 100)
+                            .foregroundColor(Color(hex: Colors.primary.rawValue))
+                            .shadow(color: Color.green.opacity(0.25), radius: 24, x: 4, y: 8)
+                            .frame(height: 65)
                             .padding()
-                    )
+                        
+                        Text("Generate Image")
+                            .foregroundColor(.white)
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                }
             }
-            .disabled(viewModel.currentInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            
+            HStack(alignment: .top, spacing: 8) {
+                TextField("Ask me anything...", text: $viewModel.currentInput)
+                .foregroundColor(.black)
+                .padding()
+                .frame(minHeight: CGFloat(30))
+                .cornerRadius(8)
+                .onChange(of: viewModel.currentInput) { newValue in
+                    if newValue.isEmpty {
+                        viewModel.currentInput = ""
+                    }
+                }
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+                
+                Button {
+                    Task { @MainActor in
+                        if UserDefaults.standard.isProMemeber {
+                            viewModel.sendMessage()
+                        } else {
+                            SessionManager.shared.getMaxTries() { max in
+                                if max > 0 {
+                                    viewModel.sendMessage()
+                                } else {
+                                    viewModel.isPaywallPresented.toggle()
+                                }
+                            }
+                        }
+                    }
+                } label: {
+                    Circle()
+                        .fill(Color(hex: Colors.primary.rawValue))
+                        .frame(width: 50, height: 50)
+                        .overlay(
+                            Image("ic_send_btn_icon")
+                                .resizable()
+                                .scaledToFit()
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                                .padding()
+                        )
+                }
+                .disabled(viewModel.currentInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            }
+            .padding(.top, 12)
         }
-        .padding(.top, 12)
+
     }
 }
 
-
-#Preview {
-    BottomView(image: "", viewModel: ChatVM(with: ""))
-}

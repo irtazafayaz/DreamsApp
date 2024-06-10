@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var sessionManager = SessionManager.shared
+    
     var body: some View {
-        HomeView()
+        ZStack {
+            if sessionManager.isSignedIn {
+                HomeView()
+            } else {
+                LoginView()
+            }
+            
+            if sessionManager.isLoading {
+                Color.black.opacity(0.4).edgesIgnoringSafeArea(.all)
+                
+                ProgressView()
+                    .scaleEffect(2)
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+            }
+        }
     }
 }
 
