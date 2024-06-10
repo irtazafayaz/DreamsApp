@@ -52,6 +52,7 @@ class ChatVM: ObservableObject {
             let data = result.data[0].image
             let image = try openai.decodeBase64Image(data)
             storeMessageInFirebase(image)
+            decrementMaxTriesCount()
             isLoading.toggle()
             return image
         } catch {
@@ -61,11 +62,29 @@ class ChatVM: ObservableObject {
         }
     }
     
+    private func decrementMaxTriesCount() {
+        if let uid = SessionManager.shared.currentUser?.uid {
+            
+            let documentReference = db.collection("user-info").document(uid)
+            documentReference.getDocument { document, error in
+                
+                if let document = document, document.exists {
+                    if var maxTries = document.data()?["maxTries"] as? Int, maxTries > 0 {
+                        maxTries -= 1
+                        documentReference.updateData(["maxTries": maxTries]) { error in }
+                    }
+                }
+                
+            }
+        }
+    }
+    
     // MARK: - Sending Messages APIs -
     
     func sendMessage() {
         isLoading.toggle()
         let newMessage = Message(id: UUID().uuidString, content: currentInput, createdAt: getSessionDate(), role: .user)
+        msgsArr.append(Message(id: UUID().uuidString, content: "You should only interpret the dreams. If user asks something else, ask him to enter the dream only.", createdAt: getSessionDate(), role: .system))
         msgsArr.append(newMessage)
         openAIService.sendStreamMessages(messages: msgsArr).responseStreamString { [weak self] stream in
             

@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 import FirebaseAuth
 import RevenueCat
+import FirebaseFirestore
+
 
 class SessionManager: ObservableObject {
     
@@ -18,6 +20,8 @@ class SessionManager: ObservableObject {
     @Published var isSignedIn = false
     @Published var isSubscribed = false
     @Published var isLoading = false
+    
+    private let database = Firestore.firestore()
 
     private init() {
         self.currentUser = Auth.auth().currentUser
@@ -28,7 +32,31 @@ class SessionManager: ObservableObject {
             }
         }
     }
+    
+    func getMaxTries(completion: @escaping (Int) -> Void) {
+        guard let user = currentUser else {
+            print("No user is currently signed in.")
+            completion(0)
+            return
+        }
+        
+        let userRef = self.database.collection("users-info").document(user.uid)
+        
+        userRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error getting maxTries: \(error.localizedDescription)")
+                completion(0)
+            } else if let document = document, document.exists {
+                let tries = document.data()?["maxTries"] as? Int ?? 0
+                completion(tries)
+            } else {
+                print("Document does not exist.")
+                completion(0)
+            }
+        }
+    }
 
+    
     func login(email: String, password: String) {
         isLoading = true
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
@@ -64,6 +92,7 @@ class SessionManager: ObservableObject {
                     Purchases.shared.logIn(user.uid) { _, _, _ in
                         self.updateSubscriptionStatus()
                     }
+                    self.database.collection("users-info").document(user.uid).setData(["maxTries": 10])
                 }
             }
         }

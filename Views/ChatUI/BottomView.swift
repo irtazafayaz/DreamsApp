@@ -67,7 +67,13 @@ struct BottomView: View {
                         if UserDefaults.standard.isProMemeber {
                             viewModel.sendMessage()
                         } else {
-                            viewModel.isPaywallPresented.toggle()
+                            SessionManager.shared.getMaxTries() { max in
+                                if max > 0 {
+                                    viewModel.sendMessage()
+                                } else {
+                                    viewModel.isPaywallPresented.toggle()
+                                }
+                            }
                         }
                     }
                 } label: {
