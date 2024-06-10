@@ -13,7 +13,16 @@ class ChatHistoryVM: ObservableObject {
     
     @Published var moveToChatScreen: Bool = false
     @Published var fromChatHistory: Bool = true
-        
+    @Published var selectedDate: DayComponents?
+    
+    @Published var selectedMessage: FirebaseMessages?
+    @Published var groupedMessages = [FirebaseMessages]()
+    @Published var isLoading: Bool = false
+
+    
+    @Published var filteredChats: [FirebaseMessages] = []
+    var allChats: [String] = []
+    
     var createdAtDates: [Date] {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM yyyy"
@@ -22,12 +31,6 @@ class ChatHistoryVM: ObservableObject {
         return dates
     }
     
-    @Published var selectedDate: DayComponents?
-    
-    @Published var selectedMessage: FirebaseMessages?
-    @Published var groupedMessages = [FirebaseMessages]()
-    @Published var isLoading: Bool = false
-
     private let db = Firestore.firestore()
     
     func fetchMessagesGroupedByCreatedAt(email: String) {
@@ -63,6 +66,18 @@ class ChatHistoryVM: ObservableObject {
         let date = Utilities.formatDateAndTime(selectedDate)
         guard let message = groupedMessages.first(where: { $0.date == date }) else { return }
         selectedMessage = message
+    }
+    
+    func searchChats(query: String) {
+        if query.isEmpty {
+            filteredChats = []
+        } else {
+            filteredChats = groupedMessages.filter {
+                $0.message.interpretedText.lowercased().contains(query.lowercased()) 
+                || ($0.message.inputText?.lowercased().contains(query.lowercased()) ?? false)
+                || ($0.message.tags?.contains { $0.lowercased().contains(query.lowercased()) } ?? false)
+            }
+        }
     }
     
 }

@@ -31,23 +31,52 @@ struct ChatHistoryPreview: View {
                 
                 if let interpretedDream = dream?.message {
                     
+                    Text("Interpreted Dream:")
+                        .bold()
+                        .font(.title2)
+                    
                     Text(interpretedDream.interpretedText)
                         .padding()
                         .background(Color(hex: Colors.primary.rawValue).opacity(0.5))
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color(hex: Colors.primary.rawValue), lineWidth: 2)
                         )
-                        .padding()
-                                        
+                        .padding(.vertical)
+                    
                     if let url = URL(string: interpretedDream.image) {
                         AsyncImage(url: url, content: view)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 200)
                             .padding(.vertical, 10)
                     } else {
                         Color.black
                             .frame(height: 200)
+                    }
+                    
+                    if let tags = interpretedDream.tags {
+                        HStack {
+                            Text("Tags:")
+                                .font(.title3)
+                                .bold()
+                                .frame(alignment: .leading)
+                            Text("\(tags.joined(separator: ", "))")
+                                .font(.title3)
+
+                        }
+                        .padding(.top)
+                    }
+                    
+                    if let inputText = interpretedDream.inputText {
+                        Text("Input Text:")
+                            .bold()
+                            .font(.title2)
+                            .padding(.top)
+                        Text(inputText)
+                            .font(.title3)
+                            .padding()
+                            .background(Color(.systemGray6))
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            .padding(.top)
                     }
                     
                     Spacer()
@@ -74,6 +103,8 @@ struct ChatHistoryPreview: View {
         case .success(let image):
             image
                 .resizable()
+                .frame(maxWidth: .infinity)
+                .frame(height: 400)
         case .failure(let error):
             VStack(spacing: 16) {
                 Image(systemName: "xmark.octagon.fill")
@@ -87,4 +118,19 @@ struct ChatHistoryPreview: View {
         }
     }
     
+}
+
+#Preview {
+    ChatHistoryPreview(
+        dream: FirebaseMessages(
+        date: Date().description,
+        message: MessageContent(
+            image: "",
+            interpretedText: "Hello kdnsadbkas dskd asjk dakjd askjd jkas djas jdajdas dkja skjdasjkd jasd jk asdjaskjd jas djkas djka djas jkd asj dkjad jkas djkasjd dkansjdnkaskdjksadlk",
+            tags: ["books", "movies"],
+            inputText: "dsjkdhajskdhjksad daskhdj dhasjkhdjkas hd jashdjk asd djahjsk dks jdhasjk dasd asdhjkashd jkashdj"
+        ),
+        user: "email"
+        )
+    )
 }

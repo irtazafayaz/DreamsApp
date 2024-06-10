@@ -65,6 +65,8 @@ struct ChatStreamContent: Decodable {
 struct MessageContent: Codable {
     let image: String
     let interpretedText: String
+    let tags: [String]?
+    let inputText: String?
 }
 
 struct FirebaseMessages: Identifiable, Codable {
