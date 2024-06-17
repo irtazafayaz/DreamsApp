@@ -30,11 +30,11 @@ struct PaywallView: View {
         case .day:
             return "Daily Premium"
         case .month:
-            return "Monthly Premium"
+            return "Monthly, Become Premium User on a Monthly Basis"
         case .week:
-            return "Weekly Premium"
+            return "Weekly, Become Premium User on a Weekly Basis"
         case .year:
-            return "Yearly Premium"
+            return "Yearly, Become Premium User on a Yearly Basis"
         }
     }
     
@@ -70,7 +70,7 @@ struct PaywallView: View {
                         Image(systemName: "cloud.moon.fill")
                             .foregroundColor(.black)
                         VStack(alignment: .leading) {
-                            Text("Personalized Dream Interpretations")
+                            Text("Unlimited Dream Storage")
                                 .font(Font.custom(FontFamily.semiBold.rawValue, size: 18))
                                 .foregroundColor(.black)
                         }
@@ -80,7 +80,7 @@ struct PaywallView: View {
                         Image(systemName: "text.quote")
                             .foregroundColor(.black)
                         VStack(alignment: .leading) {
-                            Text("Detailed Analysis and Insights")
+                            Text("No Limits")
                                 .font(Font.custom(FontFamily.semiBold.rawValue, size: 18))
                                 .foregroundColor(.black)
                         }

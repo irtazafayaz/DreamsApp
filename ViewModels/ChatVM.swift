@@ -23,10 +23,11 @@ class ChatVM: ObservableObject {
     @Published var dreamInterpretedImage: UIImage?
     @Published var errorMessage: String = ""
     @Published var tags: [String] = []
-
+    
     // MARK: Toggles
     @Published var isLoading: Bool = false
     @Published var isPaywallPresented = false
+    @Published var isDreamSaved = false
     
     // MARK: Service
     private let db = Firestore.firestore()
@@ -52,8 +53,7 @@ class ChatVM: ObservableObject {
             let result = try await openai.createImage(parameters: params)
             let data = result.data[0].image
             let image = try openai.decodeBase64Image(data)
-            storeMessageInFirebase(image)
-            decrementMaxTriesCount()
+            
             isLoading.toggle()
             return image
         } catch {
@@ -70,42 +70,48 @@ class ChatVM: ObservableObject {
         let newMessage = Message(id: UUID().uuidString, content: currentInput, createdAt: getSessionDate(), role: .user)
         msgsArr.append(Message(id: UUID().uuidString, content: "You should only interpret the dreams. If user asks something else, ask him to enter the dream only.", createdAt: getSessionDate(), role: .system))
         msgsArr.append(newMessage)
+        
         openAIService.sendStreamMessages(messages: msgsArr).responseStreamString { [weak self] stream in
-            
             guard let self = self else { return }
             switch stream.event {
             case .stream(let response):
                 switch response {
                 case .success(let string):
                     let streamResponse = self.parseStreamData(string)
-                    streamResponse.forEach { newMessageResponse in
-                        guard let messageContent = newMessageResponse.choices.first?.delta.content else {
-                            return
-                        }
-                        guard let existingMessageIndex = self.msgsArr.lastIndex(where: {$0.id == newMessageResponse.id}) else {
+                    DispatchQueue.main.async {
+                        streamResponse.forEach { newMessageResponse in
+                            guard let messageContent = newMessageResponse.choices.first?.delta.content else {
+                                return
+                            }
+                            guard let existingMessageIndex = self.msgsArr.lastIndex(where: {$0.id == newMessageResponse.id}) else {
+                                let newMessage = Message(
+                                    id: newMessageResponse.id,
+                                    content: messageContent,
+                                    createdAt: self.getSessionDate(),
+                                    role: .assistant
+                                )
+                                self.msgsArr.append(newMessage)
+                                return
+                            }
                             let newMessage = Message(
                                 id: newMessageResponse.id,
-                                content: messageContent,
+                                content: self.msgsArr[existingMessageIndex].content + messageContent,
                                 createdAt: self.getSessionDate(),
                                 role: .assistant
                             )
-                            self.msgsArr.append(newMessage)
-                            return
+                            self.msgsArr[existingMessageIndex] = newMessage
                         }
-                        let newMessage = Message(
-                            id: newMessageResponse.id,
-                            content: self.msgsArr[existingMessageIndex].content + messageContent,
-                            createdAt: self.getSessionDate(),
-                            role: .assistant
-                        )
-                        self.msgsArr[existingMessageIndex] = newMessage
                     }
                 case .failure(_):
-                    isLoading.toggle()
+                    DispatchQueue.main.async {
+                        self.isLoading.toggle()
+                    }
                     print("/ChatVM/sendMessage/sendStreamMessage/Failure")
                 }
             case .complete(_):
-                isLoading.toggle()
+                DispatchQueue.main.async {
+                    self.isLoading.toggle()
+                }
                 print("COMPLETE")
             }
         }
@@ -113,9 +119,9 @@ class ChatVM: ObservableObject {
     
     //MARK: - Firebase Functions -
     
-    func storeMessageInFirebase(_ image: UIImage) {
+    func storeMessageInFirebase() {
         guard let message = msgsArr.last else { return }
-        
+        guard let image = dreamInterpretedImage else { return }
         let storageRef = Storage.storage().reference()
         let imageData = image.jpegData(compressionQuality: 0.5)
         let metadata = StorageMetadata()
@@ -194,7 +200,7 @@ class ChatVM: ObservableObject {
         
     }
     
-    private func decrementMaxTriesCount() {
+    func decrementMaxTriesCount() {
         if let uid = SessionManager.shared.currentUser?.uid {
             
             let documentReference = db.collection("user-info").document(uid)

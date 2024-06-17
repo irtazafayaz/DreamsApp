@@ -63,16 +63,12 @@ struct ChatHistoryPreview: View {
                     }
                     
                     if let inputText = interpretedDream.inputText {
-                        Text("Input Text:")
-                            .bold()
-                            .font(.title2)
-                            .padding(.top)
                         Text(inputText)
-                            .font(.title3)
                             .padding()
                             .background(Color(.systemGray6))
                             .clipShape(RoundedRectangle(cornerRadius: 8))
-                            .padding(.top)
+                            .padding(.vertical)
+                        
                     }
                     
                     Spacer()

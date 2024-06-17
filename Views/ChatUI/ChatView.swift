@@ -40,6 +40,11 @@ struct ChatView: View {
                         .resizable()
                         .frame(maxWidth: .infinity)
                         .frame(height: 400)
+
+                    
+                }
+                
+                if viewModel.isDreamSaved {
                     
                     if viewModel.tags.count > 0 {
                         HStack {
@@ -54,28 +59,20 @@ struct ChatView: View {
                         .padding(.top)
                     }
                     
-                    Text("Input Text:")
-                        .bold()
-                        .font(.title2)
-                        .padding(.top)
                     Text(viewModel.currentInput)
-                        .font(.title3)
                         .padding()
                         .background(Color(.systemGray6))
                         .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .padding(.top)
-                    
-                    
+                        .padding(.vertical)
                 }
-                
-                
                 
             }
             
             Divider()
-            if viewModel.dreamInterpretedImage == nil {
+            if !viewModel.isDreamSaved {
                 bottomView
             }
+            
         }
         .disabled(viewModel.isLoading)
         .onAppear{
@@ -98,89 +95,123 @@ struct ChatView: View {
     var bottomView: some View {
         VStack(spacing: 8) {
             
-            if let lastAssistantMessage = viewModel.msgsArr.last(where: { $0.role == .assistant })?.content, !lastAssistantMessage.trimmingCharacters(in: .whitespaces).isEmpty {
+            if viewModel.dreamInterpretedImage != nil {
+                tagInputView
+                    .padding(.top, 10)
                 
-                HStack {
-                    Button {
-                        Task {
-                            generatingImageTapped.toggle()
-                            let result = await viewModel.generateImage(prompt: lastAssistantMessage)
-                            generatingImageTapped.toggle()
-                            if result == nil {
-                                print("Failed to get image")
-                            } else {
-                                viewModel.dreamInterpretedImage = result
-                            }
-                        }
-                        
-                    } label: {
-                        if generatingImageTapped {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: Colors.primary.rawValue)))
-                                .scaleEffect(1.5)
-                        } else {
-                            Text("Generate the Image of My Dream")
-                                .foregroundColor(.white)
-                                .font(.system(size: 18, weight: .bold))
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 10)
-                                .background(.black)
-                                .cornerRadius(10)
-                        }
-                    }
-                    .padding(.top)
-                }
-            }
-            
-            tagInputView
-                .padding(.top, 10)
-            
-            HStack(alignment: .top, spacing: 8) {
-                TextField("Describe your dream...", text: $viewModel.currentInput)
-                    .foregroundColor(.black)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(8)
-                    .onChange(of: viewModel.currentInput) { newValue in
-                        if newValue.isEmpty {
-                            viewModel.currentInput = ""
-                        }
-                    }
-                    .ignoresSafeArea(.keyboard, edges: .bottom)
+                saveDreamButtonView
                 
-                Button {
-                    Task { @MainActor in
-                        if UserDefaults.standard.isProMemeber {
-                            viewModel.sendMessage()
-                        } else {
-                            SessionManager.shared.getMaxTries() { max in
-                                if max > 0 {
-                                    viewModel.sendMessage()
-                                } else {
-                                    viewModel.isPaywallPresented.toggle()
-                                }
-                            }
-                        }
-                    }
-                } label: {
-                    Circle()
-                        .fill(Color(hex: Colors.primary.rawValue))
-                        .frame(width: 50, height: 50)
-                        .overlay(
-                            Image("ic_send_btn_icon")
-                                .resizable()
-                                .scaledToFit()
-                                .font(.largeTitle)
-                                .foregroundColor(.white)
-                                .padding()
-                        )
-                }
-                .disabled(viewModel.currentInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                
+            } else {
+                generateImageButton
+                sendMessageInputView
             }
-            .padding(.top, 12)
-            
             
         }
+    }
+    
+    var generateImageButton: some View {
+        VStack {
+            if let lastAssistantMessage = viewModel.msgsArr.last(where: { $0.role == .assistant })?.content,
+               !lastAssistantMessage.trimmingCharacters(in: .whitespaces).isEmpty {
+                
+                Button {
+                    Task {
+                        generatingImageTapped.toggle()
+                        let result = await viewModel.generateImage(prompt: lastAssistantMessage)
+                        generatingImageTapped.toggle()
+                        if result == nil {
+                            print("Failed to get image")
+                        } else {
+                            viewModel.dreamInterpretedImage = result
+                        }
+                    }
+                    
+                } label: {
+                    if generatingImageTapped {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: Colors.primary.rawValue)))
+                            .scaleEffect(1.5)
+                    } else {
+                        Text("Generate the Image of My Dream")
+                            .foregroundColor(.white)
+                            .font(.system(size: 18, weight: .bold))
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 10)
+                            .background(Color(hex: Colors.primary.rawValue))
+                            .cornerRadius(10)
+                    }
+                }
+                .padding(.top)
+                
+            }
+        }
+    }
+    
+    var sendMessageInputView: some View {
+        HStack(alignment: .top, spacing: 8) {
+            TextField("Describe your dream...", text: $viewModel.currentInput)
+                .foregroundColor(.black)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(8)
+                .onChange(of: viewModel.currentInput) { newValue in
+                    if newValue.isEmpty {
+                        viewModel.currentInput = ""
+                    }
+                }
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+            
+            Button {
+                Task { @MainActor in
+                    if UserDefaults.standard.isProMemeber {
+                        viewModel.sendMessage()
+                    } else {
+                        SessionManager.shared.getMaxTries() { max in
+                            if max > 0 {
+                                viewModel.sendMessage()
+                            } else {
+                                viewModel.isPaywallPresented.toggle()
+                            }
+                        }
+                    }
+                }
+            } label: {
+                Circle()
+                    .fill(Color(hex: Colors.primary.rawValue))
+                    .frame(width: 50, height: 50)
+                    .overlay(
+                        Image("ic_send_btn_icon")
+                            .resizable()
+                            .scaledToFit()
+                            .font(.largeTitle)
+                            .foregroundColor(.white)
+                            .padding()
+                    )
+            }
+            .disabled(viewModel.currentInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        }
+        .padding(.top, 12)
+    }
+    
+    var saveDreamButtonView: some View {
+        Button {
+            Task {
+                viewModel.storeMessageInFirebase()
+                viewModel.decrementMaxTriesCount()
+                viewModel.isDreamSaved = true
+            }
+            
+        } label: {
+            Text("Save Dream")
+                .foregroundColor(.white)
+                .font(.system(size: 18, weight: .bold))
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(Color(hex: Colors.primary.rawValue))
+                .cornerRadius(10)
+        }
+        .padding(.top)
     }
     
     var tagInputView: some View {
@@ -224,6 +255,8 @@ struct ChatView: View {
                     .padding(.vertical, 8)
                 }
             }
+            
+            
         }
     }
     

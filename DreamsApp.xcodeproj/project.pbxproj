@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		101976DE2C13563E0093736C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 101976DD2C13563E0093736C /* Alamofire */; };
-		101976E02C13563E0093736C /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 101976DF2C13563E0093736C /* AlamofireDynamic */; };
 		101976E32C1356BD0093736C /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 101976E22C1356BD0093736C /* HorizonCalendar */; };
 		101976E62C1357910093736C /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 101976E52C1357910093736C /* RevenueCat */; };
 		D51AC8862B8DECA500F6D3FB /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51AC8852B8DECA500F6D3FB /* MessageView.swift */; };
@@ -175,7 +174,6 @@
 				D5FE42DC2BB35C6800B594DC /* FirebaseStorage in Frameworks */,
 				D5FE42D62BB35C5300B594DC /* FirebaseAppDistribution-Beta in Frameworks */,
 				101976E62C1357910093736C /* RevenueCat in Frameworks */,
-				101976E02C13563E0093736C /* AlamofireDynamic in Frameworks */,
 				D5FE42DA2BB35C5300B594DC /* FirebaseAuthCombine-Community in Frameworks */,
 				101976DE2C13563E0093736C /* Alamofire in Frameworks */,
 			);
@@ -425,7 +423,6 @@
 				D5FE42DB2BB35C6800B594DC /* FirebaseStorage */,
 				D5FE42DD2BB35F5700B594DC /* FirebaseFirestore */,
 				101976DD2C13563E0093736C /* Alamofire */,
-				101976DF2C13563E0093736C /* AlamofireDynamic */,
 				101976E22C1356BD0093736C /* HorizonCalendar */,
 				101976E52C1357910093736C /* RevenueCat */,
 			);
@@ -706,7 +703,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.dreamgpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -745,7 +742,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thefreelancers.dreamgpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -827,11 +824,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 101976DC2C13563E0093736C /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		101976DF2C13563E0093736C /* AlamofireDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 101976DC2C13563E0093736C /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = AlamofireDynamic;
 		};
 		101976E22C1356BD0093736C /* HorizonCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
