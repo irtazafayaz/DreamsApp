@@ -169,7 +169,6 @@ class ChatVM: ObservableObject {
     func uploadMessages(message: Message, image: String) {
         
         let dateString = Utilities.formatDateAndTime(message.createdAt)
-        let userEmail = UserDefaults.standard.string(forKey: "user-email") ?? "NaN"
         let messageObj: [String: Any] = ["image": image, "interpretedText": message.content, "inputText": currentInput, "tags": tags]
         
         let query = db.collection("messages")

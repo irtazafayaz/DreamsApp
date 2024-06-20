@@ -123,7 +123,9 @@ struct ChatView: View {
                         if result == nil {
                             print("Failed to get image")
                         } else {
-                            viewModel.dreamInterpretedImage = result
+                            DispatchQueue.main.async {
+                                viewModel.dreamInterpretedImage = result
+                            }
                         }
                     }
                     

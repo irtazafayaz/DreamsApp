@@ -30,11 +30,11 @@ struct PaywallView: View {
         case .day:
             return "Daily Premium"
         case .month:
-            return "Monthly, Become Premium User on a Monthly Basis"
+            return "Monthly"
         case .week:
-            return "Weekly, Become Premium User on a Weekly Basis"
+            return "Weekly"
         case .year:
-            return "Yearly, Become Premium User on a Yearly Basis"
+            return "Yearly"
         }
     }
     
@@ -46,11 +46,11 @@ struct PaywallView: View {
         case .day:
             return ""
         case .month:
-            return ""
+            return "Become Premium User on a Monthly Basis"
         case .week:
-            return ""
+            return "Become Premium User on a Weekly Basis"
         case .year:
-            return ""
+            return "Become Premium User on a Yearly Basis"
         }
     }
     
@@ -85,7 +85,7 @@ struct PaywallView: View {
                                 .foregroundColor(.black)
                         }
                     }
-
+                    
                     HStack(alignment: .center) {
                         Image(systemName: "cloud.fill")
                             .foregroundColor(.black)
@@ -97,7 +97,7 @@ struct PaywallView: View {
                     }
                 }
                 .padding()
-
+                
                 
                 if isHideLoader {
                     if currentOffering != nil {
@@ -109,14 +109,22 @@ struct PaywallView: View {
                                     VStack(alignment: .leading) {
                                         HStack {
                                             VStack(alignment: .leading) {
-                                                Text(getPeriodTitle(pkg.storeProduct.subscriptionPeriod))
-                                                    .foregroundColor(.black)
-                                                .font(Font.custom(FontFamily.bold.rawValue, size: 18))
                                                 HStack(spacing: 0) {
+                                                    Text(getPeriodTitle(pkg.storeProduct.subscriptionPeriod))
+                                                        .foregroundColor(.black)
+                                                        .font(Font.custom(FontFamily.bold.rawValue, size: 18))
+                                                    Spacer()
                                                     Text("\(pkg.storeProduct.localizedPriceString)")
                                                         .foregroundColor(.black.opacity(0.6))
                                                         .font(Font.custom(FontFamily.regular.rawValue, size: 18))
                                                 }
+                                                
+                                                Text(getPeriodSubTitle(pkg.storeProduct.subscriptionPeriod))
+                                                    .foregroundColor(.black)
+                                                    .font(Font.custom(FontFamily.regular.rawValue, size: 14))
+                                                    .lineLimit(1)
+                                                
+                                                
                                             }
                                         }
                                     }
@@ -133,9 +141,9 @@ struct PaywallView: View {
                                     .cornerRadius(10)
                                     .padding(.horizontal, 20)
                                 }
-
+                                
                             }
-
+                            
                         }
                         
                         Button {
