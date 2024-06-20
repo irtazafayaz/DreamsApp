@@ -16,7 +16,7 @@ struct StartChatView: View {
     @State private var openDatePicker = false
     @State private var openErrorDialog = false
 
-    var groupedMessages: [FirebaseMessages]
+    var groupedMessages: [FirebaseDreams]
 
     var body: some View {
         VStack {
@@ -72,19 +72,21 @@ struct StartChatView: View {
                 .presentationDetents([.medium])
                 
                 Button("Select Date") {
-                    openDatePicker.toggle()
                     if !groupedMessages.contains(where: { $0.date == Utilities.formatDateAndTime(selectedDate) }) {
+                        openDatePicker.toggle()
                         isChatScreenPresented.toggle()
                     } else {
                         openErrorDialog.toggle()
                     }
                 }
-                .padding()
+                if openErrorDialog {
+                    Text("Already interpredted dream on this day")
+                        .foregroundStyle(.red)
+                        .font(.caption)
+                }
+                
             }
         }
-        .alert("Already interpredted dream on this day", isPresented: $openErrorDialog, actions: {
-            Button("OK", role: .cancel){}
-        })
         .navigationDestination(isPresented: $isChatScreenPresented, destination: {
             ChatView(selectedDate: selectedDate)
         })

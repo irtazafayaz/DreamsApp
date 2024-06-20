@@ -173,7 +173,8 @@ struct ChatView: View {
                             if max > 0 {
                                 viewModel.sendMessage()
                             } else {
-                                viewModel.isPaywallPresented.toggle()
+                                SessionManager.shared.removeFirstMessage()
+                                viewModel.sendMessage()
                             }
                         }
                     }

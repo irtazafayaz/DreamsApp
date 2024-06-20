@@ -20,9 +20,10 @@ class SessionManager: ObservableObject {
     @Published var isSignedIn = false
     @Published var isSubscribed = false
     @Published var isLoading = false
+    @Published var interpretedDreams = [FirebaseDreams]()
     
     private let database = Firestore.firestore()
-
+    
     private init() {
         self.currentUser = Auth.auth().currentUser
         self.isSignedIn = self.currentUser != nil
@@ -55,7 +56,69 @@ class SessionManager: ObservableObject {
             }
         }
     }
+    
+    func fetchInterpretedDreams() {
+        isLoading.toggle()
+        interpretedDreams.removeAll()
+        
+        guard let email = currentUser?.email else {
+            return
+        }
+        
+        database.collection("messages")
+            .whereField("user", isEqualTo: email)
+            .addSnapshotListener { [weak self] (querySnapshot, error) in
+                guard let self = self else { return }
+                if error != nil {
+                    isLoading.toggle()
+                    return
+                } else {
+                    self.interpretedDreams.removeAll() // Clear existing data before updating
+                    
+                    for document in querySnapshot!.documents {
+                        do {
+                            let messageData = try document.data(as: FirebaseDreams.self)
+                            self.interpretedDreams.append(messageData)
+                            
+                        } catch {
+                            print("Error decoding to FirebaseDreams")
+                        }
+                    }
+                    isLoading.toggle()
+                    print("interpretedDreams: \(interpretedDreams)")
+                }
+            }
+    }
 
+    
+    func removeFirstMessage() {
+        guard !interpretedDreams.isEmpty else {
+            print("No interpreted dreams to remove.")
+            return
+        }
+        
+        interpretedDreams.sort { $0.date < $1.date }
+        
+        let removedDream = interpretedDreams.removeFirst()
+        
+        database.collection("messages").whereField("user", isEqualTo: currentUser?.email ?? "")
+            .whereField("date", isEqualTo: removedDream.date)
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Error finding document to delete: \(error)")
+                } else if let documents = querySnapshot?.documents, let document = documents.first {
+                    document.reference.delete { error in
+                        if let error = error {
+                            print("Error deleting document: \(error)")
+                        } else {
+                            print("Document successfully deleted.")
+                        }
+                    }
+                }
+            }
+    }
+
+    
     
     func login(email: String, password: String) {
         isLoading = true
@@ -76,7 +139,7 @@ class SessionManager: ObservableObject {
             }
         }
     }
-
+    
     func register(email: String, password: String) {
         isLoading = true
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
@@ -97,7 +160,7 @@ class SessionManager: ObservableObject {
             }
         }
     }
-
+    
     func logout() async {
         do {
             try Auth.auth().signOut()

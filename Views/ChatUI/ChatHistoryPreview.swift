@@ -7,20 +7,12 @@
 
 import SwiftUI
 
-struct ViewHeightKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
-
-
 struct ChatHistoryPreview: View {
     
-    private var dream: FirebaseMessages?
+    private var dream: FirebaseDreams?
     @State private var textHeight: CGFloat = 0
     
-    init(dream: FirebaseMessages?) {
+    init(dream: FirebaseDreams?) {
         self.dream = dream
     }
     
@@ -114,9 +106,9 @@ struct ChatHistoryPreview: View {
 
 #Preview {
     ChatHistoryPreview(
-        dream: FirebaseMessages(
+        dream: FirebaseDreams(
         date: Date().description,
-        message: MessageContent(
+        message: DreamContent(
             image: "",
             interpretedText: "Hello kdnsadbkas dskd asjk dakjd askjd jkas djas jdajdas dkja skjdasjkd jasd jk asdjaskjd jas djkas djka djas jkd asj dkjad jkas djkasjd dkansjdnkaskdjksadlk",
             tags: ["books", "movies"],

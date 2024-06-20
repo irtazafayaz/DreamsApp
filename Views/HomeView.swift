@@ -20,7 +20,7 @@ struct HomeView: View {
         NavigationStack {
             VStack(alignment: .center) {
                 TabView(selection: $selectedTab) {
-                    StartChatView(groupedMessages: viewModel.groupedMessages)
+                    StartChatView(groupedMessages: SessionManager.shared.interpretedDreams)
                         .tabItem {
                             Image("ic_tab_chat")
                             Text("Your Dream")
@@ -41,7 +41,9 @@ struct HomeView: View {
                 }
                 .accentColor(Color(hex: Colors.primary.rawValue))
             }
-            .onAppear { viewModel.fetchMessagesGroupedByCreatedAt(email: SessionManager.shared.currentUser?.email ?? "NaN") }
+            .onAppear {
+                SessionManager.shared.fetchInterpretedDreams()
+            }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(title)
@@ -65,9 +67,6 @@ struct HomeView: View {
                 default:
                     title = "Dream In"
                 }
-            }
-            .onAppear {
-                //                isPaywallPresented = true
             }
             .navigationDestination(isPresented: $isPaywallPresented, destination: {
                 PaywallView(isPaywallPresented: $isPaywallPresented)
