@@ -46,8 +46,12 @@ struct ChatHistoryView: View {
                     List(viewModel.filteredChats, id: \.id) { chat in
                         VStack(alignment: .leading) {
                             Text(chat.date)
-                            if let tags = chat.message.tags {
+                            if let tags = chat.message.tags, !tags.isEmpty {
                                 Text(tags.joined(separator: ", "))
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            } else {
+                                Text(chat.message.inputText ?? "NaN")
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                             }

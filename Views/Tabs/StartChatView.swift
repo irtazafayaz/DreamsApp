@@ -29,12 +29,12 @@ struct StartChatView: View {
                 .padding(.top, 30)
             
             Text("Welcome to")
-                .font(Font.custom(FontFamily.bold.rawValue, size: 40))
+                .font(Font.custom(FontFamily.bold.rawValue, size: 34))
                 .foregroundColor(Color(hex: Colors.labelDark.rawValue))
                 .padding(.top, 20)
             
             Text("AI Dream Interpreter")
-                .font(Font.custom(FontFamily.bold.rawValue, size: 40))
+                .font(Font.custom(FontFamily.bold.rawValue, size: 34))
                 .foregroundColor(Color(hex: Colors.primary.rawValue))
             
             Text("Start describing your dream. Don’t be afraid to ask me questions about your dreams!")

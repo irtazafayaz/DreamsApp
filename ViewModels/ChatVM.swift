@@ -68,7 +68,7 @@ class ChatVM: ObservableObject {
     func sendMessage() {
         isLoading.toggle()
         let newMessage = Message(id: UUID().uuidString, content: currentInput, createdAt: getSessionDate(), role: .user)
-        msgsArr.append(Message(id: UUID().uuidString, content: "You should only interpret the dreams. If user asks something else, ask him to enter the dream only.", createdAt: getSessionDate(), role: .system))
+        msgsArr.append(Message(id: UUID().uuidString, content: "You should only interpret the dreams. If user asks something else, ask him to enter the dream only. Also donot ask questions. Your job is to only interpet user's dreams, tell them what their dreams mean and answer in their language.", createdAt: getSessionDate(), role: .system))
         msgsArr.append(newMessage)
         
         openAIService.sendStreamMessages(messages: msgsArr).responseStreamString { [weak self] stream in

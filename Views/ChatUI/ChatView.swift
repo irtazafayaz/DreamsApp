@@ -104,7 +104,10 @@ struct ChatView: View {
                 
             } else {
                 generateImageButton
-                sendMessageInputView
+                if viewModel.msgsArr.last(where: { $0.role == .assistant }) == nil {
+                    sendMessageInputView
+
+                }
             }
             
         }

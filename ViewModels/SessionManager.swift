@@ -84,7 +84,7 @@ class SessionManager: ObservableObject {
                             print("Error decoding to FirebaseDreams")
                         }
                     }
-                    isLoading.toggle()
+                    isLoading = false
                     print("interpretedDreams: \(interpretedDreams)")
                 }
             }
