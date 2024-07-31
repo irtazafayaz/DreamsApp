@@ -34,7 +34,10 @@ class ChatHistoryVM: ObservableObject {
     
     func setSelectedMsgs(_ selectedDate: Date) {
         let date = Utilities.formatDateAndTime(selectedDate)
-        guard let message = SessionManager.shared.interpretedDreams.first(where: { $0.date == date }) else { return }
+        guard let message = SessionManager.shared.interpretedDreams.first(where: { $0.date == date }) else {
+            selectedMessage = nil
+            return
+        }
         selectedMessage = message
     }
     

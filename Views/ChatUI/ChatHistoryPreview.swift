@@ -65,6 +65,12 @@ struct ChatHistoryPreview: View {
                     
                     Spacer()
                     
+                } else {
+                    Spacer()
+                    Text("No Record Found")
+                        .font(.title2)
+                        .bold()
+                    Spacer()
                 }
             }
             .padding()

@@ -37,7 +37,7 @@ struct StartChatView: View {
                 .font(Font.custom(FontFamily.bold.rawValue, size: 34))
                 .foregroundColor(Color(hex: Colors.primary.rawValue))
             
-            Text("Start describing your dream. Don’t be afraid to ask me questions about your dreams!")
+            Text("Start describing your dream. You can ask me questions about your dream.")
                 .font(Font.custom(FontFamily.regular.rawValue, size: 18))
                 .foregroundColor(Color(hex: Colors.labelGray.rawValue))
                 .multilineTextAlignment(.center)

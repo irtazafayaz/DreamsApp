@@ -58,7 +58,6 @@ class SessionManager: ObservableObject {
     }
     
     func fetchInterpretedDreams() {
-        isLoading.toggle()
         interpretedDreams.removeAll()
         
         guard let email = currentUser?.email else {
@@ -70,10 +69,9 @@ class SessionManager: ObservableObject {
             .addSnapshotListener { [weak self] (querySnapshot, error) in
                 guard let self = self else { return }
                 if error != nil {
-                    isLoading.toggle()
                     return
                 } else {
-                    self.interpretedDreams.removeAll() // Clear existing data before updating
+                    self.interpretedDreams.removeAll() 
                     
                     for document in querySnapshot!.documents {
                         do {
