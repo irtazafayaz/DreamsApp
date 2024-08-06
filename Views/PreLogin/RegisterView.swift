@@ -13,8 +13,11 @@ struct RegisterView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
+    @State private var errorMessage: String?
+
     @State private var openLoginView = false
-    
+    @State private var showAlert = false
+
     var body: some View {
         ZStack {
             VStack {
@@ -40,7 +43,15 @@ struct RegisterView: View {
                 
                 
                 Button {
-                    SessionManager.shared.register(email: email, password: password)
+                    SessionManager.shared.register(email: email, password: password) { result in
+                                switch result {
+                                case .success():
+                                    errorMessage = nil
+                                    // Navigate to the next screen or show success
+                                case .failure(let error):
+                                    errorMessage = error.localizedDescription
+                                }
+                            }
                 } label: {
                     Text("Register")
                         .padding(.horizontal, 20)
@@ -50,6 +61,9 @@ struct RegisterView: View {
                         .foregroundColor(.white)
                 }
                 .padding(.top, 20)
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Error"), message: Text(errorMessage ?? "An error occurred"), dismissButton: .default(Text("OK")))
+                }
                 
                 Spacer()
                 

@@ -12,6 +12,7 @@ class ProfileVM: ObservableObject {
     private let service = BaseService.shared
     @Published var logoutActionSuccess: Bool = false
     @Published var showPopUp: Bool = false
+    @Published var showDeletePopUp: Bool = false
     @Published var goToLogin: Bool = false
 
     func logout(completion: @escaping (Bool) -> Void) {

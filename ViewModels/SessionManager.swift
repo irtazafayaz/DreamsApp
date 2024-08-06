@@ -118,13 +118,13 @@ class SessionManager: ObservableObject {
 
     
     
-    func login(email: String, password: String) {
+    func login(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
         isLoading = true
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             DispatchQueue.main.async {
                 self.isLoading = false
                 if let error = error {
-                    print("Error signing in: \(error.localizedDescription)")
+                    completion(.failure(error))
                     return
                 }
                 self.currentUser = Auth.auth().currentUser
@@ -134,17 +134,18 @@ class SessionManager: ObservableObject {
                         self.updateSubscriptionStatus()
                     }
                 }
+                completion(.success(()))
             }
         }
     }
-    
-    func register(email: String, password: String) {
+
+    func register(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
         isLoading = true
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             DispatchQueue.main.async {
                 self.isLoading = false
                 if let error = error {
-                    print("Error signing up: \(error.localizedDescription)")
+                    completion(.failure(error))
                     return
                 }
                 self.currentUser = Auth.auth().currentUser
@@ -155,10 +156,10 @@ class SessionManager: ObservableObject {
                     }
                     self.database.collection("users-info").document(user.uid).setData(["maxTries": 10])
                 }
+                completion(.success(()))
             }
         }
     }
-    
     func logout() async {
         do {
             try Auth.auth().signOut()
@@ -172,6 +173,38 @@ class SessionManager: ObservableObject {
             print("Error signing out: \(error.localizedDescription)")
         }
     }
+    
+    func deleteUserAccount(completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let user = currentUser else {
+            completion(.failure(NSError(domain: "No user is currently signed in.", code: 401, userInfo: nil)))
+            return
+        }
+        
+        // Delete user data from Firestore
+        let userRef = database.collection("users-info").document(user.uid)
+        userRef.delete { error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            // Delete user from Firebase Authentication
+            user.delete { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    DispatchQueue.main.async {
+                        self.currentUser = nil
+                        self.isSignedIn = false
+                        self.resetSubscriptionStatus()
+                        
+                    }
+                    completion(.success(()))
+                }
+            }
+        }
+    }
+
     
     private func updateSubscriptionStatus() {
         Purchases.shared.getCustomerInfo { customerInfo, error in

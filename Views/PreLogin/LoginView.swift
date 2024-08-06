@@ -14,7 +14,9 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
     @State private var openRegisterView = false
-    
+    @State private var errorMessage: String?
+    @State private var showAlert = false
+
     var body: some View {
         VStack {
             
@@ -39,10 +41,28 @@ struct LoginView: View {
             
             Button {
                 if openRegisterView {
-                    SessionManager.shared.register(email: email, password: password)
-                } else {
-                    SessionManager.shared.login(email: email, password: password)
-                }
+                        SessionManager.shared.register(email: email, password: password) { result in
+                            switch result {
+                            case .success():
+                                errorMessage = nil
+                                // Navigate to the next screen or show success
+                            case .failure(let error):
+                                errorMessage = error.localizedDescription
+                                showAlert = true
+                            }
+                        }
+                    } else {
+                        SessionManager.shared.login(email: email, password: password) { result in
+                            switch result {
+                            case .success():
+                                errorMessage = nil
+                                // Navigate to the next screen or show success
+                            case .failure(let error):
+                                errorMessage = error.localizedDescription
+                                showAlert = true
+                            }
+                        }
+                    }
                 
             } label: {
                 Text(openRegisterView ? "Register" : "Login")
@@ -53,6 +73,9 @@ struct LoginView: View {
                     .foregroundColor(.white)
             }
             .padding(.top, 20)
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Error"), message: Text(errorMessage ?? "An error occurred"), dismissButton: .default(Text("OK")))
+            }
             
             Spacer()
             

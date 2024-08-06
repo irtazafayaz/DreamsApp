@@ -118,6 +118,43 @@ struct ProfileView: View {
                     }
                     .padding(.top, 20)
                 }
+                
+                Button {
+                    viewModel.showDeletePopUp = true
+                } label: {
+                    HStack(alignment: .center) {
+                        Image(systemName: "trash.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 17, height: 20)
+                        Text("Delete Account")
+                            .font(Font.custom(FontFamily.bold.rawValue, size: 18))
+                            .foregroundColor(.red)
+                            .padding(.leading, 5)
+                        Spacer()
+                    }
+                    .padding(.top, 20)
+                }
+                .alert(isPresented: $viewModel.showDeletePopUp) {
+                    Alert(
+                        title: Text("Delete Account"),
+                        message: Text("Are you sure you want to delete your account? This action cannot be undone."),
+                        primaryButton: .destructive(Text("Delete")) {
+                            SessionManager.shared.deleteUserAccount { result in
+                                switch result {
+                                case .success():
+
+                                    presentationMode.wrappedValue.dismiss()
+                                case .failure(let error):
+                                    // Handle error, e.g., show an error message
+                                    print("Error deleting account: \(error.localizedDescription)")
+                                }
+                            }
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
+
 
                 Spacer()
             }
