@@ -65,14 +65,22 @@ class ChatVM: ObservableObject {
     
     // MARK: - Sending Messages APIs -
     
+    func detectLanguage(for text: String) -> String {
+        let tagger = NSLinguisticTagger(tagSchemes: [.language], options: 0)
+        tagger.string = text
+        let lang = tagger.dominantLanguage ?? "und" // und means undefined
+        return lang
+    }
+    
     func sendMessage() {
         isLoading.toggle()
         let newMessage = Message(id: UUID().uuidString, content: currentInput, createdAt: getSessionDate(), role: .user)
+        let userLang = detectLanguage(for: currentInput)
         msgsArr.append(Message(
             id: UUID().uuidString,
             content: """
             Your role is to interpret dreams.
-            Respond only in the same language you receive the message with user role. whatever user entered in previous message.
+            Respond only in the language of the input, which is \(userLang).
             Do not ask questions or provide any content beyond the interpretation of the dream.
             Treat whatever the user inputs as a dream description and provide an interpretation.
             """,
